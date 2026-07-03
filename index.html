@@ -11,7 +11,93 @@
     const globalDiscountConfig = "on-50"; 
     // ==============================================================
 </script>
-    
+
+    function promoShopMaster() {
+    return {
+        // --- আপনার অন্যান্য ভ্যারিয়েবল ---
+        currentStep: 'form', 
+        selectedService: '',
+        ytPromo: '',
+        fbPromo: '',
+        configToken: globalDiscountConfig,
+        discountSettings: {
+            mode: globalDiscountConfig.split('-')[0], // 'on' বা 'off'
+            percent: parseInt(globalDiscountConfig.split('-')[1]) // '50'
+        },
+
+        // ১. [নতুন লাইভ কোড জেনারেটর] এই ফাংশনটি হুবহু ভেতরে বসিয়ে দিন
+        getLivePromoCode() {
+            const now = new Date();
+            
+            // ঘণ্টা (HH) এবং তারিখ (DD) বের করে ২ ডিজিট করা (যেমন: 5 -> 05)
+            const hh = String(now.getHours()).padStart(2, '0');
+            const dd = String(now.getDate()).padStart(2, '0');
+            const mm = now.getMinutes();
+            
+            // মিনিটের ওপর ভিত্তি করে শেষ অংশ নির্ধারণ
+            const suffix = (mm <= 30) ? "03" : "06";
+            
+            // সম্পূর্ণ কোড একসাথে জোড়া দেওয়া (যেমন: 171206)
+            return hh + dd + suffix; 
+        },
+
+        // ২. [প্রাইস ক্যালকুলেশন ফাংশন] - পুরানোটির বদলে এটি বসান
+        calcCheckoutPrice(basePrice, typedPromoCode = "") {
+            if (this.discountSettings.mode === 'on') {
+                return Math.round(basePrice * (1 - this.discountSettings.percent / 100));
+            }
+            
+            const activePromo = this.getLivePromoCode();
+            if (this.discountSettings.mode === 'off' && typedPromoCode.trim() === activePromo) {
+                return Math.round(basePrice * (1 - this.discountSettings.percent / 100));
+            }
+            return basePrice;
+        },
+
+        // ৩. [ইউটিউব বাটন সাবমিট] - পুরানোটির বদলে এটি বসান
+        handleYtActivationSubmit() {
+            const activePromo = this.getLivePromoCode();
+            const userEntered = this.ytPromo ? this.ytPromo.trim() : "";
+
+            if (userEntered !== activePromo) {
+                alert("দুঃখিত, বর্তমান সময়ের সঠিক কোডটি প্রদান করুন!");
+                return;
+            }
+            
+            this.currentStep = 'checkout';
+            this.selectedService = 'youtube';
+        },
+
+        // ৪. [ফেসবুক বাটন সাবমিট] - পুরানোটির বদলে এটি বসান
+        handleFbActivation() {
+            const activePromo = this.getLivePromoCode();
+            const userEntered = this.fbPromo ? this.fbPromo.trim() : "";
+
+            if (userEntered !== activePromo) {
+                alert("দুঃখিত, বর্তমান সময়ের সঠিক কোডটি প্রদান করুন!");
+                return;
+            }
+            
+            this.currentStep = 'checkout';
+            this.selectedService = 'facebook';
+        },
+
+        // ৫. [ফাইনাল অর্ডার সাবমিট] - পুরানোটির বদলে এটি বসান
+        processFinalOrder() {
+            const activePromo = this.getLivePromoCode();
+            let currentPromo = this.selectedService === 'youtube' ? this.ytPromo : this.fbPromo;
+            const userEntered = currentPromo ? currentPromo.trim() : "";
+            
+            if (userEntered !== activePromo) {
+                alert("প্রোমো কোডের সময় শেষ হয়ে গেছে! দয়া করে লাইভ কোডটি আবার দিন।");
+                return;
+            }
+            
+            // ... আপনার অর্ডারের বাকি Ajax/Fetch লজিক ...
+            alert("অর্ডার সফল হয়েছে!");
+        }
+    }
+}
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/lucide@latest"></script>
