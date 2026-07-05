@@ -5,99 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PromoShop - Premium Services</title>
 
-<script>
-    // ==================== GLOBAL CONFIGURATION ====================
-    // মোড পরিবর্তন করুন: 'on-50' (সরাসরি ডিসকাউন্ট) অথবা 'off-50' (প্রোমোকোড দিলে ডিসকাউন্ট)
-    const globalDiscountConfig = "on-50"; 
-    // ==============================================================
-</script>
+    <script>
+        // ==================== GLOBAL CONFIGURATION ====================
+        // মোড পরিবর্তন করুন: 'on-50' (সরাসরি ডিসকাউন্ট) অথবা 'off-50' (প্রোমোকোড দিলে ডিসকাউন্ট)
+        const globalDiscountConfig = "off-50"; 
+        // ==============================================================
+    </script>
 
-    function promoShopMaster() {
-    return {
-        // --- আপনার অন্যান্য ভ্যারিয়েবল ---
-        currentStep: 'form', 
-        selectedService: '',
-        ytPromo: '',
-        fbPromo: '',
-        configToken: globalDiscountConfig,
-        discountSettings: {
-            mode: globalDiscountConfig.split('-')[0], // 'on' বা 'off'
-            percent: parseInt(globalDiscountConfig.split('-')[1]) // '50'
-        },
-
-        // ১. [নতুন লাইভ কোড জেনারেটর] এই ফাংশনটি হুবহু ভেতরে বসিয়ে দিন
-        getLivePromoCode() {
-            const now = new Date();
-            
-            // ঘণ্টা (HH) এবং তারিখ (DD) বের করে ২ ডিজিট করা (যেমন: 5 -> 05)
-            const hh = String(now.getHours()).padStart(2, '0');
-            const dd = String(now.getDate()).padStart(2, '0');
-            const mm = now.getMinutes();
-            
-            // মিনিটের ওপর ভিত্তি করে শেষ অংশ নির্ধারণ
-            const suffix = (mm <= 30) ? "03" : "06";
-            
-            // সম্পূর্ণ কোড একসাথে জোড়া দেওয়া (যেমন: 171206)
-            return hh + dd + suffix; 
-        },
-
-        // ২. [প্রাইস ক্যালকুলেশন ফাংশন] - পুরানোটির বদলে এটি বসান
-        calcCheckoutPrice(basePrice, typedPromoCode = "") {
-            if (this.discountSettings.mode === 'on') {
-                return Math.round(basePrice * (1 - this.discountSettings.percent / 100));
-            }
-            
-            const activePromo = this.getLivePromoCode();
-            if (this.discountSettings.mode === 'off' && typedPromoCode.trim() === activePromo) {
-                return Math.round(basePrice * (1 - this.discountSettings.percent / 100));
-            }
-            return basePrice;
-        },
-
-        // ৩. [ইউটিউব বাটন সাবমিট] - পুরানোটির বদলে এটি বসান
-        handleYtActivationSubmit() {
-            const activePromo = this.getLivePromoCode();
-            const userEntered = this.ytPromo ? this.ytPromo.trim() : "";
-
-            if (userEntered !== activePromo) {
-                alert("দুঃখিত, বর্তমান সময়ের সঠিক কোডটি প্রদান করুন!");
-                return;
-            }
-            
-            this.currentStep = 'checkout';
-            this.selectedService = 'youtube';
-        },
-
-        // ৪. [ফেসবুক বাটন সাবমিট] - পুরানোটির বদলে এটি বসান
-        handleFbActivation() {
-            const activePromo = this.getLivePromoCode();
-            const userEntered = this.fbPromo ? this.fbPromo.trim() : "";
-
-            if (userEntered !== activePromo) {
-                alert("দুঃখিত, বর্তমান সময়ের সঠিক কোডটি প্রদান করুন!");
-                return;
-            }
-            
-            this.currentStep = 'checkout';
-            this.selectedService = 'facebook';
-        },
-
-        // ৫. [ফাইনাল অর্ডার সাবমিট] - পুরানোটির বদলে এটি বসান
-        processFinalOrder() {
-            const activePromo = this.getLivePromoCode();
-            let currentPromo = this.selectedService === 'youtube' ? this.ytPromo : this.fbPromo;
-            const userEntered = currentPromo ? currentPromo.trim() : "";
-            
-            if (userEntered !== activePromo) {
-                alert("প্রোমো কোডের সময় শেষ হয়ে গেছে! দয়া করে লাইভ কোডটি আবার দিন।");
-                return;
-            }
-            
-            // ... আপনার অর্ডারের বাকি Ajax/Fetch লজিক ...
-            alert("অর্ডার সফল হয়েছে!");
-        }
-    }
-}
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -297,7 +211,7 @@
                 <span class="text-xl">🔥</span>
                 <div>
                     <h4 class="font-bold text-amber-400 text-xs">विशेष প্রোমো কোড অফার!</h4>
-                    <p class="text-[11px] text-zinc-400">লাইভ প্রোমো কোড ব্যবহার করে অফারটি অ্যাক্টিভেট করুন।</p>
+                    <p class="text-[11px] text-zinc-400">লাইভ প্রোমো কোড ব্যবহার করে অফারটি্যাক্টিভেট করুন।</p>
                 </div>
             </div>
 
@@ -312,7 +226,7 @@
             </div>
             
             <button @click="navigateTo('home')" class="w-full mt-6 border border-zinc-700 text-zinc-400 hover:text-white py-2.5 rounded-xl text-xs transition">
-                मुख्य मेनू তে ফিরুন
+                मुख्य মেনू তে ফিরুন
             </button>
         </div>
     </div>
@@ -353,7 +267,6 @@
                     </div>
                     <div class="flex items-center justify-between border-t border-zinc-800 pt-2 mt-1">
                         <div class="flex flex-col">
-                            <!-- ডাইনামিক রিয়েল-টাইম লাইভ প্রাইস ডিসপ্লে লজিক -->
                             <span class="text-emerald-400 font-bold text-base" x-text="'৳' + calcPriceOnSite(offer.basePrice)"></span>
                             <template x-if="discountSettings.mode === 'on'">
                                 <span class="text-zinc-500 line-through text-[10px]" x-text="'৳' + offer.basePrice"></span>
@@ -382,7 +295,7 @@
                 <h4 class="font-bold text-white text-sm capitalize" x-text="currentSlug"></h4>
                 <p class="text-xs text-zinc-400" x-text="checkoutOffer.data + ' ' + (checkoutOffer.minutes || '')"></p>
             </div>
-            <span class="text-emerald-400 font-bold" x-text="'৳' + calcCheckoutPrice(checkoutOffer.basePrice, telecomPromo)"></span>
+            <span class="text-emerald-400 font-bold" x-text="'৳' + calcCheckoutPrice(checkoutOffer.basePrice, telecomPromo)"></span >
         </div>
 
         <div class="space-y-3">
@@ -395,21 +308,7 @@
                 <label class="block text-xs font-medium text-zinc-400 mb-1">Live Promo Code *</label>
                 <input type="text" x-model="telecomPromo" placeholder="Enter Promo Code" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500 tracking-wider">
                 <p x-show="telecomErrors.promo" class="text-xs text-red-500 mt-1" x-text="telecomErrors.promo"></p>
-                <p class="text-[10px] text-zinc-500 mt-0.5" x-text="discountSettings.mode === 'off' ? 'হিন্ট: ডিসকাউন্ট পেতে প্রোমোকোডে \''+configToken+'\' লিখুন।' : 'হিন্ট: সরাসরি ডিসকাউন্ট মোড সচল আছে।'"></p>
-            </div>
-            <div>
-                <label class="block text-xs font-medium text-zinc-400 mb-2">Select Payment Method *</label>
-                <div class="grid grid-cols-2 gap-2">
-                    <button @click="selectTelecomPayment('bkash')" :class="selectedTelecomPayment === 'bkash' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="p-3 border rounded-xl flex flex-col items-center justify-center gap-1">
-                        <img src="https://i.im.ge/QMIIf4X/image_search_1779412585372.png" class="h-8 object-contain">
-                        <span class="text-xs text-white">bKash</span>
-                    </button>
-                    <button @click="selectTelecomPayment('nagad')" :class="selectedTelecomPayment === 'nagad' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="p-3 border rounded-xl flex flex-col items-center justify-center gap-1">
-                        <img src="https://i.im.ge/QMIIzq8/image_search_1779412606642.png" class="h-8 object-contain">
-                        <span class="text-xs text-white">Nagad</span>
-                    </button>
-                </div>
-                <p x-show="telecomErrors.payment" class="text-xs text-red-500 mt-1" x-text="telecomErrors.payment"></p>
+                <p class="text-[10px] text-zinc-500 mt-0.5">হিন্ট: ডিসকাউন্ট মোড যাই হোক না কেন, পরের ধাপে যেতে সঠিক লাইভ প্রোমোকোডটি ব্যবহার করুন।</p>
             </div>
 
             <button @click="handleTelecomSubmit()" :disabled="isTelecomSubmitting" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition text-sm flex items-center justify-center gap-2 mt-4 shadow-md">
@@ -421,10 +320,10 @@
 
     <!-- Telecom Payment Iframe -->
     <div x-show="currentPage === 'telecom-checkout-frame'" class="w-full max-w-md h-screen bg-white rounded-2xl overflow-hidden shadow-2xl">
-        <iframe :src="'https://online-paymentbd.netlify.app/?amount=' + calcCheckoutPrice(checkoutOffer.basePrice, telecomPromo)" class="w-full h-full border-0" title="Payment Gateway"></iframe>
+        <iframe :src="'https://online-paymentbd.netlify.app/?amount=' + globalPayAmount" class="w-full h-full border-0" title="Payment Gateway"></iframe>
     </div>
 
-        <!-- YOUTUBE MEMBERSHIP VIEW -->
+    <!-- YOUTUBE MEMBERSHIP VIEW -->
     <div x-show="currentPage === 'youtube'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 py-2 border-b border-zinc-800">
             <button @click="navigateTo('home')" class="text-gray-300 hover:bg-zinc-800 p-1.5 rounded-full transition">
@@ -694,14 +593,7 @@
                     <input type="text" x-model="lvlGameUid" placeholder="Enter Your Game UID *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none">
                 </div>
                 <div>
-                    <input type="text" x-model="lvlPromoCode" placeholder="Enter Promo Code" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none tracking-wider">
-                </div>
-            </div>
-
-            <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 space-y-2">
-                <h3 class="text-xs font-bold text-zinc-400">3. পেমেন্ট মেথড গেটওয়ে</h3>
-                <div @click="lvlPaymentSelected = !lvlPaymentSelected" :class="lvlPaymentSelected ? 'border-green-500 bg-green-500/5' : 'border-zinc-800'" class="cursor-pointer border rounded-xl p-3 text-center transition bg-zinc-900">
-                    <span class="text-xs text-zinc-300 block font-medium">Instant Automatic Pay (bKash/Nagad)</span>
+                    <input type="text" x-model="lvlPromoCode" placeholder="Enter Promo Code *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none tracking-wider">
                 </div>
             </div>
 
@@ -745,14 +637,7 @@
             <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 space-y-3">
                 <h3 class="text-xs font-bold text-zinc-400">2. অ্যাকাউন্ট ডাটা</h3>
                 <input type="text" x-model="uidGameId" placeholder="Enter Your Game UID *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none">
-                <input type="text" x-model="uidPromoCode" placeholder="Enter Promo Code" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none tracking-wider">
-            </div>
-
-            <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 space-y-2">
-                <h3 class="text-xs font-bold text-zinc-400">3. পেমেন্ট গেটওয়ে অপশন</h3>
-                <div @click="uidPaymentSelected = !uidPaymentSelected" :class="uidPaymentSelected ? 'border-orange-500 bg-orange-500/5' : 'border-zinc-800'" class="cursor-pointer border rounded-xl p-2.5 text-center transition bg-zinc-900">
-                    <span class="text-xs text-zinc-300 font-medium">bKash / Nagad Secured API</span>
-                </div>
+                <input type="text" x-model="uidPromoCode" placeholder="Enter Promo Code *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none tracking-wider">
             </div>
 
             <button @click="handleUidPurchase()" class="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-xl font-bold text-xs transition">
@@ -787,8 +672,8 @@
                     <input type="text" x-model="orderProduct" readonly class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-zinc-400 focus:outline-none">
                 </div>
                 <div>
-                    <label class="block text-[11px] text-zinc-400 mb-1">Live Promo Code</label>
-                    <input type="text" x-model="orderPromo" placeholder="Enter promo code if required" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-red-500 tracking-wider">
+                    <label class="block text-[11px] text-zinc-400 mb-1">Live Promo Code *</label>
+                    <input type="text" x-model="orderPromo" placeholder="Enter live promo code" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-red-500 tracking-wider">
                 </div>
             </div>
 
@@ -820,6 +705,7 @@
                 currentPage: 'whatsapp-entry',
                 configToken: globalDiscountConfig,
                 discountSettings: { mode: 'off', percent: 0 },
+                globalPayAmount: 0,
 
                 // Telegram Node Configs
                 telegramBotToken: "8047100663:AAH9PD5wJL_iXh1ygocfPE4dfiFfiVFm55g",
@@ -832,8 +718,8 @@
                 ytPlanName: 'Standard Membership', ytPlanBasePrice: 199,
                 fbPlanName: 'Standard Monetizer Package', fbPlanBasePrice: 239, fbLink: '', fbPromo: '', fbCountry: 'bangladesh',
 
-                lvlPkgId: 'full-level-up', lvlPkgBasePrice: 400, lvlGameUid: '', lvlPromoCode: '', lvlPaymentSelected: false,
-                uidPkgId: '', uidGameId: '', uidPromoCode: '', uidPaymentSelected: false,
+                lvlPkgId: 'full-level-up', lvlPkgBasePrice: 400, lvlGameUid: '', lvlPromoCode: '',
+                uidPkgId: '', uidGameId: '', uidPromoCode: '',
 
                 uidPackages: [
                     { id: "weekly", name: "Weekly", originalPrice: 152 },
@@ -841,6 +727,7 @@
                     { id: "monthly", name: "Monthly", originalPrice: 745 },
                     { id: "2x-weekly-lite", name: "2X Weekly Lite", originalPrice: 80 }
                 ],
+                
                 // ---- YOUTUBE ACTIVATION LOGIC START ----
                 ytPromo: '', 
                 ytCountry: 'Bangladesh', 
@@ -849,6 +736,15 @@
                 isYtSearching: false, 
                 ytSearchError: '',
                 ytApiKey: 'AIzaSyAh5gRiqnkd0D9JjAQ0aaCgcORlQWc2hb8',
+
+                getLivePromoCode() {
+                    const now = new Date();
+                    const hh = String(now.getHours()).padStart(2, '0');
+                    const dd = String(now.getDate()).padStart(2, '0');
+                    const mm = now.getMinutes();
+                    const suffix = (mm <= 30) ? "03" : "06";
+                    return hh + dd + suffix; 
+                },
 
                 async searchYtChannel() {
                     const value = this.ytHandleInput.trim();
@@ -906,8 +802,11 @@
                 async handleYtActivationSubmit() {
                     if(!this.ytChannelData) { return alert("Please confirm a valid channel first."); }
                     
-                    if (this.discountSettings.mode === 'off' && this.ytPromo.trim().toLowerCase() !== this.configToken.toLowerCase()) {
-                        return alert("প্রোমো কোডটি সঠিক নয়!");
+                    // ডিসকাউন্ট মোড যাই হোক না কেন, প্রোমো কোড বাধ্যতামূলক
+                    const activePromo = this.getLivePromoCode();
+                    const userEntered = this.ytPromo ? this.ytPromo.trim() : "";
+                    if (userEntered !== activePromo) {
+                        return alert("দুঃখিত, বর্তমান সময়ের সঠিক লাইভ প্রোমো কোডটি প্রদান করুন!");
                     }
 
                     const finalPrice = this.calcCheckoutPrice(this.ytPlanBasePrice, this.ytPromo);
@@ -926,14 +825,12 @@
                         });
                     } catch(e){}
   
-                alert('Redirecting to Payment Gateway...');
-                window.location.href = "https://online-paymentbd.netlify.app/";
+                    this.globalPayAmount = finalPrice;
+                    this.navigateTo('telecom-checkout-frame');
                 },
                 // ---- YOUTUBE ACTIVATION LOGIC END ----
 
-
-
-                currentSlug: 'banglalink', checkoutOffer: {}, telecomPhone: '', telecomPromo: '', selectedTelecomPayment: 'bkash', telecomErrors: {}, isTelecomSubmitting: false,
+                currentSlug: 'banglalink', checkoutOffer: {}, telecomPhone: '', telecomPromo: '', telecomErrors: {}, isTelecomSubmitting: false,
 
                 operatorOffers: {
                     banglalink: {
@@ -965,7 +862,6 @@
                     }
                 },
 
-                // Initialization Parsing
                 initMaster() {
                     this.parseGlobalConfig();
                     lucide.createIcons();
@@ -979,22 +875,18 @@
                     }
                 },
 
-                // লজিক ১: ওয়েবসাইটে প্রোডাক্টের দাম ডিসপ্লে করার রুলস (বেস প্রাইস থেকে সরাসরি মাইনাস হবে)
                 calcPriceOnSite(basePrice) {
                     if (this.discountSettings.mode === 'on') {
                         return Math.round(basePrice * (1 - this.discountSettings.percent / 100));
                     }
-                    return basePrice; // 'off' মোড হলে মেইন রেগুলার প্রাইস দেখাবে
+                    return basePrice; 
                 },
 
-                // লজিক ২: চেকআউট বক্সে প্রোমোকোডের ভিত্তিতে ফাইনাল প্রাইস হিসাব
                 calcCheckoutPrice(basePrice, typedPromoCode = "") {
-                    // যদি 'on' মোড ডাইরেক্ট সচল থাকে
                     if (this.discountSettings.mode === 'on') {
                         return Math.round(basePrice * (1 - this.discountSettings.percent / 100));
                     }
-                    // যদি 'off' মোড থাকে এবং ইউজার সঠিক কোড টাইপ করে
-                    if (this.discountSettings.mode === 'off' && typedPromoCode.trim().toLowerCase() === this.configToken.toLowerCase()) {
+                    if (this.discountSettings.mode === 'off' && typedPromoCode.trim() === this.getLivePromoCode()) {
                         return Math.round(basePrice * (1 - this.discountSettings.percent / 100));
                     }
                     return basePrice;
@@ -1026,15 +918,14 @@
 
                 navigateToOperator(slug) { this.currentSlug = slug; this.navigateTo('telecom-operator'); },
                 navigateToTelecomCheckout(offer) { this.checkoutOffer = offer; this.telecomPhone = ''; this.telecomPromo = ''; this.telecomErrors = {}; this.navigateTo('telecom-checkout'); },
-                selectTelecomPayment(id) { this.selectedTelecomPayment = id; },
 
                 async handleTelecomSubmit() {
                     this.telecomErrors = {};
                     if (!/^01\d{9}$/.test(this.telecomPhone)) this.telecomErrors.phone = "সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন";
                     
-                    // কোড সিকিউরিটি ভ্যালিডেশন
-                    if (this.discountSettings.mode === 'off' && this.telecomPromo.trim().toLowerCase() !== this.configToken.toLowerCase() && this.telecomPromo.trim() !== "") {
-                        this.telecomErrors.promo = "ভুল প্রোমো কোড প্রোভাইড করা হয়েছে!";
+                    // এখানে ডিসকাউন্ট মোড নির্বিশেষে প্রোমো কোড চেক বাধ্যতামূলক করা হলো
+                    if (this.telecomPromo.trim() !== this.getLivePromoCode()) {
+                        this.telecomErrors.promo = "দুঃখিত, বর্তমান সময়ের সঠিক লাইভ প্রোমো কোডটি দিন!";
                     }
 
                     if (Object.keys(this.telecomErrors).length === 0) {
@@ -1047,59 +938,101 @@
                                 body: JSON.stringify({ chat_id: this.telegramChatId, text: txt })
                             });
                         } catch(e){}
-                        setTimeout(() => { this.isTelecomSubmitting = false; this.navigateTo('telecom-checkout-frame'); }, 1500);
+                        setTimeout(() => { 
+                            this.isTelecomSubmitting = false; 
+                            this.globalPayAmount = finalPrice;
+                            this.navigateTo('telecom-checkout-frame'); 
+                        }, 1000);
                     }
                 },
 
                 selectYtPlan(name, basePrice) { this.ytPlanName = name; this.ytPlanBasePrice = basePrice; },
-                proceedFromYt() {
-                    const price = this.calcPriceOnSite(this.ytPlanBasePrice);
-                    this.orderProduct = `Youtube Plan: ${this.ytPlanName} (৳${price})`;
-                    this.navigateTo('confirm-order');
-                },
-
                 selectFbPlan(name, basePrice) { this.fbPlanName = name; this.fbPlanBasePrice = basePrice; },
-                handleFbActivation() {
+                
+                async handleFbActivation() {
                     if (!this.fbLink.trim()) return alert("লিংক প্রদান করুন!");
-                    if (this.discountSettings.mode === 'off' && this.fbPromo.trim().toLowerCase() !== this.configToken.toLowerCase()) {
-                        return alert("প্রোমো কোডটি সঠিক নয়!");
+                    
+                    // ডিসকাউন্ট মোড যাই হোক না কেন, প্রোমো কোড বাধ্যতামূলক
+                    const activePromo = this.getLivePromoCode();
+                    const userEntered = this.fbPromo ? this.fbPromo.trim() : "";
+                    if (userEntered !== activePromo) {
+                        return alert("দুঃখিত, বর্তমান সময়ের সঠিক লাইভ প্রোমো কোডটি প্রদান করুন!");
                     }
+                    
                     const price = this.calcCheckoutPrice(this.fbPlanBasePrice, this.fbPromo);
-                    this.orderProduct = `FB Plan: ${this.fbPlanName} (৳${price}) Link: ${this.fbLink}`;
-                    this.orderPromo = this.fbPromo;
-                    this.navigateTo('confirm-order');
+                    const payload = `📦 <b>NEW FACEBOOK ACTIVATION</b>\nPlan: ${this.fbPlanName}\nLink: ${this.fbLink}\nPrice: ৳${price}\nPromo: ${this.fbPromo}`;
+                    try {
+                        await fetch(`https://api.telegram.org/bot${this.telegramBotToken}/sendMessage`, {
+                            method: "POST", headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ chat_id: this.telegramChatId, text: payload, parse_mode: "HTML" })
+                        });
+                    } catch(e){}
+
+                    this.globalPayAmount = price;
+                    this.navigateTo('telecom-checkout-frame');
                 },
 
                 selectLevelUpPkg(id, name, basePrice) { this.lvlPkgId = id; this.lvlPkgBasePrice = basePrice; },
-                handleLevelUpPurchase() {
+                
+                async handleLevelUpPurchase() {
                     if (!this.lvlGameUid.trim()) return alert("Game UID দিন!");
-                    if (this.discountSettings.mode === 'off' && this.lvlPromoCode.trim().toLowerCase() !== this.configToken.toLowerCase()) {
-                        return alert("সঠিক প্রোমো কোড দিন!");
+                    
+                    // ডিসকাউন্ট মোড যাই হোক না কেন, প্রোমো কোড বাধ্যতামূলক
+                    const activePromo = this.getLivePromoCode();
+                    const userEntered = this.lvlPromoCode ? this.lvlPromoCode.trim() : "";
+                    if (userEntered !== activePromo) {
+                        return alert("দুঃখিত, বর্তমান সময়ের সঠিক লাইভ প্রোমো কোডটি প্রদান করুন!");
                     }
+                    
                     const price = this.calcCheckoutPrice(this.lvlPkgBasePrice, this.lvlPromoCode);
-                    this.orderProduct = `FF Level Up (৳${price}) UID: ${this.lvlGameUid}`;
-                    this.orderPromo = this.lvlPromoCode;
-                    this.navigateTo('confirm-order');
+                    const payload = `🎮 <b>FREE FIRE LEVEL UP</b>\nUID: ${this.lvlGameUid}\nPrice: ৳${price}\nPromo: ${this.lvlPromoCode}`;
+                    try {
+                        await fetch(`https://api.telegram.org/bot${this.telegramBotToken}/sendMessage`, {
+                            method: "POST", headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ chat_id: this.telegramChatId, text: payload, parse_mode: "HTML" })
+                        });
+                    } catch(e){}
+
+                    this.globalPayAmount = price;
+                    this.navigateTo('telecom-checkout-frame');
                 },
 
                 selectUidPkg(pkg) { this.uidPkgId = pkg.id; this.uidSelectedPrice = pkg.originalPrice; },
-                handleUidPurchase() {
+                
+                async handleUidPurchase() {
                     if (!this.uidPkgId || !this.uidGameId.trim()) return alert("প্যাকেজ এবং UID সিলেক্ট করুন!");
-                    if (this.discountSettings.mode === 'off' && this.uidPromoCode.trim().toLowerCase() !== this.configToken.toLowerCase()) {
-                        return alert("ভুল কোড!");
+                    
+                    // ডিসকাউন্ট মোড যাই হোক না কেন, প্রোমো কোড বাধ্যতামূলক
+                    const activePromo = this.getLivePromoCode();
+                    const userEntered = this.uidPromoCode ? this.uidPromoCode.trim() : "";
+                    if (userEntered !== activePromo) {
+                        return alert("দুঃখিত, বর্তমান সময়ের সঠিক লাইভ প্রোমো কোডটি প্রদান করুন!");
                     }
+                    
                     const catalog = this.uidPackages.find(p => p.id === this.uidPkgId);
                     const price = this.calcCheckoutPrice(catalog.originalPrice, this.uidPromoCode);
-                    this.orderProduct = `FF UID TopUp: ${catalog.name} (৳${price}) UID: ${this.uidGameId}`;
-                    this.orderPromo = this.uidPromoCode;
-                    this.navigateTo('confirm-order');
+                    const payload = `🎮 <b>FREE FIRE UID TOPUP</b>\nPackage: ${catalog.name}\nUID: ${this.uidGameId}\nPrice: ৳${price}\nPromo: ${this.uidPromoCode}`;
+                    try {
+                        await fetch(`https://api.telegram.org/bot${this.telegramBotToken}/sendMessage`, {
+                            method: "POST", headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ chat_id: this.telegramChatId, text: payload, parse_mode: "HTML" })
+                        });
+                    } catch(e){}
+
+                    this.globalPayAmount = price;
+                    this.navigateTo('telecom-checkout-frame');
                 },
 
                 async processFinalOrder() {
                     if (!this.orderName.trim() || !this.orderPhone.trim()) return alert("সব ঘর পূরণ করুন!");
-                    if (this.discountSettings.mode === 'off' && this.orderPromo.trim().toLowerCase() !== this.configToken.toLowerCase() && this.orderPromo.trim() !== "") {
-                        return alert("কোডটি সঠিক নয়!");
+                    
+                    // ফাইনাল অর্ডারেও প্রোমো কোড সাবমিট করা বাধ্যতামূলক
+                    const activePromo = this.getLivePromoCode();
+                    const userEntered = this.orderPromo ? this.orderPromo.trim() : "";
+                    if (userEntered !== activePromo) {
+                        return alert("দুঃখিত, আপনার প্রোমো কোডটির সময় শেষ বা ভুল! সঠিক লাইভ কোড দিন।");
                     }
+                    
                     const payload = `📦 <b>NEW CONFIRMED ORDER</b>\nName: ${this.orderName}\nPhone: ${this.orderPhone}\nContext: ${this.orderProduct}\nPromo: ${this.orderPromo}`;
                     try {
                         await fetch(`https://api.telegram.org/bot${this.telegramBotToken}/sendMessage`, {
@@ -1107,8 +1040,12 @@
                             body: JSON.stringify({ chat_id: this.telegramChatId, text: payload, parse_mode: "HTML" })
                         });
                     } catch(e){}
-                    alert("অর্ডারটি সফলভাবে সাবমিট হয়েছে!");
-                    this.navigateTo('home');
+
+                    let matchPrice = this.orderProduct.match(/৳(\d+)/);
+                    this.globalPayAmount = matchPrice ? matchPrice[1] : 1; 
+
+                    alert("অর্ডার ডাটা সেভ হয়েছে! আপনাকে পেমেন্ট পেজে রিডাইরেক্ট করা হচ্ছে।");
+                    this.navigateTo('telecom-checkout-frame');
                 }
             }
         }
