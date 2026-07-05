@@ -93,14 +93,14 @@
                 <i data-lucide="message-square" class="w-8 h-8 text-green-500"></i>
             </div>
             <h2 class="text-xl font-bold text-white">WhatsApp Verification</h2>
-            <p class="text-xs text-promo-text-muted">প্রজেক্টে প্রবেশ করতে আপনার হোয়াটসঅ্যাপ নম্বরটি দিন</p>
+            <p class="text-xs text-promo-text-muted">পরবর্তীতে আপনার সাথে যোগাযোগের জন্য হোয়াটসঅ্যাপ নাম্বারটি দিন</p>
         </div>
 
         <div class="space-y-4">
             <div>
                 <label class="block text-xs font-medium text-promo-text-muted mb-2">WhatsApp Number</label>
                 <input type="tel" x-model="wpEntryPhone" @keyup.enter="submitWhatsAppNumber()" placeholder="01XXXXXXXXX" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-green-500 transition">
-                <p x-show="wpEntryError" class="text-xs text-red-500 mt-1">সঠিক নম্বরটি প্রদান করুন (১১ ডিজিট)</p>
+                <p x-show="wpEntryError" class="text-xs text-red-500 mt-1">সঠিক নম্বরটি প্রদান করুন</p>
             </div>
 
             <button @click="submitWhatsAppNumber()" :disabled="isWpSubmitting" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-xl transition text-sm flex items-center justify-center gap-2">
@@ -114,7 +114,7 @@
     <div x-cloak x-show="currentPage === 'home'" class="w-full max-w-md space-y-4">
         <div class="w-full bg-promo-card-bg rounded-b-2xl p-4 text-center border-x border-b border-zinc-800 shadow-lg">
             <h1 class="text-2xl font-bold text-white tracking-wide">PROMOSHOP 50X</h1>
-            <p class="text-xs text-promo-text-muted">Premium Digital & Gaming Services</p>
+            <p class="text-xs text-promo-text-muted">Premium,Digital & Gaming Services</p>
         </div>
 
         <main class="w-full bg-promo-card-bg rounded-2xl shadow-lg border border-zinc-800 overflow-hidden p-4 grid gap-3">
@@ -123,7 +123,7 @@
             <div @click="navigateTo('youtube')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">1</span>
-                    <span class="text-sm font-bold text-white">Youtube Membership Offer</span>
+                    <span class="text-sm font-bold text-white">Youtube Membership</span>
                 </div>
                 <i data-lucide="play" class="w-5 h-5 text-red-500"></i>
             </div>
@@ -315,12 +315,11 @@
             <div>
                 <label class="block text-xs font-medium text-zinc-400 mb-1">Live Promo Code *</label>
                 <input type="text" x-model="telecomPromo" placeholder="Enter Promo Code" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500 tracking-wider">
-                <p x-show="telecomErrors.promo" class="text-xs text-red-500 mt-1" x-text="telecomErrors.promo"></p>
                 
                 <p class="text-[11px] mt-1.5 font-semibold">
                     <span x-show="telecomPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
                     <span x-show="telecomPromo.trim() !== '' && telecomPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
-                    <span x-show="telecomPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    <span x-show="telecomPromo.trim() !== '' && telecomPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
                 </p>
             </div>
 
@@ -431,9 +430,9 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-3 gap-2 text-center text-[11px]">
-                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-red-500" x-text="ytChannelData?.subs"></span><span class="text-zinc-400">Subscribers</span></div>
-                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-red-500" x-text="ytChannelData?.videos"></span><span class="text-zinc-400">Videos</span></div>
-                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-red-500" x-text="ytChannelData?.views"></span><span class="text-zinc-400">Views</span></div>
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-khait" x-text="ytChannelData?.subs"></span><span class="text-zinc-400">Subscribers</span></div>
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-whait" x-text="ytChannelData?.videos"></span><span class="text-zinc-400">Videos</span></div>
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-whait" x-text="ytChannelData?.views"></span><span class="text-zinc-400">Views</span></div>
                 </div>
             </div>
 
@@ -453,7 +452,7 @@
                 <p class="text-[11px] mt-1.5 font-semibold">
                     <span x-show="ytPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
                     <span x-show="ytPromo.trim() !== '' && ytPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
-                    <span x-show="ytPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    <span x-show="ytPromo.trim() !== '' && ytPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
                 </p>
             </div>
             
@@ -527,8 +526,8 @@
                 
                 <p class="text-[11px] mt-1.5 font-semibold">
                     <span x-show="fbPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
-                    <span x-show="fbPromo.trim() !== '' && fbPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
-                    <span x-show="fbPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    <span x-show="fbPromo.trim() !== '' && fbPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিন কে মেসেজ দিন।</span>
+                    <span x-show="fbPromo.trim() !== '' && fbPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> ধন্যবাদ! আপনি ৫০% ডিসকাউন্ট পেয়েছেন।</span>
                 </p>
             </div>
 
@@ -619,8 +618,8 @@
                     
                     <p class="text-[11px] mt-1.5 font-semibold">
                         <span x-show="lvlPromoCode.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
-                        <span x-show="lvlPromoCode.trim() !== '' && lvlPromoCode.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
-                        <span x-show="lvlPromoCode.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                        <span x-show="lvlPromoCode.trim() !== '' && lvlPromoCode.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিন কে মেসেজ দিন।</span>
+                        <span x-show="lvlPromoCode.trim() !== '' && lvlPromoCode.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
                     </p>
                 </div>
             </div>
@@ -670,7 +669,7 @@
                     <p class="text-[11px] mt-1.5 font-semibold">
                         <span x-show="uidPromoCode.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
                         <span x-show="uidPromoCode.trim() !== '' && uidPromoCode.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
-                        <span x-show="uidPromoCode.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                        <span x-show="uidPromoCode.trim() !== '' && uidPromoCode.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
                     </p>
                 </div>
             </div>
@@ -713,7 +712,7 @@
                     <p class="text-[11px] mt-1.5 font-semibold">
                         <span x-show="orderPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
                         <span x-show="orderPromo.trim() !== '' && orderPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
-                        <span x-show="orderPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                        <span x-show="orderPromo.trim() !== '' && orderPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
                     </p>
                 </div>
             </div>
@@ -743,7 +742,6 @@
     <script>
         function promoShopMaster() {
             return {
-                // পেজ লোডে ফ্লিকারিং বন্ধ করতে শুরুতে 'whatsapp-entry' রেন্ডার হওয়ার আগে চেক রান করবে
                 currentPage: 'whatsapp-entry', 
                 configToken: globalDiscountConfig,
                 discountSettings: { mode: 'off', percent: 0 },
@@ -839,12 +837,12 @@
                 },
 
                 async handleYtActivationSubmit() {
-                    if(!this.ytChannelData) { return alert("Please confirm a valid channel first."); }
+                    if(!this.ytChannelData) { return; }
                     
                     const activePromo = this.getLivePromoCode();
                     const userEntered = this.ytPromo ? this.ytPromo.trim() : "";
                     if (userEntered !== activePromo) {
-                        return alert("দুঃখিত, বর্তমান সময়ের সঠিক লাইভ প্রোমো কোডটি প্রদান করুন!");
+                        return;
                     }
 
                     const finalPrice = this.calcCheckoutPrice(this.ytPlanBasePrice, this.ytPromo);
@@ -902,14 +900,13 @@
                 initMaster() {
                     this.parseGlobalConfig();
                     
-                    // সেশন ভেরিফিকেশন চেক: ২৪ ঘণ্টার লকিং সিস্টেম ট্র্যাকিং
                     const wpAuthTimestamp = localStorage.getItem('wp_auth_success_time');
                     if (wpAuthTimestamp) {
                         const hoursPassed = (Date.now() - parseInt(wpAuthTimestamp)) / (1000 * 60 * 60);
                         if (hoursPassed < 24) {
-                            this.currentPage = 'home'; // ভেরিফাইড হলে সরাসরি হোমে রিডাইরেক্ট (ফ্লিকার ছাড়া)
+                            this.currentPage = 'home'; 
                         } else {
-                            localStorage.removeItem('wp_auth_success_time'); // ২৪ ঘণ্টা পার হয়ে গেলে রিমুভ করবে
+                            localStorage.removeItem('wp_auth_success_time'); 
                         }
                     }
 
@@ -954,7 +951,6 @@
                             body: JSON.stringify({ chat_id: this.telegramChatId, text: msg, parse_mode: "HTML" })
                         });
                         
-                        // সফলভাবে সাবমিট হলে ২৪ ঘণ্টার জন্য ব্রাউজারে ডাটা লক করে রাখবে
                         localStorage.setItem('wp_auth_success_time', Date.now().toString());
                         this.navigateTo('home');
                     } catch (e) { 
@@ -978,7 +974,8 @@
                     if (!/^01\d{9}$/.test(this.telecomPhone)) this.telecomErrors.phone = "সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন";
                     
                     if (this.telecomPromo.trim() !== this.getLivePromoCode()) {
-                        this.telecomErrors.promo = "দুঃখিত, বর্তমান সময়ের সঠিক লাইভ প্রোমো কোডটি দিন!";
+                        this.telecomErrors.promo = "সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।";
+                        return;
                     }
 
                     if (Object.keys(this.telecomErrors).length === 0) {
@@ -1003,12 +1000,12 @@
                 selectFbPlan(name, basePrice) { this.fbPlanName = name; this.fbPlanBasePrice = basePrice; },
                 
                 async handleFbActivation() {
-                    if (!this.fbLink.trim()) return alert("লিংক প্রদান করুন!");
+                    if (!this.fbLink.trim()) return;
                     
                     const activePromo = this.getLivePromoCode();
                     const userEntered = this.fbPromo ? this.fbPromo.trim() : "";
                     if (userEntered !== activePromo) {
-                        return alert("দুঃখিত, বর্তমান সময়ের সঠিক লাইভ প্রোমো কোডটি প্রদান করুন!");
+                        return;
                     }
                     
                     const price = this.calcCheckoutPrice(this.fbPlanBasePrice, this.fbPromo);
@@ -1027,12 +1024,12 @@
                 selectLevelUpPkg(id, name, basePrice) { this.lvlPkgId = id; this.lvlPkgBasePrice = basePrice; },
                 
                 async handleLevelUpPurchase() {
-                    if (!this.lvlGameUid.trim()) return alert("Game UID দিন!");
+                    if (!this.lvlGameUid.trim()) return;
                     
                     const activePromo = this.getLivePromoCode();
                     const userEntered = this.lvlPromoCode ? this.lvlPromoCode.trim() : "";
                     if (userEntered !== activePromo) {
-                        return alert("দুঃখিত, বর্তমান সময়ের সঠিক লাইভ প্রোমো কোডটি প্রদান করুন!");
+                        return;
                     }
                     
                     const price = this.calcCheckoutPrice(this.lvlPkgBasePrice, this.lvlPromoCode);
@@ -1051,12 +1048,12 @@
                 selectUidPkg(pkg) { this.uidPkgId = pkg.id; this.uidSelectedPrice = pkg.originalPrice; },
                 
                 async handleUidPurchase() {
-                    if (!this.uidPkgId || !this.uidGameId.trim()) return alert("প্যাকেজ এবং UID সিলেক্ট করুন!");
+                    if (!this.uidPkgId || !this.uidGameId.trim()) return;
                     
                     const activePromo = this.getLivePromoCode();
                     const userEntered = this.uidPromoCode ? this.uidPromoCode.trim() : "";
                     if (userEntered !== activePromo) {
-                        return alert("দুঃখিত, বর্তমান সময়ের সঠিক লাইভ প্রোমো কোডটি প্রদান করুন!");
+                        return;
                     }
                     
                     const catalog = this.uidPackages.find(p => p.id === this.uidPkgId);
@@ -1074,12 +1071,12 @@
                 },
 
                 async processFinalOrder() {
-                    if (!this.orderName.trim() || !this.orderPhone.trim()) return alert("সব ঘর পূরণ করুন!");
+                    if (!this.orderName.trim() || !this.orderPhone.trim()) return;
                     
                     const activePromo = this.getLivePromoCode();
                     const userEntered = this.orderPromo ? this.orderPromo.trim() : "";
                     if (userEntered !== activePromo) {
-                        return alert("দুঃখিত, আপনার প্রোমো কোডটির সময় শেষ বা ভুল! সঠিক লাইভ কোড দিন।");
+                        return;
                     }
                     
                     let basePrice = 1;
@@ -1097,7 +1094,6 @@
                         });
                     } catch(e){}
 
-                    alert("অর্ডার ডাটা সেভ হয়েছে! আপনাকে পেমেন্ট পেজে রিডাইরেক্ট করা হচ্ছে।");
                     this.globalPayAmount = parseFloat(finalPrice).toFixed(2);
                     this.navigateTo('telecom-checkout-frame');
                 }
