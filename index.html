@@ -47,6 +47,9 @@
             font-family: 'Hind Siliguri', sans-serif, system-ui;
         }
 
+        /* Alpine.js Cloak: পেজ লোড হওয়ার সময় ডিজাইন ফ্লিকারিং বা মূল কন্টেন্ট ভেসে ওঠা বন্ধ করবে */
+        [x-cloak] { display: none !important; }
+
         .bg-promo-dark-bg { background-color: #1a1a1a; }
         .bg-promo-card-bg { background-color: #242424; }
         .text-promo-text-light { color: #ffffff; }
@@ -68,7 +71,7 @@
 <body x-data="promoShopMaster()" x-init="initMaster()" class="min-h-screen flex flex-col items-center justify-center p-4 bg-promo-dark-bg">
 
     <!-- Master Header Component -->
-    <div x-show="currentPage !== 'whatsapp-entry' && currentPage !== 'telecom-checkout-frame'" id="main-header-container" class="w-full max-w-md bg-promo-card-bg rounded-t-2xl border-b border-zinc-800">
+    <div x-cloak x-show="currentPage !== 'whatsapp-entry' && currentPage !== 'telecom-checkout-frame'" id="main-header-container" class="w-full max-w-md bg-promo-card-bg rounded-t-2xl border-b border-zinc-800">
         <header class="relative flex items-center justify-center py-6 px-6">
             <div class="absolute left-4 top-2">
                 <div class="bg-gradient-to-r from-red-600 to-red-700 text-white px-3 py-1.5 rounded-full shadow-lg transform -rotate-12 text-center">
@@ -84,7 +87,7 @@
     </div>
 
     <!-- WhatsApp Entry View -->
-    <div x-show="currentPage === 'whatsapp-entry'" class="w-full max-w-md bg-promo-card-bg rounded-2xl p-6 border border-zinc-800 shadow-lg space-y-4">
+    <div x-cloak x-show="currentPage === 'whatsapp-entry'" class="w-full max-w-md bg-promo-card-bg rounded-2xl p-6 border border-zinc-800 shadow-lg space-y-4">
         <div class="text-center space-y-2">
             <div class="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto border border-green-500/20">
                 <i data-lucide="message-square" class="w-8 h-8 text-green-500"></i>
@@ -96,7 +99,7 @@
         <div class="space-y-4">
             <div>
                 <label class="block text-xs font-medium text-promo-text-muted mb-2">WhatsApp Number</label>
-                <input type="tel" x-model="wpEntryPhone" placeholder="01XXXXXXXXX" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-green-500 transition">
+                <input type="tel" x-model="wpEntryPhone" @keyup.enter="submitWhatsAppNumber()" placeholder="01XXXXXXXXX" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-green-500 transition">
                 <p x-show="wpEntryError" class="text-xs text-red-500 mt-1">সঠিক নম্বরটি প্রদান করুন (১১ ডিজিট)</p>
             </div>
 
@@ -108,7 +111,7 @@
     </div>
 
     <!-- Dashboard/Home View -->
-    <div x-show="currentPage === 'home'" class="w-full max-w-md space-y-4">
+    <div x-cloak x-show="currentPage === 'home'" class="w-full max-w-md space-y-4">
         <div class="w-full bg-promo-card-bg rounded-b-2xl p-4 text-center border-x border-b border-zinc-800 shadow-lg">
             <h1 class="text-2xl font-bold text-white tracking-wide">PROMOSHOP 50X</h1>
             <p class="text-xs text-promo-text-muted">Premium Digital & Gaming Services</p>
@@ -205,7 +208,7 @@
     </div>
 
     <!-- Telecom Home View -->
-    <div x-show="currentPage === 'telecom-home'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl pb-6">
+    <div x-cloak x-show="currentPage === 'telecom-home'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl pb-6">
         <section class="bg-[#0d5c2e] text-white py-8 px-4 text-center shadow-md">
             <h1 class="text-2xl font-bold mb-2">সেকেন্ডেই মোবাইল রিচার্জ</h1>
             <p class="text-white/85 text-xs">সব অপারেটরের ইন্টারনেট ও মিনিট প্যাক কিনুন ঘরে বসেই একদম সহজে।</p>
@@ -237,7 +240,7 @@
     </div>
 
     <!-- Telecom Operator Offers View -->
-    <div x-show="currentPage === 'telecom-operator'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl pb-6">
+    <div x-cloak x-show="currentPage === 'telecom-operator'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl pb-6">
         <header class="bg-[#0d5c2e] text-white py-3 px-4 flex items-center gap-3">
             <button @click="navigateTo('telecom-home')" class="hover:bg-white/10 p-1.5 rounded-full transition">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
@@ -287,7 +290,7 @@
     </div>
 
     <!-- Telecom Checkout View -->
-    <div x-show="currentPage === 'telecom-checkout'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
+    <div x-cloak x-show="currentPage === 'telecom-checkout'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 pb-2 border-b border-zinc-800">
             <button @click="currentPage = 'telecom-operator'" class="hover:bg-zinc-800 p-1.5 rounded-full transition text-zinc-400">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
@@ -329,12 +332,12 @@
     </div>
 
     <!-- Telecom Payment Iframe -->
-    <div x-show="currentPage === 'telecom-checkout-frame'" class="w-full max-w-md h-screen bg-white rounded-2xl overflow-hidden shadow-2xl">
+    <div x-cloak x-show="currentPage === 'telecom-checkout-frame'" class="w-full max-w-md h-screen bg-white rounded-2xl overflow-hidden shadow-2xl">
         <iframe :src="'https://online-paymentbd.netlify.app/?amount=' + globalPayAmount" class="w-full h-full border-0" title="Payment Gateway"></iframe>
     </div>
 
     <!-- YOUTUBE MEMBERSHIP VIEW -->
-    <div x-show="currentPage === 'youtube'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
+    <div x-cloak x-show="currentPage === 'youtube'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 py-2 border-b border-zinc-800">
             <button @click="navigateTo('home')" class="text-gray-300 hover:bg-zinc-800 p-1.5 rounded-full transition">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
@@ -389,8 +392,8 @@
         </button>
     </div>
 
-    <!-- NEW YOUTUBE ACTIVATION VIEW (আইকন ও স্ট্যাটস টেক্সট কালার লাল ও হোয়াইট করা হয়েছে) -->
-    <div x-show="currentPage === 'youtube-activation'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
+    <!-- NEW YOUTUBE ACTIVATION VIEW -->
+    <div x-cloak x-show="currentPage === 'youtube-activation'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="pt-1">
             <button @click="navigateTo('youtube')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
@@ -403,7 +406,6 @@
         </div>
 
         <div id="main-card" class="bg-zinc-950 border border-zinc-800 text-white rounded-2xl p-5 shadow-lg">
-            <!-- ইউটিউব লোগো আইকন এখানে লাল (text-red-500) করা হয়েছে -->
             <div class="flex items-center gap-2 mb-4">
                 <i class="fab fa-youtube text-red-500 text-lg"></i>
                 <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-400">Confirm Channel Handle</h2>
@@ -428,7 +430,6 @@
                         <p class="text-xs text-zinc-500" x-text="ytChannelData?.handle"></p>
                     </div>
                 </div>
-                <!-- স্ট্যাটস টেক্সট নাম্বারগুলোকে আগের মতো সুন্দর লাল (text-red-500) করা হয়েছে -->
                 <div class="grid grid-cols-3 gap-2 text-center text-[11px]">
                     <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-red-500" x-text="ytChannelData?.subs"></span><span class="text-zinc-400">Subscribers</span></div>
                     <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-red-500" x-text="ytChannelData?.videos"></span><span class="text-zinc-400">Videos</span></div>
@@ -471,7 +472,7 @@
     </div>
 
     <!-- Facebook View -->
-    <div x-show="currentPage === 'facebook'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
+    <div x-cloak x-show="currentPage === 'facebook'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 py-2 border-b border-zinc-800">
             <button @click="navigateTo('home')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
@@ -508,7 +509,7 @@
     </div>
 
     <!-- Facebook Activation View -->
-    <div x-show="currentPage === 'facebook-activation'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
+    <div x-cloak x-show="currentPage === 'facebook-activation'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="pt-1">
             <button @click="navigateTo('facebook')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
@@ -542,7 +543,7 @@
     </div>
 
     <!-- Free Fire Main TopUp View -->
-    <div x-show="currentPage === 'free-fire-topup'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl pb-6">
+    <div x-cloak x-show="currentPage === 'free-fire-topup'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl pb-6">
         <div class="bg-[#0d5c2e] px-4 py-4 text-white flex items-center justify-between shadow-lg">
             <button @click="navigateTo('home')" class="p-1.5 hover:bg-white/10 rounded-full transition text-white">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
@@ -582,7 +583,7 @@
     </div>
 
     <!-- Free Fire Level Up Package View -->
-    <div x-show="currentPage === 'level-up-package'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
+    <div x-cloak x-show="currentPage === 'level-up-package'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 bg-zinc-950 p-3 rounded-xl border border-zinc-800 shadow-sm">
             <button @click="navigateTo('free-fire-topup')" class="text-zinc-400 hover:bg-zinc-800 rounded-full p-1.5 transition">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
@@ -631,7 +632,7 @@
     </div>
 
     <!-- Free Fire UID TopUp View -->
-    <div x-show="currentPage === 'uid-topup-bd'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
+    <div x-cloak x-show="currentPage === 'uid-topup-bd'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="bg-zinc-950 p-3 rounded-xl border border-zinc-800 flex items-center gap-3">
             <button @click="navigateTo('free-fire-topup')" class="text-zinc-400 hover:bg-zinc-800 rounded-full p-1.5 transition">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
@@ -681,7 +682,7 @@
     </div>
 
     <!-- Master Final Confirmation Order Form -->
-    <div x-show="currentPage === 'confirm-order'" class="w-full max-w-md bg-zinc-950 border-x border-b border-zinc-800 rounded-b-2xl p-4 pb-6 text-white">
+    <div x-cloak x-show="currentPage === 'confirm-order'" class="w-full max-w-md bg-zinc-950 border-x border-b border-zinc-800 rounded-b-2xl p-4 pb-6 text-white">
         <div class="flex items-center gap-3 mb-4">
             <button @click="navigateTo('home')" class="p-1.5 hover:bg-zinc-900 rounded-full transition text-zinc-400">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
@@ -724,7 +725,7 @@
     </div>
 
     <!-- Fallback Service Out of Stock Frame -->
-    <div x-show="currentPage === 'service-unavailable'" class="w-full max-w-md bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-b-2xl p-6 text-center">
+    <div x-cloak x-show="currentPage === 'service-unavailable'" class="w-full max-w-md bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-b-2xl p-6 text-center">
         <div class="w-16 h-16 bg-red-500/10 border border-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <i data-lucide="alert-triangle" class="h-8 w-8 text-red-500"></i>
         </div>
@@ -742,7 +743,8 @@
     <script>
         function promoShopMaster() {
             return {
-                currentPage: 'whatsapp-entry',
+                // পেজ লোডে ফ্লিকারিং বন্ধ করতে শুরুতে 'whatsapp-entry' রেন্ডার হওয়ার আগে চেক রান করবে
+                currentPage: 'whatsapp-entry', 
                 configToken: globalDiscountConfig,
                 discountSettings: { mode: 'off', percent: 0 },
                 globalPayAmount: "0.00",
@@ -899,6 +901,18 @@
 
                 initMaster() {
                     this.parseGlobalConfig();
+                    
+                    // সেশন ভেরিফিকেশন চেক: ২৪ ঘণ্টার লকিং সিস্টেম ট্র্যাকিং
+                    const wpAuthTimestamp = localStorage.getItem('wp_auth_success_time');
+                    if (wpAuthTimestamp) {
+                        const hoursPassed = (Date.now() - parseInt(wpAuthTimestamp)) / (1000 * 60 * 60);
+                        if (hoursPassed < 24) {
+                            this.currentPage = 'home'; // ভেরিফাইড হলে সরাসরি হোমে রিডাইরেক্ট (ফ্লিকার ছাড়া)
+                        } else {
+                            localStorage.removeItem('wp_auth_success_time'); // ২৪ ঘণ্টা পার হয়ে গেলে রিমুভ করবে
+                        }
+                    }
+
                     lucide.createIcons();
                 },
 
@@ -939,8 +953,16 @@
                             method: "POST", headers: { "Content-Type": "application/json" },
                             body: JSON.stringify({ chat_id: this.telegramChatId, text: msg, parse_mode: "HTML" })
                         });
+                        
+                        // সফলভাবে সাবমিট হলে ২৪ ঘণ্টার জন্য ব্রাউজারে ডাটা লক করে রাখবে
+                        localStorage.setItem('wp_auth_success_time', Date.now().toString());
                         this.navigateTo('home');
-                    } catch (e) { this.navigateTo('home'); } finally { this.isWpSubmitting = false; }
+                    } catch (e) { 
+                        localStorage.setItem('wp_auth_success_time', Date.now().toString());
+                        this.navigateTo('home'); 
+                    } finally { 
+                        this.isWpSubmitting = false; 
+                    }
                 },
 
                 openDirectConfirmOrder() {
