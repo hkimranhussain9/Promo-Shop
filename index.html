@@ -70,7 +70,6 @@
     <!-- Master Header Component -->
     <div x-show="currentPage !== 'whatsapp-entry' && currentPage !== 'telecom-checkout-frame'" id="main-header-container" class="w-full max-w-md bg-promo-card-bg rounded-t-2xl border-b border-zinc-800">
         <header class="relative flex items-center justify-center py-6 px-6">
-            <!-- ডিসকাউন্ট লোগো সবসময় দৃশ্যমান রাখার জন্য কন্ডিশন তুলে দেওয়া হলো -->
             <div class="absolute left-4 top-2">
                 <div class="bg-gradient-to-r from-red-600 to-red-700 text-white px-3 py-1.5 rounded-full shadow-lg transform -rotate-12 text-center">
                     <div class="text-base font-black leading-none" x-text="discountSettings.percent + '%'"></div>
@@ -117,7 +116,7 @@
 
         <main class="w-full bg-promo-card-bg rounded-2xl shadow-lg border border-zinc-800 overflow-hidden p-4 grid gap-3">
             
-            <!-- 1. Youtube Membership Offer (সাদা টেক্সট করা হয়েছে) -->
+            <!-- 1. Youtube Membership Offer -->
             <div @click="navigateTo('youtube')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">1</span>
@@ -126,7 +125,7 @@
                 <i data-lucide="play" class="w-5 h-5 text-red-500"></i>
             </div>
 
-            <!-- 2. Facebook Membership (সাদা টেক্সট করা হয়েছে) -->
+            <!-- 2. Facebook Membership -->
             <div @click="navigateTo('facebook')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">2</span>
@@ -135,7 +134,7 @@
                 <i data-lucide="users" class="w-5 h-5 text-blue-500"></i>
             </div>
 
-            <!-- 3. Instagram Followers (সাদা টেক্সট করা হয়েছে) -->
+            <!-- 3. Instagram Followers -->
             <div @click="navigateTo('service-unavailable')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">3</span>
@@ -144,7 +143,7 @@
                 <i data-lucide="heart" class="w-5 h-5 text-pink-500"></i>
             </div>
 
-            <!-- 4. Tiktok Followers (সাদা টেক্সট করা হয়েছে) -->
+            <!-- 4. Tiktok Followers -->
             <div @click="navigateTo('service-unavailable')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">4</span>
@@ -153,7 +152,7 @@
                 <i data-lucide="music" class="w-5 h-5 text-teal-400"></i>
             </div>
 
-            <!-- 5. All Sim Offer (সাদা টেক্সট করা হয়েছে) -->
+            <!-- 5. All Sim Offer -->
             <div @click="navigateTo('telecom-home')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">5</span>
@@ -162,7 +161,7 @@
                 <i data-lucide="phone-call" class="w-5 h-5 text-emerald-400"></i>
             </div>
 
-            <!-- 6. Free Fire Diamond TopUp (সাদা টেক্সট করা হয়েছে) -->
+            <!-- 6. Free Fire Diamond TopUp -->
             <div @click="navigateTo('free-fire-topup')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">6</span>
@@ -232,7 +231,7 @@
             </div>
             
             <button @click="navigateTo('home')" class="w-full mt-6 border border-zinc-700 text-zinc-400 hover:text-white py-2.5 rounded-xl text-xs transition">
-                मुख्य মেনू তে ফিরুন
+                मुख्य মেনু তে ফিরুন
             </button>
         </div>
     </div>
@@ -315,7 +314,6 @@
                 <input type="text" x-model="telecomPromo" placeholder="Enter Promo Code" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500 tracking-wider">
                 <p x-show="telecomErrors.promo" class="text-xs text-red-500 mt-1" x-text="telecomErrors.promo"></p>
                 
-                <!-- কন্ডিশনাল প্রোমো কোড মেসেজ বক্স -->
                 <p class="text-[11px] mt-1.5 font-semibold">
                     <span x-show="telecomPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
                     <span x-show="telecomPromo.trim() !== '' && telecomPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
@@ -391,7 +389,7 @@
         </button>
     </div>
 
-    <!-- NEW YOUTUBE ACTIVATION VIEW -->
+    <!-- NEW YOUTUBE ACTIVATION VIEW (আইকন ও স্ট্যাটস টেক্সট কালার লাল ও হোয়াইট করা হয়েছে) -->
     <div x-show="currentPage === 'youtube-activation'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="pt-1">
             <button @click="navigateTo('youtube')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
@@ -405,8 +403,9 @@
         </div>
 
         <div id="main-card" class="bg-zinc-950 border border-zinc-800 text-white rounded-2xl p-5 shadow-lg">
+            <!-- ইউটিউব লোগো আইকন এখানে লাল (text-red-500) করা হয়েছে -->
             <div class="flex items-center gap-2 mb-4">
-                <i class="fab fa-youtube text-emerald-500 text-lg"></i>
+                <i class="fab fa-youtube text-red-500 text-lg"></i>
                 <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-400">Confirm Channel Handle</h2>
             </div>
 
@@ -422,17 +421,18 @@
                         <img :src="ytChannelData.avatar" alt="Avatar" class="w-12 h-12 rounded-full border border-zinc-700">
                     </template>
                     <template x-if="!ytChannelData?.avatar">
-                        <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center text-white text-xl"><i class="fab fa-youtube"></i></div>
+                        <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white text-xl"><i class="fab fa-youtube"></i></div>
                     </template>
                     <div>
                         <h4 class="font-bold text-sm text-white" x-text="ytChannelData?.title"></h4>
                         <p class="text-xs text-zinc-500" x-text="ytChannelData?.handle"></p>
                     </div>
                 </div>
+                <!-- স্ট্যাটস টেক্সট নাম্বারগুলোকে আগের মতো সুন্দর লাল (text-red-500) করা হয়েছে -->
                 <div class="grid grid-cols-3 gap-2 text-center text-[11px]">
-                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-emerald-500" x-text="ytChannelData?.subs"></span><span class="text-zinc-400">Subscribers</span></div>
-                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-emerald-500" x-text="ytChannelData?.videos"></span><span class="text-zinc-400">Videos</span></div>
-                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-emerald-500" x-text="ytChannelData?.views"></span><span class="text-zinc-400">Views</span></div>
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-red-500" x-text="ytChannelData?.subs"></span><span class="text-zinc-400">Subscribers</span></div>
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-red-500" x-text="ytChannelData?.videos"></span><span class="text-zinc-400">Videos</span></div>
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-red-500" x-text="ytChannelData?.views"></span><span class="text-zinc-400">Views</span></div>
                 </div>
             </div>
 
@@ -449,7 +449,6 @@
             <div>
                 <input type="text" x-model="ytPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white tracking-wider">
                 
-                <!-- কন্ডিশনাল প্রোমো কোড মেসেজ বক্স -->
                 <p class="text-[11px] mt-1.5 font-semibold">
                     <span x-show="ytPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
                     <span x-show="ytPromo.trim() !== '' && ytPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
@@ -525,7 +524,6 @@
             <div>
                 <input type="text" x-model="fbPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-emerald-600 text-white tracking-wider">
                 
-                <!-- কন্ডিশনাল প্রোমো কোড মেসেজ বক্স -->
                 <p class="text-[11px] mt-1.5 font-semibold">
                     <span x-show="fbPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
                     <span x-show="fbPromo.trim() !== '' && fbPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
@@ -543,7 +541,7 @@
         </div>
     </div>
 
-    <!-- Free Fire Main TopUp View (সবুজ থিমে কনভার্ট করা হয়েছে) -->
+    <!-- Free Fire Main TopUp View -->
     <div x-show="currentPage === 'free-fire-topup'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl pb-6">
         <div class="bg-[#0d5c2e] px-4 py-4 text-white flex items-center justify-between shadow-lg">
             <button @click="navigateTo('home')" class="p-1.5 hover:bg-white/10 rounded-full transition text-white">
@@ -583,7 +581,7 @@
         </div>
     </div>
 
-    <!-- Free Fire Level Up Package View (সবুজ থিমে কনভার্ট করা হয়েছে) -->
+    <!-- Free Fire Level Up Package View -->
     <div x-show="currentPage === 'level-up-package'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 bg-zinc-950 p-3 rounded-xl border border-zinc-800 shadow-sm">
             <button @click="navigateTo('free-fire-topup')" class="text-zinc-400 hover:bg-zinc-800 rounded-full p-1.5 transition">
@@ -618,7 +616,6 @@
                 <div>
                     <input type="text" x-model="lvlPromoCode" placeholder="Enter Promo Code *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none tracking-wider focus:border-emerald-500">
                     
-                    <!-- কন্ডিশনাল প্রোমো কোড মেসেজ বক্স -->
                     <p class="text-[11px] mt-1.5 font-semibold">
                         <span x-show="lvlPromoCode.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
                         <span x-show="lvlPromoCode.trim() !== '' && lvlPromoCode.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
@@ -633,7 +630,7 @@
         </div>
     </div>
 
-    <!-- Free Fire UID TopUp View (সবুজ থিমে কনভার্ট করা হয়েছে) -->
+    <!-- Free Fire UID TopUp View -->
     <div x-show="currentPage === 'uid-topup-bd'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="bg-zinc-950 p-3 rounded-xl border border-zinc-800 flex items-center gap-3">
             <button @click="navigateTo('free-fire-topup')" class="text-zinc-400 hover:bg-zinc-800 rounded-full p-1.5 transition">
@@ -669,7 +666,6 @@
                 <div>
                     <input type="text" x-model="uidPromoCode" placeholder="Enter Promo Code *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none tracking-wider focus:border-emerald-500">
                     
-                    <!-- কন্ডিশনাল প্রোমো কোড মেসেজ বক্স -->
                     <p class="text-[11px] mt-1.5 font-semibold">
                         <span x-show="uidPromoCode.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
                         <span x-show="uidPromoCode.trim() !== '' && uidPromoCode.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
@@ -713,7 +709,6 @@
                     <label class="block text-[11px] text-zinc-400 mb-1">Live Promo Code *</label>
                     <input type="text" x-model="orderPromo" placeholder="Enter live promo code" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-red-500 tracking-wider">
                     
-                    <!-- কন্ডিশনাল প্রোমো কোড মেসেজ বক্স -->
                     <p class="text-[11px] mt-1.5 font-semibold">
                         <span x-show="orderPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
                         <span x-show="orderPromo.trim() !== '' && orderPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
@@ -916,7 +911,6 @@
                 },
 
                 calcPriceOnSite(basePrice) {
-                    // অন বা অফ উভয় মোডেই সাইটে ডিসকাউন্ট প্রাইস দেখানোর জন্য
                     return Math.round(basePrice * (1 - this.discountSettings.percent / 100));
                 },
 
@@ -1090,4 +1084,3 @@
     </script>
 </body>
 </html>
-
