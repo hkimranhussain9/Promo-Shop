@@ -70,15 +70,13 @@
     <!-- Master Header Component -->
     <div x-show="currentPage !== 'whatsapp-entry' && currentPage !== 'telecom-checkout-frame'" id="main-header-container" class="w-full max-w-md bg-promo-card-bg rounded-t-2xl border-b border-zinc-800">
         <header class="relative flex items-center justify-center py-6 px-6">
-            <!-- ডাইনামিক লাইভ ডিসকাউন্ট ব্যানার (শুধুমাত্র 'on' মোডে দেখাবে) -->
-            <template x-if="discountSettings.mode === 'on'">
-                <div class="absolute left-4 top-2">
-                    <div class="bg-gradient-to-r from-red-600 to-red-700 text-white px-3 py-1.5 rounded-full shadow-lg transform -rotate-12 text-center">
-                        <div class="text-base font-black leading-none" x-text="discountSettings.percent + '%'"></div>
-                        <div class="text-[10px] font-bold tracking-wider">OFF</div>
-                    </div>
+            <!-- ডিসকাউন্ট লোগো সবসময় দৃশ্যমান রাখার জন্য কন্ডিশন তুলে দেওয়া হলো -->
+            <div class="absolute left-4 top-2">
+                <div class="bg-gradient-to-r from-red-600 to-red-700 text-white px-3 py-1.5 rounded-full shadow-lg transform -rotate-12 text-center">
+                    <div class="text-base font-black leading-none" x-text="discountSettings.percent + '%'"></div>
+                    <div class="text-[10px] font-bold tracking-wider">OFF</div>
                 </div>
-            </template>
+            </div>
             <div class="flex items-center gap-2 mt-2">
                 <i data-lucide="sparkles" class="w-6 h-6 text-red-500 fill-red-500"></i>
                 <span class="text-white text-xl font-bold tracking-wide">Promo Shop</span>
@@ -118,54 +116,62 @@
         </div>
 
         <main class="w-full bg-promo-card-bg rounded-2xl shadow-lg border border-zinc-800 overflow-hidden p-4 grid gap-3">
-            <div @click="navigateTo('youtube')" class="flex items-center justify-between p-3 rounded-xl bg-zinc-800/50 border border-zinc-700/50 hover:bg-zinc-800 transition cursor-pointer">
+            
+            <!-- 1. Youtube Membership Offer (সাদা টেক্সট করা হয়েছে) -->
+            <div @click="navigateTo('youtube')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
-                    <span class="w-6 h-6 flex items-center justify-center bg-zinc-700 text-xs rounded-full font-bold">1</span>
-                    <span class="text-sm font-medium text-white">Youtube Membership Offer</span>
+                    <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">1</span>
+                    <span class="text-sm font-bold text-white">Youtube Membership Offer</span>
                 </div>
                 <i data-lucide="play" class="w-5 h-5 text-red-500"></i>
             </div>
 
-            <div @click="navigateTo('facebook')" class="flex items-center justify-between p-3 rounded-xl bg-zinc-800/50 border border-zinc-700/50 hover:bg-zinc-800 transition cursor-pointer">
+            <!-- 2. Facebook Membership (সাদা টেক্সট করা হয়েছে) -->
+            <div @click="navigateTo('facebook')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
-                    <span class="w-6 h-6 flex items-center justify-center bg-zinc-700 text-xs rounded-full font-bold">2</span>
-                    <span class="text-sm font-medium text-white">Facebook Membership</span>
+                    <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">2</span>
+                    <span class="text-sm font-bold text-white">Facebook Membership</span>
                 </div>
                 <i data-lucide="users" class="w-5 h-5 text-blue-500"></i>
             </div>
 
-            <div @click="navigateTo('service-unavailable')" class="flex items-center justify-between p-3 rounded-xl bg-zinc-800/50 border border-zinc-700/50 hover:bg-zinc-800 transition cursor-pointer">
+            <!-- 3. Instagram Followers (সাদা টেক্সট করা হয়েছে) -->
+            <div @click="navigateTo('service-unavailable')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
-                    <span class="w-6 h-6 flex items-center justify-center bg-zinc-700 text-xs rounded-full font-bold">3</span>
-                    <span class="text-sm font-medium text-white">Instagram Followers</span>
+                    <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">3</span>
+                    <span class="text-sm font-bold text-white">Instagram Followers</span>
                 </div>
                 <i data-lucide="heart" class="w-5 h-5 text-pink-500"></i>
             </div>
 
-            <div @click="navigateTo('service-unavailable')" class="flex items-center justify-between p-3 rounded-xl bg-zinc-800/50 border border-zinc-700/50 hover:bg-zinc-800 transition cursor-pointer">
+            <!-- 4. Tiktok Followers (সাদা টেক্সট করা হয়েছে) -->
+            <div @click="navigateTo('service-unavailable')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
-                    <span class="w-6 h-6 flex items-center justify-center bg-zinc-700 text-xs rounded-full font-bold">4</span>
-                    <span class="text-sm font-medium text-white">Tiktok Followers</span>
+                    <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">4</span>
+                    <span class="text-sm font-bold text-white">Tiktok Followers</span>
                 </div>
                 <i data-lucide="music" class="w-5 h-5 text-teal-400"></i>
             </div>
 
+            <!-- 5. All Sim Offer (সাদা টেক্সট করা হয়েছে) -->
             <div @click="navigateTo('telecom-home')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">5</span>
-                    <span class="text-sm font-bold text-emerald-400">All Sim Offer</span>
+                    <span class="text-sm font-bold text-white">All Sim Offer</span>
                 </div>
                 <i data-lucide="phone-call" class="w-5 h-5 text-emerald-400"></i>
             </div>
 
-            <div @click="navigateTo('free-fire-topup')" class="flex items-center justify-between p-3 rounded-xl bg-zinc-800/50 border border-zinc-700/50 hover:bg-zinc-800 transition cursor-pointer">
+            <!-- 6. Free Fire Diamond TopUp (সাদা টেক্সট করা হয়েছে) -->
+            <div @click="navigateTo('free-fire-topup')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
-                    <span class="w-6 h-6 flex items-center justify-center bg-zinc-700 text-xs rounded-full font-bold">6</span>
-                    <span class="text-sm font-medium text-white">Free Fire Diamond TopUp</span>
+                    <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">6</span>
+                    <span class="text-sm font-bold text-white">Free Fire Diamond TopUp</span>
                 </div>
                 <i data-lucide="zap" class="w-5 h-5 text-amber-400"></i>
             </div>
 
+            <!-- # Confirm Order -->
             <div @click="openDirectConfirmOrder()" class="flex items-center justify-between p-3 rounded-xl bg-promo-red-20 border border-promo-red hover-bg-promo-red-30 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-red-600 text-xs rounded-full font-bold text-white">#</span>
@@ -210,8 +216,8 @@
             <div class="bg-amber-500/10 border border-amber-500/30 rounded-xl p-3 flex items-center gap-3 mb-6">
                 <span class="text-xl">🔥</span>
                 <div>
-                    <h4 class="font-bold text-amber-400 text-xs">विशेष প্রোমো কোড অফার!</h4>
-                    <p class="text-[11px] text-zinc-400">লাইভ প্রোমো কোড ব্যবহার করে অফারটি্যাক্টিভেট করুন।</p>
+                    <h4 class="font-bold text-amber-400 text-xs">বিশেষ প্রোমো কোড অফার!</h4>
+                    <p class="text-[11px] text-zinc-400">লাইভ প্রোমো কোড ব্যবহার করে অফারটি অ্যাক্টিভেট করুন।</p>
                 </div>
             </div>
 
@@ -268,7 +274,7 @@
                     <div class="flex items-center justify-between border-t border-zinc-800 pt-2 mt-1">
                         <div class="flex flex-col">
                             <span class="text-emerald-400 font-bold text-base" x-text="'৳' + calcPriceOnSite(offer.basePrice)"></span>
-                            <template x-if="discountSettings.mode === 'on'">
+                            <template x-if="discountSettings.mode === 'on' || discountSettings.mode === 'off'">
                                 <span class="text-zinc-500 line-through text-[10px]" x-text="'৳' + offer.basePrice"></span>
                             </template>
                         </div>
@@ -295,7 +301,7 @@
                 <h4 class="font-bold text-white text-sm capitalize" x-text="currentSlug"></h4>
                 <p class="text-xs text-zinc-400" x-text="checkoutOffer.data + ' ' + (checkoutOffer.minutes || '')"></p>
             </div>
-            <span class="text-emerald-400 font-bold" x-text="'৳' + calcCheckoutPrice(checkoutOffer.basePrice, telecomPromo)"></span >
+            <span class="text-emerald-400 font-bold" x-text="'৳' + calcCheckoutPrice(checkoutOffer.basePrice, telecomPromo)"></span>
         </div>
 
         <div class="space-y-3">
@@ -308,7 +314,13 @@
                 <label class="block text-xs font-medium text-zinc-400 mb-1">Live Promo Code *</label>
                 <input type="text" x-model="telecomPromo" placeholder="Enter Promo Code" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500 tracking-wider">
                 <p x-show="telecomErrors.promo" class="text-xs text-red-500 mt-1" x-text="telecomErrors.promo"></p>
-                <p class="text-[10px] text-zinc-500 mt-0.5">হিন্ট: ডিসকাউন্ট মোড যাই হোক না কেন, পরের ধাপে যেতে সঠিক লাইভ প্রোমোকোডটি ব্যবহার করুন।</p>
+                
+                <!-- কন্ডিশনাল প্রোমো কোড মেসেজ বক্স -->
+                <p class="text-[11px] mt-1.5 font-semibold">
+                    <span x-show="telecomPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                    <span x-show="telecomPromo.trim() !== '' && telecomPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                    <span x-show="telecomPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                </p>
             </div>
 
             <button @click="handleTelecomSubmit()" :disabled="isTelecomSubmitting" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition text-sm flex items-center justify-center gap-2 mt-4 shadow-md">
@@ -339,48 +351,42 @@
             <i class="fab fa-youtube text-red-500 text-3xl mb-1"></i>
             <h2 class="text-base font-bold mb-0.5 text-white">YouTube Monetization Plan</h2>
             <p class="text-xs text-gray-400 mb-2">Boost views, watch hours instantly & start earning money!</p>
-            <template x-if="discountSettings.mode === 'on'">
-                <span class="bg-red-600 text-white text-[10px] px-2.5 py-1 rounded font-bold uppercase" x-text="'🔥 Limited Offer - ' + discountSettings.percent + '% OFF'"></span>
-            </template>
+            <span class="bg-emerald-600 text-white text-[10px] px-2.5 py-1 rounded font-bold uppercase" x-text="'🔥 Limited Offer - ' + discountSettings.percent + '% OFF'"></span>
         </div>
 
         <div class="space-y-3">
             <h3 class="font-bold text-gray-300 text-xs uppercase tracking-wider">Choose Your Plan</h3>
 
             <!-- Standard Membership -->
-            <div @click="selectYtPlan('Standard Membership', 199)" :class="ytPlanName === 'Standard Membership' ? 'border-green-500 bg-green-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <span class="absolute top-3 right-3 bg-red-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">Most Popular</span>
+            <div @click="selectYtPlan('Standard Membership', 199)" :class="ytPlanName === 'Standard Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <span class="absolute top-3 right-3 bg-emerald-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">Most Popular</span>
                 <h4 class="font-bold text-sm text-white">Standard Membership</h4>
                 <div class="flex items-center gap-2 my-1">
                     <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(199)"></span>
-                    <template x-if="discountSettings.mode === 'on'">
-                        <span class="text-xs text-gray-500 line-through">৳199</span>
-                    </template>
+                    <span class="text-xs text-gray-500 line-through">৳199</span>
                 </div>
                 <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-green-400 mr-1.5"></i> Views: 50,000+</li>
-                    <li><i class="fas fa-check text-green-400 mr-1.5"></i> Watch Time: 4,000 Hour</li>
-                    <li><i class="fas fa-check text-green-400 mr-1.5"></i> Subscribers: 1,000</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Views: 50,000+</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Watch Time: 4,000 Hour</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Subscribers: 1,000</li>
                 </ul>
             </div>
 
             <!-- Premium Membership -->
-            <div @click="selectYtPlan('Premium Membership', 299)" :class="ytPlanName === 'Premium Membership' ? 'border-green-500 bg-green-500/10' : 'border-zinc-800 bg-zinc-950'" class="border rounded-2xl p-4 cursor-pointer transition">
+            <div @click="selectYtPlan('Premium Membership', 299)" :class="ytPlanName === 'Premium Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="border rounded-2xl p-4 cursor-pointer transition">
                 <h4 class="font-bold text-sm text-white">Premium Membership</h4>
                 <div class="flex items-center gap-2 my-1">
                     <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(299)"></span>
-                    <template x-if="discountSettings.mode === 'on'">
-                        <span class="text-xs text-gray-500 line-through">৳299</span>
-                    </template>
+                    <span class="text-xs text-gray-500 line-through">৳299</span>
                 </div>
                 <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-green-400 mr-1.5"></i> Views: 1,00,000+</li>
-                    <li><i class="fas fa-check text-green-400 mr-1.5"></i> Watch Time: 6,000+ Hour</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Views: 1,00,000+</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Watch Time: 6,000+ Hour</li>
                 </ul>
             </div>
         </div>
 
-        <button @click="navigateTo('youtube-activation')" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 rounded-xl text-xs transition tracking-wide">
+        <button @click="navigateTo('youtube-activation')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs transition tracking-wide">
             Proceed to Activation
         </button>
     </div>
@@ -394,18 +400,18 @@
         </div>
 
         <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3 flex items-center justify-between">
-            <span class="text-sm font-black text-red-500" x-text="'Selected: ' + ytPlanName + ' (৳' + calcCheckoutPrice(ytPlanBasePrice, ytPromo) + ')'"></span>
+            <span class="text-sm font-black text-emerald-500" x-text="'Selected: ' + ytPlanName + ' (৳' + calcCheckoutPrice(ytPlanBasePrice, ytPromo) + ')'"></span>
             <span class="bg-zinc-800 text-white text-[10px] font-bold px-2 py-0.5 rounded">PROMO OFFER</span>
         </div>
 
         <div id="main-card" class="bg-zinc-950 border border-zinc-800 text-white rounded-2xl p-5 shadow-lg">
             <div class="flex items-center gap-2 mb-4">
-                <i class="fab fa-youtube text-red-500 text-lg"></i>
+                <i class="fab fa-youtube text-emerald-500 text-lg"></i>
                 <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-400">Confirm Channel Handle</h2>
             </div>
 
             <div x-show="!ytChannelData" class="mb-4">
-                <input type="text" x-model="ytHandleInput" placeholder="@channelhandle" class="w-full bg-zinc-900 border border-zinc-700 text-center font-medium py-3 rounded-xl focus:outline-none text-base text-white focus:border-red-500 transition">
+                <input type="text" x-model="ytHandleInput" placeholder="@channelhandle" class="w-full bg-zinc-900 border border-zinc-700 text-center font-medium py-3 rounded-xl focus:outline-none text-base text-white focus:border-emerald-500 transition">
             </div>
 
             <!-- Live Channel Details Card -->
@@ -416,7 +422,7 @@
                         <img :src="ytChannelData.avatar" alt="Avatar" class="w-12 h-12 rounded-full border border-zinc-700">
                     </template>
                     <template x-if="!ytChannelData?.avatar">
-                        <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center text-white text-xl"><i class="fab fa-youtube"></i></div>
+                        <div class="w-12 h-12 bg-emerald-600 rounded-full flex items-center justify-center text-white text-xl"><i class="fab fa-youtube"></i></div>
                     </template>
                     <div>
                         <h4 class="font-bold text-sm text-white" x-text="ytChannelData?.title"></h4>
@@ -424,9 +430,9 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-3 gap-2 text-center text-[11px]">
-                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-red-500" x-text="ytChannelData?.subs"></span><span class="text-zinc-400">Subscribers</span></div>
-                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-red-500" x-text="ytChannelData?.videos"></span><span class="text-zinc-400">Videos</span></div>
-                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-red-500" x-text="ytChannelData?.views"></span><span class="text-zinc-400">Views</span></div>
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-emerald-500" x-text="ytChannelData?.subs"></span><span class="text-zinc-400">Subscribers</span></div>
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-emerald-500" x-text="ytChannelData?.videos"></span><span class="text-zinc-400">Videos</span></div>
+                    <div class="bg-zinc-950 p-2 rounded-lg border border-zinc-800"><span class="block font-bold text-xs text-emerald-500" x-text="ytChannelData?.views"></span><span class="text-zinc-400">Views</span></div>
                 </div>
             </div>
 
@@ -440,16 +446,26 @@
         </div>
 
         <div class="space-y-3">
-            <input type="text" x-model="ytPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-red-500 text-xs text-white tracking-wider">
+            <div>
+                <input type="text" x-model="ytPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white tracking-wider">
+                
+                <!-- কন্ডিশনাল প্রোমো কোড মেসেজ বক্স -->
+                <p class="text-[11px] mt-1.5 font-semibold">
+                    <span x-show="ytPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                    <span x-show="ytPromo.trim() !== '' && ytPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                    <span x-show="ytPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                </p>
+            </div>
+            
             <div class="bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl text-zinc-400 font-medium text-xs" x-text="ytPlanName"></div>
             
-            <select x-model="ytCountry" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-red-500 text-xs text-white">
+            <select x-model="ytCountry" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white">
                 <option value="Bangladesh">Bangladesh</option>
                 <option value="India">India</option>
                 <option value="Pakistan">Pakistan</option>
             </select>
 
-            <button @click="handleYtActivationSubmit()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition text-xs tracking-wide shadow-md">
+            <button @click="handleYtActivationSubmit()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition text-xs tracking-wide shadow-md">
                 Activate Plan
             </button>
         </div>
@@ -466,29 +482,27 @@
         </div>
 
         <div class="space-y-3">
-            <div @click="selectFbPlan('Basic Growth Package', 149)" :class="fbPlanName === 'Basic Growth Package' ? 'border-blue-500 bg-blue-950/20' : 'border-zinc-800 bg-zinc-950'" class="p-3 border rounded-xl cursor-pointer transition">
+            <div @click="selectFbPlan('Basic Growth Package', 149)" :class="fbPlanName === 'Basic Growth Package' ? 'border-emerald-500 bg-emerald-950/20' : 'border-zinc-800 bg-zinc-950'" class="p-3 border rounded-xl cursor-pointer transition">
                 <div class="flex justify-between items-center">
                     <h4 class="font-bold text-white text-xs">Basic Growth Package</h4>
-                    <template x-if="discountSettings.mode === 'on'">
-                        <span class="text-[10px] bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded" x-text="discountSettings.percent + '% OFF'"></span>
-                    </template>
+                    <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded" x-text="discountSettings.percent + '% OFF'"></span>
                 </div>
-                <div class="text-base font-bold text-white mt-1" x-text="'৳' + calcPriceOnSite(149) + ' '"><template x-if="discountSettings.mode === 'on'"><span class="text-xs text-zinc-500 line-through">৳149</span></template></div>
+                <div class="text-base font-bold text-white mt-1" x-text="'৳' + calcPriceOnSite(149) + ' '"><span class="text-xs text-zinc-500 line-through">৳149</span></div>
                 <p class="text-[11px] text-zinc-400">✓ Page Followers: 7,000+ & Profile Boost Support</p>
             </div>
 
-            <div @click="selectFbPlan('Standard Monetizer Package', 239)" :class="fbPlanName === 'Standard Monetizer Package' ? 'border-blue-500 bg-blue-500/5 border-2' : 'border-zinc-800 bg-zinc-950 border'" class="p-3 rounded-xl cursor-pointer transition">
+            <div @click="selectFbPlan('Standard Monetizer Package', 239)" :class="fbPlanName === 'Standard Monetizer Package' ? 'border-emerald-500 bg-emerald-500/5 border-2' : 'border-zinc-800 bg-zinc-950 border'" class="p-3 rounded-xl cursor-pointer transition">
                 <div class="flex justify-between items-center">
                     <h4 class="font-bold text-white text-xs">Standard Monetizer Package</h4>
-                    <span class="text-[10px] bg-red-600 text-white px-2 py-0.5 rounded font-bold">Popular</span>
+                    <span class="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded font-bold">Popular</span>
                 </div>
-                <div class="text-base font-bold text-white mt-1" x-text="'৳' + calcPriceOnSite(239) + ' '"><template x-if="discountSettings.mode === 'on'"><span class="text-xs text-zinc-500 line-through">৳239</span></template></div>
+                <div class="text-base font-bold text-white mt-1" x-text="'৳' + calcPriceOnSite(239) + ' '"><span class="text-xs text-zinc-500 line-through">৳239</span></div>
                 <p class="text-[11px] text-zinc-400">✓ Reach: 700K+ Organic Node & Qualify for In-Stream Ads</p>
             </div>
         </div>
 
         <div class="p-1">
-            <button @click="navigateTo('facebook-activation')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl text-xs transition shadow-md">
+            <button @click="navigateTo('facebook-activation')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-xs transition shadow-md">
                 Proceed to Activation
             </button>
         </div>
@@ -502,25 +516,36 @@
             </button>
         </div>
         <div class="border border-zinc-700 rounded-xl p-3 bg-zinc-950 flex items-center justify-between">
-            <span class="text-sm font-black text-blue-500" x-text="'Selected: ' + fbPlanName + ' (৳' + calcCheckoutPrice(fbPlanBasePrice, fbPromo) + ')'"></span>
+            <span class="text-sm font-black text-emerald-500" x-text="'Selected: ' + fbPlanName + ' (৳' + calcCheckoutPrice(fbPlanBasePrice, fbPromo) + ')'"></span>
             <span class="text-[10px] font-bold bg-zinc-800 text-white px-2 py-0.5 rounded">PROMO OFFER</span>
         </div>
         <div class="space-y-3">
-            <input type="url" x-model="fbLink" placeholder="Enter Facebook Page/Profile Link *" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-blue-600 text-white">
-            <input type="text" x-model="fbPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-blue-600 text-white tracking-wider">
-            <select x-model="fbCountry" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-blue-600 text-white">
+            <input type="url" x-model="fbLink" placeholder="Enter Facebook Page/Profile Link *" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-emerald-600 text-white">
+            
+            <div>
+                <input type="text" x-model="fbPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-emerald-600 text-white tracking-wider">
+                
+                <!-- কন্ডিশনাল প্রোমো কোড মেসেজ বক্স -->
+                <p class="text-[11px] mt-1.5 font-semibold">
+                    <span x-show="fbPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                    <span x-show="fbPromo.trim() !== '' && fbPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                    <span x-show="fbPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                </p>
+            </div>
+
+            <select x-model="fbCountry" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-emerald-600 text-white">
                 <option value="bangladesh">Bangladesh</option>
                 <option value="india">India</option>
             </select>
-            <button @click="handleFbActivation()" class="w-full bg-transparent text-red-500 border border-red-500 hover:bg-red-500 hover:text-white font-bold py-3 rounded-xl transition text-xs">
+            <button @click="handleFbActivation()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition text-xs shadow-md">
                 Activate Plan
             </button>
         </div>
     </div>
 
-    <!-- Free Fire Main TopUp View -->
+    <!-- Free Fire Main TopUp View (সবুজ থিমে কনভার্ট করা হয়েছে) -->
     <div x-show="currentPage === 'free-fire-topup'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl pb-6">
-        <div class="bg-gradient-to-r from-orange-600 to-red-600 px-4 py-4 text-white flex items-center justify-between shadow-lg">
+        <div class="bg-[#0d5c2e] px-4 py-4 text-white flex items-center justify-between shadow-lg">
             <button @click="navigateTo('home')" class="p-1.5 hover:bg-white/10 rounded-full transition text-white">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
             </button>
@@ -529,19 +554,17 @@
         </div>
         
         <div class="p-4 space-y-4">
-            <template x-if="discountSettings.mode === 'on'">
-                <div class="bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30 rounded-xl p-4 text-center shadow-inner">
-                    <div class="flex items-center justify-center gap-1 mb-1 text-green-400">
-                        <i data-lucide="percent" class="w-5 h-5"></i>
-                        <span class="text-xl font-black" x-text="discountSettings.percent + '% INSTANT OFF'"></span>
-                    </div>
-                    <p class="text-[11px] text-zinc-300" x-text="'সকল ফ্রি ফায়ার ডায়মন্ড ও লেভেল আপ বান্ডেলে ' + discountSettings.percent + '% ছাড় চলছে!'"></p>
+            <div class="bg-gradient-to-r from-green-600/20 to-emerald-600/20 border border-green-500/30 rounded-xl p-4 text-center shadow-inner">
+                <div class="flex items-center justify-center gap-1 mb-1 text-green-400">
+                    <i data-lucide="percent" class="w-5 h-5"></i>
+                    <span class="text-xl font-black" x-text="discountSettings.percent + '% INSTANT OFF'"></span>
                 </div>
-            </template>
+                <p class="text-[11px] text-zinc-300" x-text="'সকল ফ্রি ফায়ার ডায়মন্ড ও লেভেল আপ বান্ডেলে ' + discountSettings.percent + '% ছাড় চলছে!'"></p>
+            </div>
 
             <h3 class="text-xs font-bold text-zinc-400 uppercase tracking-wider">সার্ভিস ক্যাটাগরি</h3>
             <div class="space-y-2.5">
-                <div @click="navigateTo('uid-topup-bd')" class="bg-zinc-950 border border-zinc-800 p-3 rounded-xl flex items-center gap-3 cursor-pointer hover:border-orange-500 transition shadow-md">
+                <div @click="navigateTo('uid-topup-bd')" class="bg-zinc-950 border border-zinc-800 p-3 rounded-xl flex items-center gap-3 cursor-pointer hover:border-emerald-500 transition shadow-md">
                     <div class="w-11 h-11 bg-zinc-800 rounded-lg flex items-center justify-center text-lg">🎮</div>
                     <div class="flex-1">
                         <h4 class="font-bold text-white text-xs">UID Topup [BD]</h4>
@@ -549,7 +572,7 @@
                     </div>
                 </div>
 
-                <div @click="navigateTo('level-up-package')" class="bg-zinc-950 border border-zinc-800 p-3 rounded-xl flex items-center gap-3 cursor-pointer hover:border-orange-500 transition shadow-md">
+                <div @click="navigateTo('level-up-package')" class="bg-zinc-950 border border-zinc-800 p-3 rounded-xl flex items-center gap-3 cursor-pointer hover:border-emerald-500 transition shadow-md">
                     <div class="w-11 h-11 bg-zinc-800 rounded-lg flex items-center justify-center text-lg">💎</div>
                     <div class="flex-1">
                         <h4 class="font-bold text-white text-xs">Level Up Package Boost</h4>
@@ -560,13 +583,13 @@
         </div>
     </div>
 
-    <!-- Free Fire Level Up Package View -->
+    <!-- Free Fire Level Up Package View (সবুজ থিমে কনভার্ট করা হয়েছে) -->
     <div x-show="currentPage === 'level-up-package'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 bg-zinc-950 p-3 rounded-xl border border-zinc-800 shadow-sm">
             <button @click="navigateTo('free-fire-topup')" class="text-zinc-400 hover:bg-zinc-800 rounded-full p-1.5 transition">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
             </button>
-            <div class="w-10 h-10 bg-cyan-600 text-white rounded-xl flex items-center justify-center text-lg font-bold">💎</div>
+            <div class="w-10 h-10 bg-emerald-600 text-white rounded-xl flex items-center justify-center text-lg font-bold">💎</div>
             <div>
                 <h2 class="text-sm font-bold text-white">Level Up Package</h2>
                 <p class="text-zinc-400 text-[10px]">Game Account Top up Module</p>
@@ -576,12 +599,12 @@
         <div class="space-y-4">
             <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 space-y-2">
                 <h3 class="text-xs font-bold text-zinc-400">1. সিলেক্ট রিচার্জ প্যাক</h3>
-                <div @click="selectLevelUpPkg('full-level-up', 'Full Level Up (1270 Diamond)', 400)" :class="lvlPkgId === 'full-level-up' ? 'border-cyan-500 bg-cyan-500/5' : 'border-zinc-800 bg-zinc-900'" class="cursor-pointer border rounded-xl p-3 transition flex items-center justify-between">
+                <div @click="selectLevelUpPkg('full-level-up', 'Full Level Up (1270 Diamond)', 400)" :class="lvlPkgId === 'full-level-up' ? 'border-emerald-500 bg-emerald-500/5' : 'border-zinc-800 bg-zinc-900'" class="cursor-pointer border rounded-xl p-3 transition flex items-center justify-between">
                     <div>
                         <div class="text-white font-medium text-xs">Full Level Up <span class="text-zinc-400 font-normal">(1270 Diamond Max)</span></div>
-                        <div class="text-orange-500 font-bold text-base mt-0.5" x-text="calcCheckoutPrice(400, lvlPromoCode) + ' TK '"><template x-if="discountSettings.mode==='on'"><span class="text-xs text-zinc-500 line-through">400 TK</span></template></div>
+                        <div class="text-emerald-400 font-bold text-base mt-0.5" x-text="calcCheckoutPrice(400, lvlPromoCode) + ' TK '"><span class="text-xs text-zinc-500 line-through">400 TK</span></div>
                     </div>
-                    <div :class="lvlPkgId === 'full-level-up' ? 'bg-cyan-500' : 'bg-zinc-800'" class="w-4 h-4 rounded-full border border-zinc-700 flex items-center justify-center">
+                    <div :class="lvlPkgId === 'full-level-up' ? 'bg-emerald-500' : 'bg-zinc-800'" class="w-4 h-4 rounded-full border border-zinc-700 flex items-center justify-center">
                         <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
                     </div>
                 </div>
@@ -590,26 +613,33 @@
             <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 space-y-3">
                 <h3 class="text-xs font-bold text-zinc-400">2. প্লেয়ার ইনফরমেশন</h3>
                 <div>
-                    <input type="text" x-model="lvlGameUid" placeholder="Enter Your Game UID *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none">
+                    <input type="text" x-model="lvlGameUid" placeholder="Enter Your Game UID *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none focus:border-emerald-500">
                 </div>
                 <div>
-                    <input type="text" x-model="lvlPromoCode" placeholder="Enter Promo Code *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none tracking-wider">
+                    <input type="text" x-model="lvlPromoCode" placeholder="Enter Promo Code *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none tracking-wider focus:border-emerald-500">
+                    
+                    <!-- কন্ডিশনাল প্রোমো কোড মেসেজ বক্স -->
+                    <p class="text-[11px] mt-1.5 font-semibold">
+                        <span x-show="lvlPromoCode.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                        <span x-show="lvlPromoCode.trim() !== '' && lvlPromoCode.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                        <span x-show="lvlPromoCode.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    </p>
                 </div>
             </div>
 
-            <button @click="handleLevelUpPurchase()" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white py-3 rounded-xl font-bold text-xs transition">
+            <button @click="handleLevelUpPurchase()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-xs transition shadow-md">
                 Purchase Now
             </button>
         </div>
     </div>
 
-    <!-- Free Fire UID TopUp View -->
+    <!-- Free Fire UID TopUp View (সবুজ থিমে কনভার্ট করা হয়েছে) -->
     <div x-show="currentPage === 'uid-topup-bd'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="bg-zinc-950 p-3 rounded-xl border border-zinc-800 flex items-center gap-3">
             <button @click="navigateTo('free-fire-topup')" class="text-zinc-400 hover:bg-zinc-800 rounded-full p-1.5 transition">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
             </button>
-            <div class="w-10 h-10 bg-orange-500 text-white rounded-xl flex items-center justify-center text-lg">🎮</div>
+            <div class="w-10 h-10 bg-emerald-600 text-white rounded-xl flex items-center justify-center text-lg">🎮</div>
             <div>
                 <h2 class="text-sm font-bold text-white">UID Topup [BD]</h2>
                 <p class="text-zinc-400 text-[10px]">Official Direct Region Topup</p>
@@ -621,13 +651,11 @@
                 <h3 class="text-xs font-bold text-zinc-400 mb-2">1. সিলেক্ট রিচার্জ প্যাকেজ</h3>
                 <div class="grid grid-cols-2 gap-2 max-h-[220px] overflow-y-auto pr-1">
                     <template x-for="pkg in uidPackages" :key="pkg.id">
-                        <div @click="selectUidPkg(pkg)" :class="uidPkgId === pkg.id ? 'border-orange-500 bg-orange-500/5' : 'border-zinc-800 bg-zinc-900'" class="cursor-pointer border rounded-lg p-2 transition flex items-center gap-2">
+                        <div @click="selectUidPkg(pkg)" :class="uidPkgId === pkg.id ? 'border-emerald-500 bg-emerald-500/5' : 'border-zinc-800 bg-zinc-900'" class="cursor-pointer border rounded-lg p-2 transition flex items-center gap-2">
                             <div class="flex-1 min-w-0">
                                 <p class="text-white font-bold text-[11px] truncate" x-text="pkg.name"></p>
-                                <span class="text-orange-400 font-black text-xs" x-text="calcCheckoutPrice(pkg.originalPrice, uidPromoCode) + ' TK'"></span>
-                                <template x-if="discountSettings.mode === 'on'">
-                                    <span class="text-zinc-500 line-through text-[9px] block" x-text="pkg.originalPrice + ' TK'"></span>
-                                </template>
+                                <span class="text-emerald-400 font-black text-xs" x-text="calcCheckoutPrice(pkg.originalPrice, uidPromoCode) + ' TK'"></span>
+                                <span class="text-zinc-500 line-through text-[9px] block" x-text="pkg.originalPrice + ' TK'"></span>
                             </div>
                         </div>
                     </template>
@@ -636,11 +664,21 @@
 
             <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 space-y-3">
                 <h3 class="text-xs font-bold text-zinc-400">2. অ্যাকাউন্ট ডাটা</h3>
-                <input type="text" x-model="uidGameId" placeholder="Enter Your Game UID *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none">
-                <input type="text" x-model="uidPromoCode" placeholder="Enter Promo Code *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none tracking-wider">
+                <input type="text" x-model="uidGameId" placeholder="Enter Your Game UID *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none focus:border-emerald-500">
+                
+                <div>
+                    <input type="text" x-model="uidPromoCode" placeholder="Enter Promo Code *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none tracking-wider focus:border-emerald-500">
+                    
+                    <!-- কন্ডিশনাল প্রোমো কোড মেসেজ বক্স -->
+                    <p class="text-[11px] mt-1.5 font-semibold">
+                        <span x-show="uidPromoCode.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                        <span x-show="uidPromoCode.trim() !== '' && uidPromoCode.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                        <span x-show="uidPromoCode.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    </p>
+                </div>
             </div>
 
-            <button @click="handleUidPurchase()" class="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 rounded-xl font-bold text-xs transition">
+            <button @click="handleUidPurchase()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold text-xs transition shadow-md">
                 Purchase Securely
             </button>
         </div>
@@ -674,6 +712,13 @@
                 <div>
                     <label class="block text-[11px] text-zinc-400 mb-1">Live Promo Code *</label>
                     <input type="text" x-model="orderPromo" placeholder="Enter live promo code" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-red-500 tracking-wider">
+                    
+                    <!-- কন্ডিশনাল প্রোমো কোড মেসেজ বক্স -->
+                    <p class="text-[11px] mt-1.5 font-semibold">
+                        <span x-show="orderPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                        <span x-show="orderPromo.trim() !== '' && orderPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                        <span x-show="orderPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    </p>
                 </div>
             </div>
 
@@ -705,13 +750,11 @@
                 currentPage: 'whatsapp-entry',
                 configToken: globalDiscountConfig,
                 discountSettings: { mode: 'off', percent: 0 },
-                globalPayAmount: 0,
+                globalPayAmount: "0.00",
 
-                // Telegram Node Configs
                 telegramBotToken: "8047100663:AAH9PD5wJL_iXh1ygocfPE4dfiFfiVFm55g",
                 telegramChatId: "7335173906",
 
-                // Core States
                 wpEntryPhone: '', wpEntryError: false, isWpSubmitting: false,
                 orderName: '', orderPhone: '', orderProduct: '', orderPromo: '',
 
@@ -719,7 +762,7 @@
                 fbPlanName: 'Standard Monetizer Package', fbPlanBasePrice: 239, fbLink: '', fbPromo: '', fbCountry: 'bangladesh',
 
                 lvlPkgId: 'full-level-up', lvlPkgBasePrice: 400, lvlGameUid: '', lvlPromoCode: '',
-                uidPkgId: '', uidGameId: '', uidPromoCode: '',
+                uidPkgId: '', uidSelectedPrice: 0, uidGameId: '', uidPromoCode: '',
 
                 uidPackages: [
                     { id: "weekly", name: "Weekly", originalPrice: 152 },
@@ -728,7 +771,6 @@
                     { id: "2x-weekly-lite", name: "2X Weekly Lite", originalPrice: 80 }
                 ],
                 
-                // ---- YOUTUBE ACTIVATION LOGIC START ----
                 ytPromo: '', 
                 ytCountry: 'Bangladesh', 
                 ytHandleInput: '', 
@@ -802,7 +844,6 @@
                 async handleYtActivationSubmit() {
                     if(!this.ytChannelData) { return alert("Please confirm a valid channel first."); }
                     
-                    // ডিসকাউন্ট মোড যাই হোক না কেন, প্রোমো কোড বাধ্যতামূলক
                     const activePromo = this.getLivePromoCode();
                     const userEntered = this.ytPromo ? this.ytPromo.trim() : "";
                     if (userEntered !== activePromo) {
@@ -825,10 +866,9 @@
                         });
                     } catch(e){}
   
-                    this.globalPayAmount = finalPrice;
+                    this.globalPayAmount = parseFloat(finalPrice).toFixed(2);
                     this.navigateTo('telecom-checkout-frame');
                 },
-                // ---- YOUTUBE ACTIVATION LOGIC END ----
 
                 currentSlug: 'banglalink', checkoutOffer: {}, telecomPhone: '', telecomPromo: '', telecomErrors: {}, isTelecomSubmitting: false,
 
@@ -876,10 +916,8 @@
                 },
 
                 calcPriceOnSite(basePrice) {
-                    if (this.discountSettings.mode === 'on') {
-                        return Math.round(basePrice * (1 - this.discountSettings.percent / 100));
-                    }
-                    return basePrice; 
+                    // অন বা অফ উভয় মোডেই সাইটে ডিসকাউন্ট প্রাইস দেখানোর জন্য
+                    return Math.round(basePrice * (1 - this.discountSettings.percent / 100));
                 },
 
                 calcCheckoutPrice(basePrice, typedPromoCode = "") {
@@ -923,7 +961,6 @@
                     this.telecomErrors = {};
                     if (!/^01\d{9}$/.test(this.telecomPhone)) this.telecomErrors.phone = "সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন";
                     
-                    // এখানে ডিসকাউন্ট মোড নির্বিশেষে প্রোমো কোড চেক বাধ্যতামূলক করা হলো
                     if (this.telecomPromo.trim() !== this.getLivePromoCode()) {
                         this.telecomErrors.promo = "দুঃখিত, বর্তমান সময়ের সঠিক লাইভ প্রোমো কোডটি দিন!";
                     }
@@ -940,7 +977,7 @@
                         } catch(e){}
                         setTimeout(() => { 
                             this.isTelecomSubmitting = false; 
-                            this.globalPayAmount = finalPrice;
+                            this.globalPayAmount = parseFloat(finalPrice).toFixed(2);
                             this.navigateTo('telecom-checkout-frame'); 
                         }, 1000);
                     }
@@ -952,7 +989,6 @@
                 async handleFbActivation() {
                     if (!this.fbLink.trim()) return alert("লিংক প্রদান করুন!");
                     
-                    // ডিসকাউন্ট মোড যাই হোক না কেন, প্রোমো কোড বাধ্যতামূলক
                     const activePromo = this.getLivePromoCode();
                     const userEntered = this.fbPromo ? this.fbPromo.trim() : "";
                     if (userEntered !== activePromo) {
@@ -968,7 +1004,7 @@
                         });
                     } catch(e){}
 
-                    this.globalPayAmount = price;
+                    this.globalPayAmount = parseFloat(price).toFixed(2);
                     this.navigateTo('telecom-checkout-frame');
                 },
 
@@ -977,7 +1013,6 @@
                 async handleLevelUpPurchase() {
                     if (!this.lvlGameUid.trim()) return alert("Game UID দিন!");
                     
-                    // ডিসকাউন্ট মোড যাই হোক না কেন, প্রোমো কোড বাধ্যতামূলক
                     const activePromo = this.getLivePromoCode();
                     const userEntered = this.lvlPromoCode ? this.lvlPromoCode.trim() : "";
                     if (userEntered !== activePromo) {
@@ -993,7 +1028,7 @@
                         });
                     } catch(e){}
 
-                    this.globalPayAmount = price;
+                    this.globalPayAmount = parseFloat(price).toFixed(2);
                     this.navigateTo('telecom-checkout-frame');
                 },
 
@@ -1002,7 +1037,6 @@
                 async handleUidPurchase() {
                     if (!this.uidPkgId || !this.uidGameId.trim()) return alert("প্যাকেজ এবং UID সিলেক্ট করুন!");
                     
-                    // ডিসকাউন্ট মোড যাই হোক না কেন, প্রোমো কোড বাধ্যতামূলক
                     const activePromo = this.getLivePromoCode();
                     const userEntered = this.uidPromoCode ? this.uidPromoCode.trim() : "";
                     if (userEntered !== activePromo) {
@@ -1019,21 +1053,27 @@
                         });
                     } catch(e){}
 
-                    this.globalPayAmount = price;
+                    this.globalPayAmount = parseFloat(price).toFixed(2);
                     this.navigateTo('telecom-checkout-frame');
                 },
 
                 async processFinalOrder() {
                     if (!this.orderName.trim() || !this.orderPhone.trim()) return alert("সব ঘর পূরণ করুন!");
                     
-                    // ফাইনাল অর্ডারেও প্রোমো কোড সাবমিট করা বাধ্যতামূলক
                     const activePromo = this.getLivePromoCode();
                     const userEntered = this.orderPromo ? this.orderPromo.trim() : "";
                     if (userEntered !== activePromo) {
                         return alert("দুঃখিত, আপনার প্রোমো কোডটির সময় শেষ বা ভুল! সঠিক লাইভ কোড দিন।");
                     }
                     
-                    const payload = `📦 <b>NEW CONFIRMED ORDER</b>\nName: ${this.orderName}\nPhone: ${this.orderPhone}\nContext: ${this.orderProduct}\nPromo: ${this.orderPromo}`;
+                    let basePrice = 1;
+                    let matchPrice = this.orderProduct.match(/৳(\d+)/);
+                    if(matchPrice) {
+                        basePrice = parseInt(matchPrice[1]);
+                    }
+                    const finalPrice = this.calcCheckoutPrice(basePrice, this.orderPromo);
+
+                    const payload = `📦 <b>NEW CONFIRMED ORDER</b>\nName: ${this.orderName}\nPhone: ${this.orderPhone}\nContext: ${this.orderProduct}\nPaid: ৳${finalPrice}\nPromo: ${this.orderPromo}`;
                     try {
                         await fetch(`https://api.telegram.org/bot${this.telegramBotToken}/sendMessage`, {
                             method: "POST", headers: { "Content-Type": "application/json" },
@@ -1041,10 +1081,8 @@
                         });
                     } catch(e){}
 
-                    let matchPrice = this.orderProduct.match(/৳(\d+)/);
-                    this.globalPayAmount = matchPrice ? matchPrice[1] : 1; 
-
                     alert("অর্ডার ডাটা সেভ হয়েছে! আপনাকে পেমেন্ট পেজে রিডাইরেক্ট করা হচ্ছে।");
+                    this.globalPayAmount = parseFloat(finalPrice).toFixed(2);
                     this.navigateTo('telecom-checkout-frame');
                 }
             }
@@ -1052,3 +1090,4 @@
     </script>
 </body>
 </html>
+
