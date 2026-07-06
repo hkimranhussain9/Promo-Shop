@@ -723,10 +723,22 @@
         </div>
     </div>
 
-        <!-- ==================== DYNAMIC LIVE PURCHASE NOTIFICATION SYSTEM ==================== -->
+            <!-- ==================== DYNAMIC LIVE PURCHASE NOTIFICATION SYSTEM ==================== -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // ১. বাংলাদেশি নাম এবং প্রোডাক্টের ডেমো লিস্ট (পরবর্তীতে নতুন প্রোডাক্ট এলে এখানে নাম কমা দিয়ে লিখে দিলেই হবে)
+            // --- পেমেন্ট ও চেকআউট পেজ প্রটেকশন ---
+            // আপনার ওয়েবসাইটের পেমেন্ট বা চেকআউট পেজের URL-এ যে শব্দগুলো থাকে তা এখানে দেওয়া হয়েছে।
+            // যদি কারেন্ট পেজের লিংকে এর যেকোনো একটি মিলে যায়, তবে নোটিফিকেশন সিস্টেমটি এখানেই স্টপ হয়ে যাবে।
+            const currentUrl = window.location.href.toLowerCase();
+            const blockedPages = ["checkout", "payment", "pay", "order-received", "bill", "success"];
+            
+            const isBlockedPage = blockedPages.some(page => currentUrl.includes(page));
+            if (isBlockedPage) {
+                console.log("Live purchase notification disabled on payment/checkout page for better user experience.");
+                return; // এখানেই কোড এক্সিকিউশন বন্ধ করে দেওয়া হলো
+            }
+            // -------------------------------------
+
             const customerNames = ["Abir", "Sabbir", "Rahat", "Anik", "Tanvir", "Sujon", "Emon", "Nayeem", "Fahim", "Sakib", "Rifat", "Imran", "Arif", "Hasan", "Sumon", "Nabil", "Jahid", "Maruf", "Ayan", "Siam"];
             const phonePrefixes = ["017", "019", "018", "016", "015", "013", "014"];
             
@@ -749,21 +761,16 @@
             const timePhrases = ["Just now", "2 seconds ago", "15 seconds ago", "40 seconds ago", "1 minute ago"];
             const toastContainer = document.getElementById('toast-container');
 
-            // ২. নোটিফিকেশন তৈরি ও দেখানোর মেইন ফাংশন
             function showLiveNotification() {
                 if (!toastContainer) return;
 
-                // র‍্যান্ডম ডেটা সিলেক্ট করা
                 const randomName = customerNames[Math.floor(Math.random() * customerNames.length)];
                 const randomPrefix = phonePrefixes[Math.floor(Math.random() * phonePrefixes.length)];
-                const randomDigits = Math.floor(1000 + Math.random() * 9000); // ৪ ডিজিটের ফোন নম্বর
+                const randomDigits = Math.floor(1000 + Math.random() * 9000);
                 const randomProduct = liveProducts[Math.floor(Math.random() * liveProducts.length)];
                 const randomTime = timePhrases[Math.floor(Math.random() * timePhrases.length)];
-                
-                // ৪ ডিজিটের ইউনিক অর্ডার আইডি জেনারেট করা
                 const randomOrderId = Math.floor(1000 + Math.random() * 9000);
 
-                // টোস্ট নোটিফিকেশন কার্ডের HTML স্ট্রাকচার
                 const toast = document.createElement('div');
                 toast.className = "pointer-events-auto w-full max-w-sm bg-zinc-900/95 backdrop-blur-md border border-emerald-500/30 text-white p-3.5 rounded-xl shadow-2xl transform translate-y-4 opacity-0 transition-all duration-500 flex items-center gap-3";
                 
@@ -784,44 +791,38 @@
                     </button>
                 `;
 
-                // কন্টেইনারে পুশ করা
                 toastContainer.appendChild(toast);
 
-                // অ্যানিমেশন দিয়ে শো করা (Slide In)
                 setTimeout(() => {
                     toast.classList.remove('translate-y-4', 'opacity-0');
                 }, 100);
 
-                // ৪.৫ সেকেন্ড স্ক্রিনে নোটিফিকেশনটা ভেসে থাকবে, তারপর চলে যাবে
                 setTimeout(() => {
                     toast.classList.add('opacity-0', 'translate-y-2');
                     setTimeout(() => { toast.remove(); }, 500);
                 }, 4500);
 
-                // ৩. হিউম্যান-লাইক "রিয়েল হিউম্যান রিদম" টাইমিং লজিক
+                // রিয়েল হিউম্যান রিদম টাইমিং লজিক
                 let nextRandomDelay;
-                const diceRoll = Math.random(); // ০ থেকে ১ এর মধ্যে একটি র‍্যান্ডম নম্বর
+                const diceRoll = Math.random();
 
                 if (diceRoll < 0.15) {
-                    // ১৫% চান্স: খুব দ্রুত পরপর অর্ডার আসবে (৪ থেকে ৫ সেকেন্ডের ব্যবধানে)
                     nextRandomDelay = Math.floor(Math.random() * (5000 - 4000 + 1)) + 4000;
                 } else if (diceRoll < 0.35) {
-                    // ২০% চান্স: মাঝারি বিরতি (১৫ থেকে ২০ সেকেন্ডের ব্যবধানে একটি আসবে)
                     nextRandomDelay = Math.floor(Math.random() * (20000 - 15000 + 1)) + 15000;
                 } else {
-                    // ৬৫% চান্স (নরমাল মোড): দীর্ঘ বিরতি (৪০ থেকে ৭০ সেকেন্ড বা ১ মিনিট+ পর পর আসবে)
                     nextRandomDelay = Math.floor(Math.random() * (70000 - 40000 + 1)) + 40000;
                 }
 
-                // পরবর্তী নোটিফিকেশন শিডিউল করা
                 setTimeout(showLiveNotification, nextRandomDelay);
             }
 
-            // প্রথম নোটিফিকেশনটি পেজ লোড হওয়ার ১০ সেকেন্ড পর আসবে
+            // প্রথম নোটিফিকেশন ১০ সেকেন্ড পর আসবে (যদি ব্লকড পেজ না হয়)
             setTimeout(showLiveNotification, 10000);
         });
     </script>
     <!-- ==================== END OF NOTIFICATION SYSTEM ==================== -->
+
 
     <!-- Fallback Service Out of Stock Frame -->
     <div x-cloak x-show="currentPage === 'service-unavailable'" class="w-full max-w-md bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-b-2xl p-6 text-center">
