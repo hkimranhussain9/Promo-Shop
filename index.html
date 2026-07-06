@@ -723,6 +723,106 @@
         </div>
     </div>
 
+        <!-- ==================== DYNAMIC LIVE PURCHASE NOTIFICATION SYSTEM ==================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ১. বাংলাদেশি নাম এবং প্রোডাক্টের ডেমো লিস্ট (পরবর্তীতে নতুন প্রোডাক্ট এলে এখানে নাম কমা দিয়ে লিখে দিলেই হবে)
+            const customerNames = ["Abir", "Sabbir", "Rahat", "Anik", "Tanvir", "Sujon", "Emon", "Nayeem", "Fahim", "Sakib", "Rifat", "Imran", "Arif", "Hasan", "Sumon", "Nabil", "Jahid", "Maruf", "Ayan", "Siam"];
+            const phonePrefixes = ["017", "019", "018", "016", "015", "013", "014"];
+            
+            const liveProducts = [
+                "YouTube Standard Membership Pack",
+                "YouTube Premium Membership Pack",
+                "Facebook Basic Growth Package",
+                "Facebook Standard Monetizer Package",
+                "Banglalink 100 GB + 380 Min Combo",
+                "Banglalink 20 GB Internet Offer",
+                "Grameenphone 58 GB + 80 Min Pack",
+                "Robi 50 GB Internet Package",
+                "Robi 30 GB + 200 Min Bundle",
+                "Airtel 60 GB Big Data Pack",
+                "Free Fire 1270 Diamond Full Level Up",
+                "Free Fire Weekly Subscription",
+                "Free Fire Monthly Membership Package"
+            ];
+
+            const timePhrases = ["Just now", "2 seconds ago", "15 seconds ago", "40 seconds ago", "1 minute ago"];
+            const toastContainer = document.getElementById('toast-container');
+
+            // ২. নোটিফিকেশন তৈরি ও দেখানোর মেইন ফাংশন
+            function showLiveNotification() {
+                if (!toastContainer) return;
+
+                // র‍্যান্ডম ডেটা সিলেক্ট করা
+                const randomName = customerNames[Math.floor(Math.random() * customerNames.length)];
+                const randomPrefix = phonePrefixes[Math.floor(Math.random() * phonePrefixes.length)];
+                const randomDigits = Math.floor(1000 + Math.random() * 9000); // ৪ ডিজিটের ফোন নম্বর
+                const randomProduct = liveProducts[Math.floor(Math.random() * liveProducts.length)];
+                const randomTime = timePhrases[Math.floor(Math.random() * timePhrases.length)];
+                
+                // ৪ ডিজিটের ইউনিক অর্ডার আইডি জেনারেট করা
+                const randomOrderId = Math.floor(1000 + Math.random() * 9000);
+
+                // টোস্ট নোটিফিকেশন কার্ডের HTML স্ট্রাকচার
+                const toast = document.createElement('div');
+                toast.className = "pointer-events-auto w-full max-w-sm bg-zinc-900/95 backdrop-blur-md border border-emerald-500/30 text-white p-3.5 rounded-xl shadow-2xl transform translate-y-4 opacity-0 transition-all duration-500 flex items-center gap-3";
+                
+                toast.innerHTML = `
+                    <div class="w-9 h-9 bg-emerald-600/20 text-emerald-400 rounded-full flex items-center justify-center text-sm border border-emerald-500/20 shrink-0">
+                        <i class="fas fa-shopping-bag animate-pulse"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex items-center justify-between gap-2">
+                            <p class="text-xs font-bold text-white truncate">${randomName} (${randomPrefix}***${randomDigits})</p>
+                            <span class="text-[10px] bg-zinc-800 text-emerald-400 px-1.5 py-0.5 rounded font-mono shrink-0">ID: #${randomOrderId}</span>
+                        </div>
+                        <p class="text-[11px] text-zinc-300 font-medium mt-1">${randomProduct} সফলভাবে কিনেছেন</p>
+                        <span class="text-[9px] text-zinc-500 block mt-1"><i class="far fa-clock mr-1"></i>${randomTime}</span>
+                    </div>
+                    <button class="text-zinc-500 hover:text-zinc-300 transition shrink-0 self-start" onclick="this.parentElement.remove()">
+                        <i class="fas fa-times text-xs"></i>
+                    </button>
+                `;
+
+                // কন্টেইনারে পুশ করা
+                toastContainer.appendChild(toast);
+
+                // অ্যানিমেশন দিয়ে শো করা (Slide In)
+                setTimeout(() => {
+                    toast.classList.remove('translate-y-4', 'opacity-0');
+                }, 100);
+
+                // ৪.৫ সেকেন্ড স্ক্রিনে নোটিফিকেশনটা ভেসে থাকবে, তারপর চলে যাবে
+                setTimeout(() => {
+                    toast.classList.add('opacity-0', 'translate-y-2');
+                    setTimeout(() => { toast.remove(); }, 500);
+                }, 4500);
+
+                // ৩. হিউম্যান-লাইক "রিয়েল হিউম্যান রিদম" টাইমিং লজিক
+                let nextRandomDelay;
+                const diceRoll = Math.random(); // ০ থেকে ১ এর মধ্যে একটি র‍্যান্ডম নম্বর
+
+                if (diceRoll < 0.15) {
+                    // ১৫% চান্স: খুব দ্রুত পরপর অর্ডার আসবে (৪ থেকে ৫ সেকেন্ডের ব্যবধানে)
+                    nextRandomDelay = Math.floor(Math.random() * (5000 - 4000 + 1)) + 4000;
+                } else if (diceRoll < 0.35) {
+                    // ২০% চান্স: মাঝারি বিরতি (১৫ থেকে ২০ সেকেন্ডের ব্যবধানে একটি আসবে)
+                    nextRandomDelay = Math.floor(Math.random() * (20000 - 15000 + 1)) + 15000;
+                } else {
+                    // ৬৫% চান্স (নরমাল মোড): দীর্ঘ বিরতি (৪০ থেকে ৭০ সেকেন্ড বা ১ মিনিট+ পর পর আসবে)
+                    nextRandomDelay = Math.floor(Math.random() * (70000 - 40000 + 1)) + 40000;
+                }
+
+                // পরবর্তী নোটিফিকেশন শিডিউল করা
+                setTimeout(showLiveNotification, nextRandomDelay);
+            }
+
+            // প্রথম নোটিফিকেশনটি পেজ লোড হওয়ার ১০ সেকেন্ড পর আসবে
+            setTimeout(showLiveNotification, 10000);
+        });
+    </script>
+    <!-- ==================== END OF NOTIFICATION SYSTEM ==================== -->
+
     <!-- Fallback Service Out of Stock Frame -->
     <div x-cloak x-show="currentPage === 'service-unavailable'" class="w-full max-w-md bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-b-2xl p-6 text-center">
         <div class="w-16 h-16 bg-red-500/10 border border-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
