@@ -362,12 +362,12 @@
                 <h4 class="font-bold text-sm text-white">Basic Membership</h4>
                 <div class="flex items-center gap-2 my-1">
                     <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(99)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳58</span>
+                    <span class="text-xs text-gray-500 line-through">৳149</span>
                 </div>
                 <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> country: Asia </li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> delivery time: Instant </li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Subscribers: 1000</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Country: Asia</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Delivery time: Instant</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Subscribers: 1,000</li>
                 </ul>
             </div>
 
@@ -376,7 +376,7 @@
                 <span class="absolute top-3 right-3 bg-emerald-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">Most Popular</span>
                 <h4 class="font-bold text-sm text-white">Standard Membership</h4>
                 <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(199)"></span>
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(1199)"></span>
                     <span class="text-xs text-gray-500 line-through">৳1199</span>
                 </div>
                 <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
@@ -387,10 +387,10 @@
             </div>
 
             <!-- Premium Membership -->
-            <div @click="selectYtPlan('Premium Membership', 1499)" :class="ytPlanName === 'Premium Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="border rounded-2xl p-4 cursor-pointer transition">
+            <div @click="selectYtPlan('Premium Membership', 1499)" :class="ytPlanName === 'Premium Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
                 <h4 class="font-bold text-sm text-white">Premium Membership</h4>
                 <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(2199)"></span>
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(1499)"></span>
                     <span class="text-xs text-gray-500 line-through">৳1499</span>
                 </div>
                 <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
