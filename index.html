@@ -234,7 +234,7 @@
             </div>
             
             <button @click="navigateTo('home')" class="w-full mt-6 border border-zinc-700 text-zinc-400 hover:text-white py-2.5 rounded-xl text-xs transition">
-                मुख्य মেনু তে ফিরুন
+                হোম পেজে ফিরে আসুন 
             </button>
         </div>
     </div>
@@ -358,11 +358,11 @@
             <h3 class="font-bold text-gray-300 text-xs uppercase tracking-wider">Choose Your Plan</h3>
 
             <!-- Basic Membership -->
-            <div @click="selectYtPlan('Basic Membership', 99)" :class="ytPlanName === 'Basic Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+            <div @click="selectYtPlan('Basic Membership', 78)" :class="ytPlanName === 'Basic Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
                 <h4 class="font-bold text-sm text-white">Basic Membership</h4>
                 <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(99)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳149</span>
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(78)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳78</span>
                 </div>
                 <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
                     <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Country: Asia</li>
@@ -394,12 +394,30 @@
                     <span class="text-xs text-gray-500 line-through">৳1499</span>
                 </div>
                 <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Views: 1,00,000+</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Views: 1,20,000+</li>
                     <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Watch Time: 4,500+ Hour</li>
                     <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Subscribers: 10,000</li>
                 </ul>
             </div>
         </div>
+
+            <!-- Official Artist Channel -->
+            <div @click="selectYtPlan('Artist Verification', 171)" :class="ytPlanName === 'Artist Verification' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <span class="absolute top-3 right-3 bg-purple-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">OAC Badge</span>
+                <h4 class="font-bold text-sm text-white flex items-center gap-1.5">
+                    Artist Verification <i class="fas fa-music text-purple-400 text-xs"></i>
+                </h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(171)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳171</span>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Official Artist Channel Badge (🎵)</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Music Distribution: Included</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Delivery: 5-7 Working Days</li>
+                </ul>
+            </div>
+
 
         <button @click="navigateTo('youtube-activation')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs transition tracking-wide">
             Proceed to Activation
@@ -485,7 +503,9 @@
         </div>
     </div>
 
-    <!-- Facebook View -->
+
+     <!//------Facebook view page------//>
+
     <div x-cloak x-show="currentPage === 'facebook'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 py-2 border-b border-zinc-800">
             <button @click="navigateTo('home')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
@@ -495,66 +515,209 @@
             <h1 class="text-base font-bold text-white">Facebook Membership</h1>
         </div>
 
+        <div class="bg-gradient-to-r from-blue-600/10 to-indigo-600/20 border border-blue-500/20 rounded-2xl p-4 text-center">
+            <i class="fab fa-facebook-f text-blue-500 text-3xl mb-1"></i>
+            <h2 class="text-base font-bold mb-0.5 text-white">Facebook Boost Plan</h2>
+            <p class="text-xs text-gray-400 mb-2">Grow your page organically & unlock monetization quickly!</p>
+            <span class="bg-blue-600 text-white text-[10px] px-2.5 py-1 rounded font-bold uppercase" x-text="'🔥 Limited Offer - ' + discountSettings.percent + '% OFF'"></span>
+        </div>
+
         <div class="space-y-3">
-            <div @click="selectFbPlan('Basic Growth Package', 149)" :class="fbPlanName === 'Basic Growth Package' ? 'border-emerald-500 bg-emerald-950/20' : 'border-zinc-800 bg-zinc-950'" class="p-3 border rounded-xl cursor-pointer transition">
+            <h3 class="font-bold text-gray-300 text-xs uppercase tracking-wider">Choose Your Package</h3>
+
+            <!-- 1. Facebook Followers -->
+            <div @click="selectFbPlan('Facebook Followers', 180)" :class="fbPlanName === 'Facebook Followers' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="p-4 border rounded-xl cursor-pointer transition group hover:border-zinc-700">
                 <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-white text-xs">Basic Growth Package</h4>
-                    <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded" x-text="discountSettings.percent + '% OFF'"></span>
+                    <h4 class="font-bold text-white text-xs">Facebook Followers</h4>
+                    <span class="text-[10px] bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded font-bold uppercase tracking-wide">Profile</span>
                 </div>
-                <div class="text-base font-bold text-white mt-1" x-text="'৳' + calcPriceOnSite(149) + ' '"><span class="text-xs text-zinc-500 line-through">৳149</span></div>
-                <p class="text-[11px] text-zinc-400">✓ Page Followers: 7,000+ & Profile Boost Support</p>
+                <div class="flex items-baseline gap-2 mt-1.5 mb-3 border-b border-zinc-900 pb-3">
+                    <span class="text-base font-black text-white" x-text="'৳' + calcPriceOnSite(180)"></span>
+                    <span class="text-xs text-zinc-500 line-through" x-text="'৳' + 180"></span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ 5,000 Profile Followers</span>
+                    </div>
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ Premium & Non-Drop Pack</span>
+                    </div>
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ Global Active Accounts</span>
+                    </div>
+                </div>
             </div>
 
-            <div @click="selectFbPlan('Standard Monetizer Package', 239)" :class="fbPlanName === 'Standard Monetizer Package' ? 'border-emerald-500 bg-emerald-500/5 border-2' : 'border-zinc-800 bg-zinc-950 border'" class="p-3 rounded-xl cursor-pointer transition">
+            <!----- 2. Facebook Page Followers ----->
+            <div @click="selectFbPlan('Facebook Page Followers', 84)" :class="fbPlanName === 'Facebook Page Followers' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="p-4 border rounded-xl cursor-pointer transition group hover:border-zinc-700">
+                <div class="flex justify-between items-center">
+                    <h4 class="font-bold text-white text-xs">Facebook Page Followers</h4>
+                    <span class="text-[10px] bg-blue-600 text-white px-2 py-0.5 rounded font-bold uppercase tracking-wide">Best Seller</span>
+                </div>
+                <div class="flex items-baseline gap-2 mt-1.5 mb-3 border-b border-zinc-900 pb-3">
+                    <span class="text-base font-black text-white" x-text="'৳' + calcPriceOnSite(220)"></span>
+                    <span class="text-xs text-zinc-500 line-through" x-text="'৳' + 84"></span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ 5,000 Page Followers & Likes</span>
+                    </div>
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ 100% Safe & Lifetime Guarantee</span>
+                    </div>
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ Bangladeshi Real Users</span>
+                    </div>
+                </div>
+            </div>
+
+            <!----- 3. Standard Monetizer Package ----->
+            <div @click="selectFbPlan('Standard Monetizer Package', 239)" :class="fbPlanName === 'Standard Monetizer Package' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="p-4 border rounded-xl cursor-pointer transition group hover:border-zinc-700">
                 <div class="flex justify-between items-center">
                     <h4 class="font-bold text-white text-xs">Standard Monetizer Package</h4>
-                    <span class="text-[10px] bg-emerald-600 text-white px-2 py-0.5 rounded font-bold">Popular</span>
+                    <span class="text-[10px] bg-blue-600 text-white px-2 py-0.5 rounded font-bold uppercase tracking-wide">Popular</span>
                 </div>
-                <div class="text-base font-bold text-white mt-1" x-text="'৳' + calcPriceOnSite(239) + ' '"><span class="text-xs text-zinc-500 line-through">৳239</span></div>
-                <p class="text-[11px] text-zinc-400">✓ Reach: 700K+ Organic Node & Qualify for In-Stream Ads</p>
+                <div class="flex items-baseline gap-2 mt-1.5 mb-3 border-b border-zinc-900 pb-3">
+                    <span class="text-base font-black text-white" x-text="'৳' + calcPriceOnSite(239)"></span>
+                    <span class="text-xs text-zinc-500 line-through" x-text="'৳' + 239"></span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ 10,000 followers & 500K+ Organic Reach</span>
+                    </div>
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ 60,000 Minutes watchtime</span>
+                    </div>
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ Premium & Real Engagement</span>
+                    </div>
+                </div>
+            </div>
+
+            <!----- 4. Facebook Post Reaction ----->
+            <div @click="selectFbPlan('Facebook Post Reaction', 50)" :class="fbPlanName === 'Facebook Post Reaction' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="p-4 border rounded-xl cursor-pointer transition group hover:border-zinc-700">
+                <div class="flex justify-between items-center">
+                    <h4 class="font-bold text-white text-xs">Facebook Post Reaction</h4>
+                    <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-bold" x-text="discountSettings.percent + '% OFF'"></span>
+                </div>
+                <div class="flex items-baseline gap-2 mt-1.5 mb-3 border-b border-zinc-900 pb-3">
+                    <span class="text-base font-black text-white" x-text="'৳' + calcPriceOnSite(50)"></span>
+                    <span class="text-xs text-zinc-500 line-through" x-text="'৳' + 50"></span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ Instant Reactions (Like/Love/Wow)</span>
+                    </div>
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ Safe & Non-Drop Pack</span>
+                    </div>
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ Bangladeshi Active Profiles</span>
+                    </div>
+                </div>
+            </div>
+
+            <!----- 5. Facebook Blue Badge Verification ----->
+            <div @click="selectFbPlan('Facebook Profile/Page Verify', 60)" :class="fbPlanName === 'Blue Badge Verify' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="p-4 border rounded-xl cursor-pointer transition group hover:border-zinc-700">
+                <div class="flex justify-between items-center">
+                    <h4 class="font-bold text-white text-xs">Blue Badge Verify</h4>
+                    <span class="text-[10px] bg-purple-600 text-white px-2 py-0.5 rounded font-bold uppercase tracking-wide">OAC Badge</span>
+                </div>
+                <div class="flex items-baseline gap-2 mt-1.5 mb-3 border-b border-zinc-900 pb-3">
+                    <span class="text-base font-black text-white" x-text="'৳' + calcPriceOnSite(1450)"></span>
+                    <span class="text-xs text-zinc-500 line-through" x-text="'৳' + 60"></span>
+                </div>
+                <div class="space-y-1.5">
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ Instant Delivery </span>
+                    </div>
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ Lifetime Verified </span>
+                    </div>
+                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                        <span>✓ Profile/Page Verification Submission (Our Oocument)  </span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="p-1">
-            <button @click="navigateTo('facebook-activation')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-xs transition shadow-md">
+            <button @click="navigateTo('facebook-activation')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs transition tracking-wide shadow-md">
                 Proceed to Activation
             </button>
         </div>
     </div>
 
-    <!-- Facebook Activation View -->
-    <div x-cloak x-show="currentPage === 'facebook-activation'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
-        <div class="pt-1">
+
+   <!//-------- Facebook Action Page ----------///>
+   <div x-cloak x-show="currentPage === 'facebook-activation'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
+        <div class="flex items-center gap-3 py-2 border-b border-zinc-800">
             <button @click="navigateTo('facebook')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
             </button>
+            <i data-lucide="shield-check" class="w-6 h-6 text-emerald-500"></i>
+            <h1 class="text-base font-bold text-white">Activation Panel</h1>
         </div>
-        <div class="border border-zinc-700 rounded-xl p-3 bg-zinc-950 flex items-center justify-between">
+
+        <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3 flex items-center justify-between">
             <span class="text-sm font-black text-emerald-500" x-text="'Selected: ' + fbPlanName + ' (৳' + calcCheckoutPrice(fbPlanBasePrice, fbPromo) + ')'"></span>
-            <span class="text-[10px] font-bold bg-zinc-800 text-white px-2 py-0.5 rounded">PROMO OFFER</span>
+            <span class="bg-zinc-800 text-white text-[10px] font-bold px-2 py-0.5 rounded">PROMO OFFER</span>
         </div>
+
+        <div class="bg-zinc-950 border border-zinc-800 text-white rounded-2xl p-5 shadow-lg">
+            <div class="flex items-center gap-2 mb-4">
+                <i class="fab fa-facebook text-blue-500 text-lg"></i>
+                <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-400">Confirm Page / Profile Link</h2>
+            </div>
+
+            <div class="mb-2">
+                <input type="url" x-model="fbLink" placeholder="https://facebook.com/yourpage" class="w-full bg-zinc-900 border border-zinc-700 font-medium py-3 px-4 rounded-xl focus:outline-none text-xs text-white focus:border-emerald-500 transition">
+            </div>
+        </div>
+
         <div class="space-y-3">
-            <input type="url" x-model="fbLink" placeholder="Enter Facebook Page/Profile Link *" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-emerald-600 text-white">
-            
             <div>
-                <input type="text" x-model="fbPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-emerald-600 text-white tracking-wider">
+                <input type="text" x-model="fbPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white tracking-wider">
                 
                 <p class="text-[11px] mt-1.5 font-semibold">
                     <span x-show="fbPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
-                    <span x-show="fbPromo.trim() !== '' && fbPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিন কে মেসেজ দিন।</span>
-                    <span x-show="fbPromo.trim() !== '' && fbPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> ধন্যবাদ! আপনি ৫০% ডিসকাউন্ট পেয়েছেন।</span>
+                    <span x-show="fbPromo.trim() !== '' && fbPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                    <span x-show="fbPromo.trim() !== '' && fbPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
                 </p>
             </div>
-
-            <select x-model="fbCountry" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-xs focus:outline-none focus:border-emerald-600 text-white">
+            
+            <div class="bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl text-zinc-400 font-medium text-xs" x-text="fbPlanName"></div>
+            
+            <select x-model="fbCountry" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white">
                 <option value="bangladesh">Bangladesh</option>
                 <option value="india">India</option>
+                <option value="pakistan">Pakistan</option>
             </select>
-            <button @click="handleFbActivation()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition text-xs shadow-md">
+
+            <button @click="handleFbActivation()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition text-xs tracking-wide shadow-md">
                 Activate Plan
             </button>
         </div>
     </div>
+
+
+
+
 
     <!-- Free Fire Main TopUp View -->
     <div x-cloak x-show="currentPage === 'free-fire-topup'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl pb-6">
@@ -738,7 +901,7 @@
         </div>
     </div>
 
-            <!-- ==================== DYNAMIC LIVE PURCHASE NOTIFICATION SYSTEM ==================== -->
+          <!-- ==================== DYNAMIC LIVE PURCHASE NOTIFICATION SYSTEM ==================== --
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // --- পেমেন্ট ও চেকআউট পেজ প্রটেকশন ---
@@ -779,6 +942,18 @@
             function showLiveNotification() {
                 if (!toastContainer) return;
 
+                // Alpine.js এর বর্তমান পেজ চেক করা হচ্ছে (হোয়াটসঅ্যাপ এন্ট্রি ভিউতে নোটিফিকেশন বন্ধ রাখার জন্য)
+                const bodyEl = document.querySelector('body');
+                if (bodyEl && bodyEl.__x && bodyEl.__x.$data) {
+                    const currentPage = bodyEl.__x.$data.currentPage;
+                    if (currentPage === 'whatsapp-entry') {
+                        // হোয়াটসঅ্যাপ পেজে থাকলে নোটিফিকেশন দেখাবে না, ৮-১৫ সেকেন্ড পর আবার চেক করবে
+                        let retryDelay = Math.floor(Math.random() * (15000 - 8000 + 1)) + 8000;
+                        setTimeout(showLiveNotification, retryDelay);
+                        return;
+                    }
+                }
+
                 const randomName = customerNames[Math.floor(Math.random() * customerNames.length)];
                 const randomPrefix = phonePrefixes[Math.floor(Math.random() * phonePrefixes.length)];
                 const randomDigits = Math.floor(1000 + Math.random() * 9000);
@@ -817,7 +992,7 @@
                     setTimeout(() => { toast.remove(); }, 500);
                 }, 4500);
 
-                // রিয়েল হিউম্যান রিদম টাইমিং লজিক
+                // রিয়েল হিউম্যান রিদম টাইমিং লজিক (পরবর্তী নোটিফিকেশনগুলোর জন্য)
                 let nextRandomDelay;
                 const diceRoll = Math.random();
 
@@ -832,10 +1007,12 @@
                 setTimeout(showLiveNotification, nextRandomDelay);
             }
 
-            // প্রথম নোটিফিকেশন ১০ সেকেন্ড পর আসবে (যদি ব্লকড পেজ না হয়)
-            setTimeout(showLiveNotification, 10000);
+            // প্রথম নোটিফিকেশন ৮ থেকে ১৫ সেকেন্ডের মধ্যে যেকোনো একটি সময়ে আসবে
+            const initialDelay = Math.floor(Math.random() * (15000 - 8000 + 1)) + 8000;
+            setTimeout(showLiveNotification, initialDelay);
         });
     </script>
+    ```
     <!-- ==================== END OF NOTIFICATION SYSTEM ==================== -->
 
 
@@ -882,16 +1059,16 @@
                     { id: "2x-weekly-lite", name: "2X Weekly Lite", originalPrice: 80 },
                         { id: "ff1", name: "115 Diamond", originalPrice: 110 },    // ৩০% ডিসকাউন্টে ৭৭৳ আসবে
     { id: "ff2", name: "240 Diamond", originalPrice: 222 },    // ৩০% ডিসকাউন্টে ১৫৫৳ আসবে
-    { id: "ff3", name: "355 Diamond", originalPrice: 339 },    // ৩০% ডিসকাউন্টে ২৩৭৳ আসবে
-    { id: "ff4", name: "505 Diamond", originalPrice: 480 },    // ৩০% ডিসকাউন্টে ৩৩৬৳ আসবে
-    { id: "ff5", name: "610 Diamond", originalPrice: 558 },    // ৩০% ডিসকাউন্টে ৩৯০৳ আসবে
-    { id: "ff6", name: "850 Diamond", originalPrice: 798 },    // ৩০% ডিসকাউন্টে ৫৫৮৳ আসবে
-    { id: "ff7", name: "1090 Diamond", originalPrice: 1023 },  // ৩০% ডিসকাউন্টে ৭১৬৳ আসবে
-    { id: "ff8", name: "1240 Diamond", originalPrice: 1129 },  // ৩০% ডিসকাউন্টে ৭৯০৳ আসবে
-    { id: "ff9", name: "2530 Diamond", originalPrice: 2272 },  // ৩০% ডিসকাউন্টে ১৫৯০৳ আসবে
-    { id: "ff10", name: "3010 Diamond", originalPrice: 2752 }, // ৩০% ডিসকাউন্টে ১৯২৬৳ আসবে
-    { id: "ff11", name: "5060 Diamond", originalPrice: 4600 }, // ৩০% ডিসকাউন্টে ৩২২০৳ আসবে
-    { id: "ff12", name: "7590 Diamond", originalPrice: 6900 }, // ৩০% ডিসকাউন্টে ৪৮৩০৳ আসবে
+    { id: "ff3", name: "355 Diamond", originalPrice: 339 },   
+    { id: "ff4", name: "505 Diamond", originalPrice: 480 },  
+    { id: "ff5", name: "610 Diamond", originalPrice: 558 },   
+    { id: "ff6", name: "850 Diamond", originalPrice: 798 },   
+    { id: "ff7", name: "1090 Diamond", originalPrice: 1023 }, 
+    { id: "ff8", name: "1240 Diamond", originalPrice: 1129 },  
+    { id: "ff9", name: "2530 Diamond", originalPrice: 2272 }, 
+    { id: "ff10", name: "3010 Diamond", originalPrice: 2752 }, 
+    { id: "ff11", name: "5060 Diamond", originalPrice: 4600 }, 
+    { id: "ff12", name: "7590 Diamond", originalPrice: 6900 },
     { id: "ff13", name: "10120 Diamond", originalPrice: 9200 }
                 ],
                 
@@ -1094,7 +1271,38 @@
             { id: "a19", data: "", minutes: "600 Minutes", validity: "30 Day", basePrice: 357 }, 
             { id: "a20", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300 }  
                         ]
-                    }
+                    },
+skitto: {
+    name: "Skitto",
+    logo: "https://i.im.ge/QMCBr68/image_search_1783651817770.png",
+    offers: [
+        { id: "s0", data: "95 GB", minutes: "1200 Minutes", validity: "30 Day", basePrice: 949 },
+        { id: "s1", data: "22 GB", minutes: "1400 Minutes", validity: "30 Day", basePrice: 609 },
+        { id: "s2", data: "105 GB", minutes: "1850 Minutes", validity: "30 Day", basePrice: 1072 },
+        { id: "s3", data: "68 GB", minutes: "1500 Minutes", validity: "30 Day", basePrice: 899 },
+        { id: "s4", data: "52 GB", minutes: "950 Minutes", validity: "30 Day", basePrice: 749 },
+        { id: "s5", data: "42 GB", minutes: "850 Minutes", validity: "30 Day", basePrice: 599 },
+        { id: "s6", data: "38 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 539 },
+        { id: "s7", data: "27 GB", minutes: "450 Minutes", validity: "30 Day", basePrice: 469 },
+
+        // --- শুধু ডাটা প্যাকেজ ---
+        { id: "s8", data: "58 GB", minutes: "", validity: "30 Day", basePrice: 529 },
+        { id: "s9", data: "105 GB", minutes: "", validity: "30 Day", basePrice: 760 },
+
+        { id: "s10", data: "84 GB", minutes: "", validity: "30 Day", basePrice: 680 },
+        { id: "s11", data: "48 GB", minutes: "", validity: "30 Day", basePrice: 430 },
+        { id: "s12", data: "33 GB", minutes: "", validity: "30 Day", basePrice: 380 },
+        { id: "s13", data: "98 GB", minutes: "", validity: "30 Day", basePrice: 0, stockOut: true },
+        { id: "s14", data: "28 GB", minutes: "", validity: "30 Day", basePrice: 345 },
+        { id: "s15", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 869 },
+
+        // --- শুধু মিনিট প্যাকেজ ---
+        { id: "s16", data: "", minutes: "950 Minutes", validity: "30 Day", basePrice: 475 },
+        { id: "s17", data: "", minutes: "850 Minutes", validity: "30 Day", basePrice: 379 },
+        { id: "s18", data: "", minutes: "650 Minutes", validity: "30 Day", basePrice: 349 },
+        { id: "s19", data: "", minutes: "550 Minutes", validity: "30 Day", basePrice: 315 }
+    ]
+}
                 },
 
                 initMaster() {
