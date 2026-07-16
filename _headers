@@ -1,7 +1,0 @@
-# Block access to actual-index.html
-/actual-index.html
-  X-Robots-Tag: noindex, nofollow
-
-# Block all .html files except index.html
-/*.html
-  X-Robots-Tag: noindex, nofollow
