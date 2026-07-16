@@ -1,0 +1,11 @@
+[[redirects]]
+  from = "/actual-index.html"
+  to = "/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/*.html"
+  to = "/"
+  status = 302
+  force = true
