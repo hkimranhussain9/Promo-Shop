@@ -21,6 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
+        /* ===== ALL STYLES ===== */
         :root {
             --background: 0 0% 100%;
             --foreground: 0 0% 3.9%;
@@ -40,10 +41,14 @@
             --border: 0 0% 14.9%;
         }
 
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
             background-color: #1a1a1a !important;
             color: #e0e0e0 !important;
             font-family: 'Hind Siliguri', sans-serif, system-ui;
+            padding: 0 !important;
+            margin: 0 !important;
         }
 
         [x-cloak] { display: none !important; }
@@ -69,21 +74,23 @@
         .live-toast-notification {
             pointer-events: auto;
             width: 100%;
+            max-width: 320px !important;
             background-color: rgba(24, 24, 27, 0.95);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(16, 185, 129, 0.3);
             color: #ffffff;
-            padding: 14px;
-            border-radius: 12px;
+            padding: 10px 12px !important;
+            border-radius: 10px !important;
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
             transform: translateY(20px);
             opacity: 0;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-size: 11px !important;
         }
         .live-toast-notification.show {
             transform: translateY(0);
@@ -93,8 +100,27 @@
             transform: translateY(-10px);
             opacity: 0;
         }
+        .live-toast-notification .toast-icon {
+            width: 28px !important;
+            height: 28px !important;
+            background-color: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            flex-shrink: 0;
+        }
+        .live-toast-notification .toast-name { margin: 0; font-size: 11px; font-weight: bold; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .live-toast-notification .toast-id { margin: 0; font-size: 8px; background-color: #27272a; color: #10b981; padding: 1px 5px; border-radius: 3px; font-family: monospace; flex-shrink: 0; }
+        .live-toast-notification .toast-product { margin: 2px 0 0 0; font-size: 10px; color: #d4d4d8; font-weight: 500; line-height: 1.3; }
+        .live-toast-notification .toast-time { margin: 2px 0 0 0; font-size: 8px; color: #71717a; display: block; }
+        .live-toast-notification .toast-close { background: none; border: none; color: #52525b; cursor: pointer; padding: 0; flex-shrink: 0; align-self: flex-start; font-size: 10px; transition: color 0.2s; }
+        .live-toast-notification .toast-close:hover { color: #d4d4d8; }
 
-        /* ============ PAYMENT PAGE FULL SCREEN STYLES ============ */
+        /* Payment Page */
         .payment-page-wrapper {
             position: fixed !important;
             top: 0 !important;
@@ -112,83 +138,637 @@
             overflow: hidden !important;
             z-index: 99999 !important;
         }
-
         .payment-page-wrapper iframe {
             width: 100% !important;
             height: 100% !important;
             border: none !important;
             display: block !important;
         }
-
         body.payment-mode {
             overflow: hidden !important;
             padding: 0 !important;
             margin: 0 !important;
             background: #ffffff !important;
         }
-
         body.payment-mode #main-header-container,
         body.payment-mode .w-full.max-w-md:not(.payment-page-wrapper) {
             display: none !important;
         }
-
         body.payment-mode .min-h-screen {
             padding: 0 !important;
             margin: 0 !important;
         }
+
+        /* Scrolling Headline */
+        .scrolling-headline {
+            overflow: hidden;
+            white-space: nowrap;
+            background: rgba(220, 38, 38, 0.08);
+            border: 1px solid rgba(220, 38, 38, 0.25);
+            border-radius: 8px;
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .scrolling-headline .static-text {
+            flex-shrink: 0;
+            color: #fbbf24;
+            font-weight: 800;
+            font-size: 11px;
+        }
+        .scrolling-headline .scroll-track {
+            overflow: hidden;
+            flex: 1;
+            position: relative;
+        }
+        .scrolling-headline .scroll-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: scrollMarquee 15s linear infinite;
+            color: #fca5a5;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        @keyframes scrollMarquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Sidebar Menu */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 99998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .sidebar-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .sidebar-menu {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            height: 100vh;
+            background: #1e1e1e;
+            z-index: 99999;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 20px;
+            border-left: 1px solid #333;
+            overflow-y: auto;
+        }
+        .sidebar-menu.open {
+            right: 0;
+        }
+        .sidebar-menu .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: #888;
+            font-size: 20px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .sidebar-menu .close-btn:hover { color: #fff; }
+        .sidebar-menu .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 0;
+            border-bottom: 1px solid #333;
+            margin-bottom: 15px;
+        }
+        .sidebar-menu .user-info .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #2d2d2d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #10b981;
+            border: 2px solid #10b981;
+        }
+        .sidebar-menu .user-info .avatar.admin-avatar {
+            background: #1a1a1a;
+            border-color: #10b981;
+            font-size: 22px;
+            font-weight: 700;
+            color: #10b981;
+        }
+        .sidebar-menu .user-info .name { color: #fff; font-weight: 600; font-size: 14px; }
+        .sidebar-menu .user-info .phone { color: #888; font-size: 12px; }
+        .sidebar-menu .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 14px;
+            color: #ccc;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .sidebar-menu .menu-item:hover { background: #2d2d2d; color: #fff; }
+        .sidebar-menu .menu-item i { width: 20px; color: #10b981; }
+        .sidebar-menu .menu-item.danger { color: #ef4444; }
+        .sidebar-menu .menu-item.danger i { color: #ef4444; }
+        .sidebar-menu .menu-item .badge {
+            background: #10b981;
+            color: white;
+            font-size: 9px;
+            padding: 1px 8px;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #1a1a1a;
+            z-index: 999999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        .loading-screen.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .loading-screen .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #2d2d2d;
+            border-top: 4px solid #ef4444;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        .loading-screen .logo-text {
+            color: #fff;
+            font-size: 28px;
+            font-weight: 800;
+            margin-top: 20px;
+            letter-spacing: 2px;
+        }
+        .loading-screen .logo-text span { color: #ef4444; }
+        .loading-screen .sub-text {
+            color: #888;
+            font-size: 13px;
+            margin-top: 8px;
+            letter-spacing: 3px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+        /* Login Page */
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0d0d0d;
+            padding: 20px;
+        }
+        .login-container {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid #2d2d2d;
+        }
+        .login-container h2 { text-align: center; margin-bottom: 25px; color: #ffffff; font-weight: 600; }
+        .login-container h2 span { color: #ef4444; }
+        .login-container .tab {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #2d2d2d;
+            padding-bottom: 10px;
+        }
+        .login-container .tab button {
+            flex: 1;
+            padding: 10px 0;
+            border: none;
+            background: transparent;
+            font-size: 16px;
+            font-weight: 600;
+            color: #888;
+            cursor: pointer;
+            border-radius: 40px;
+            transition: 0.3s;
+        }
+        .login-container .tab button.active {
+            background: #ef4444;
+            color: white;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+        .login-container .tab button:hover { background: #2d2d2d; color: #fff; }
+        .login-container .tab button.active:hover { background: #dc2626; }
+        .login-container .form-group { margin-bottom: 16px; }
+        .login-container .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #ccc;
+            font-size: 13px;
+        }
+        .login-container .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid #2d2d2d;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: 0.3s;
+            background: #0d0d0d;
+            color: #fff;
+        }
+        .login-container .form-group input:focus {
+            border-color: #ef4444;
+            outline: none;
+            background: #1a1a1a;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+        }
+        .login-container .form-group input.error {
+            border-color: #dc3545 !important;
+            background: rgba(220, 53, 69, 0.1) !important;
+        }
+        .login-container .btn {
+            width: 100%;
+            padding: 14px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 8px;
+        }
+        .login-container .btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+        }
+        .login-container .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .login-container .message {
+            margin-top: 16px;
+            padding: 10px 16px;
+            border-radius: 10px;
+            display: none;
+            text-align: center;
+            font-weight: 500;
+            font-size: 13px;
+        }
+        .login-container .message.success {
+            display: block;
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        .login-container .message.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+        .login-container .message.info {
+            display: block;
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        .login-container .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #666;
+            font-size: 13px;
+        }
+        .login-container .divider::before,
+        .login-container .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #2d2d2d;
+        }
+        .login-container .divider::before { margin-right: 15px; }
+        .login-container .divider::after { margin-left: 15px; }
+        .login-container .switch-link {
+            text-align: center;
+            margin-top: 16px;
+            color: #888;
+            font-size: 13px;
+        }
+        .login-container .switch-link a {
+            color: #ef4444;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .login-container .switch-link a:hover { text-decoration: underline; }
+        .login-container .hidden { display: none !important; }
+        .login-container .user-status {
+            text-align: center;
+            padding: 20px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        .login-container .user-status .name { font-size: 18px; font-weight: 600; color: #34d399; }
+        .login-container .user-status .email { color: #888; margin-top: 5px; font-size: 13px; }
+        .login-container .logout-btn { background: #dc3545; margin-top: 10px; }
+        .login-container .logout-btn:hover { background: #c82333; }
+        .login-container .back-to-app {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #888;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .login-container .back-to-app:hover { color: #fff; }
+        .login-container .back-to-app i { margin-right: 6px; }
+
+        .main-container { padding-top: 10px; padding-bottom: 4px; }
+        .header-gap-top { margin-top: 6px; }
+        .header-gap-bottom { margin-bottom: 6px; }
+
+        /* Order History - Green Theme */
+        .order-item {
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+        .order-item:hover {
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+        .order-item .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .order-item .order-id { color: #10b981; font-weight: 700; font-size: 13px; }
+        .order-item .order-date { color: #666; font-size: 10px; }
+        .order-item .order-product { color: #fff; font-size: 14px; font-weight: 500; margin-top: 4px; }
+        .order-item .order-amount { color: #fbbf24; font-weight: 700; font-size: 15px; }
+        .order-item .order-status {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            font-size: 10px;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        .order-item .order-delete {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 13px;
+            padding: 4px 6px;
+            border-radius: 6px;
+            transition: 0.2s;
+        }
+        .order-item .order-delete:hover { background: rgba(239, 68, 68, 0.15); }
+        .order-item .order-details {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(16, 185, 129, 0.15);
+            font-size: 11px;
+            color: #888;
+        }
+        .order-item .order-details .detail-row {
+            display: flex;
+            gap: 6px;
+            padding: 1px 0;
+        }
+        .order-item .order-details .detail-key { color: #666; }
+        .order-item .order-details .detail-value { color: #ccc; }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .profile-stats .stat-box {
+            background: #1a1a1a;
+            border: 1px solid #2d2d2d;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+        }
+        .profile-stats .stat-box .number { font-size: 20px; font-weight: 700; color: #10b981; }
+        .profile-stats .stat-box .label { font-size: 10px; color: #666; margin-top: 2px; }
+
+        /* Support Page */
+        .support-card {
+            background: #1a1a1a;
+            border: 1px solid #2d2d2d;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+        .support-card .title { color: #fff; font-weight: 600; font-size: 14px; }
+        .support-card .desc { color: #888; font-size: 12px; margin-top: 4px; line-height: 1.5; }
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            color: white;
+            margin: 4px;
+        }
+        .support-btn.whatsapp { background: #25D366; }
+        .support-btn.whatsapp:hover { background: #1da851; transform: translateY(-2px); }
+        .support-btn.telegram { background: #0088cc; }
+        .support-btn.telegram:hover { background: #006699; transform: translateY(-2px); }
+        .support-btn i { font-size: 18px; }
     </style>
 </head>
-<body x-data="promoShopMaster()" x-init="initMaster()" class="min-h-screen flex flex-col items-center justify-center p-4 bg-promo-dark-bg">
+<body x-data="promoShopMaster()" x-init="initMaster()" class="min-h-screen flex flex-col items-center justify-center bg-promo-dark-bg">
 
-    <!-- Header -->
-    <div x-cloak x-show="currentPage !== 'whatsapp-entry' && currentPage !== 'telecom-checkout-frame'" id="main-header-container" class="w-full max-w-md bg-promo-card-bg rounded-t-2xl border-b border-zinc-800">
-        <header class="relative flex items-center justify-center py-6 px-6">
-            <div class="absolute left-4 top-2">
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loader"></div>
+        <div class="logo-text">PROMO <span>SHOP</span></div>
+        <div class="sub-text">Loading your experience...</div>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" :class="sidebarOpen ? 'active' : ''" @click="sidebarOpen = false"></div>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar-menu" :class="sidebarOpen ? 'open' : ''">
+        <button class="close-btn" @click="sidebarOpen = false">✕</button>
+        
+        <div class="user-info">
+            <div class="avatar" x-show="!isAdmin">👤</div>
+            <div class="avatar admin-avatar" x-show="isAdmin">@</div>
+            <div>
+                <div class="name" x-text="userName || 'Guest User'"></div>
+                <div class="phone" x-text="userPhone || 'Not logged in'"></div>
+            </div>
+        </div>
+
+        <div class="menu-item" @click="sidebarOpen = false; navigateTo('home')">
+            <i class="fas fa-home"></i> Home
+        </div>
+        <div class="menu-item" @click="sidebarOpen = false; navigateTo('order-history')">
+            <i class="fas fa-history"></i> Order History
+            <span class="badge" x-show="orderHistory.length > 0" x-text="orderHistory.length"></span>
+        </div>
+        <div class="menu-item" @click="sidebarOpen = false; navigateTo('profile-settings')">
+            <i class="fas fa-user-cog"></i> Profile Settings
+        </div>
+        <div class="menu-item" @click="sidebarOpen = false; navigateTo('support')">
+            <i class="fas fa-headset"></i> Support
+        </div>
+        <div class="menu-item danger" @click="handleLogout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ==================== LOGIN / REGISTER PAGE ================== -->
+    <!-- ============================================================ -->
+    <div x-cloak x-show="currentPage === 'login'" class="w-full max-w-md login-page" id="loginPageContainer">
+        <div class="login-container">
+            <h2>🔐 <span>Promo</span>Shop</h2>
+
+            <div class="tab">
+                <button id="registerTab" class="active" onclick="window.showRegister()">📝 Register</button>
+                <button id="loginTab" onclick="window.showLogin()">🔑 Login</button>
+            </div>
+
+            <div id="userStatus" class="hidden">
+                <div class="user-status">
+                    <div class="name" id="loggedUserName">User</div>
+                    <div class="email" id="loggedUserEmail">email@example.com</div>
+                    <button class="btn logout-btn" onclick="window.logoutUser()">🚪 Logout</button>
+                </div>
+            </div>
+
+            <div id="registerForm">
+                <div class="form-group">
+                    <label>👤 Name</label>
+                    <input type="text" id="regName" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label>📧 Email</label>
+                    <input type="email" id="regEmail" placeholder="example@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label>📱 Phone</label>
+                    <input type="text" id="regNumber" placeholder="01XXXXXXXXX" maxlength="11" required>
+                </div>
+                <div class="form-group">
+                    <label>🔒 Password</label>
+                    <input type="password" id="regPassword" placeholder="Minimum 6 characters" required>
+                </div>
+                <div class="form-group">
+                    <label>✅ Confirm Password</label>
+                    <input type="password" id="regConfirm" placeholder="Re-enter password" required>
+                </div>
+
+                <button class="btn" onclick="window.registerUser()">📥 Register</button>
+                
+                <div id="registerMessage" class="message"></div>
+                <div class="switch-link">
+                    Already have an account? <a onclick="window.showLogin()">Login here</a>
+                </div>
+            </div>
+
+            <div id="loginForm" class="hidden">
+                <div class="form-group">
+                    <label>📧 Email or Phone</label>
+                    <input type="text" id="loginEmailOrNumber" placeholder="Enter email, phone or 'admin'" required>
+                </div>
+                <div class="form-group">
+                    <label>🔒 Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter password" required>
+                </div>
+                <button class="btn" onclick="window.loginUser()">🚪 Login</button>
+                
+                <div id="loginMessage" class="message"></div>
+                <div class="switch-link">
+                    New user? <a onclick="window.showRegister()">Register here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ==================== MAIN HEADER ============================ -->
+    <!-- ============================================================ -->
+    <div x-cloak x-show="currentPage === 'home'" id="main-header-container" class="w-full max-w-md bg-promo-card-bg rounded-t-2xl border-b border-zinc-800 relative header-gap-top">
+        <header class="relative flex items-center justify-center py-4 px-4">
+            <div class="absolute left-3 top-0">
                 <div class="bg-gradient-to-r from-red-600 to-red-700 text-white px-3 py-1.5 rounded-full shadow-lg transform -rotate-12 text-center">
                     <div class="text-base font-black leading-none" x-text="discountSettings.percent + '%'"></div>
                     <div class="text-[10px] font-bold tracking-wider">OFF</div>
                 </div>
             </div>
-            <div class="flex items-center gap-2 mt-2">
-                <i data-lucide="sparkles" class="w-6 h-6 text-red-500 fill-red-500"></i>
-                <span class="text-white text-xl font-bold tracking-wide">Promo Shop</span>
-            </div>
-        </header>
-    </div>
-
-    <!-- WhatsApp Entry -->
-    <div x-cloak x-show="currentPage === 'whatsapp-entry'" class="w-full max-w-md bg-promo-card-bg rounded-2xl p-6 border border-zinc-800 shadow-lg space-y-4">
-        <div class="text-center space-y-2">
-            <div class="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto border border-green-500/20">
-                <i data-lucide="message-square" class="w-8 h-8 text-green-500"></i>
-            </div>
-            <h2 class="text-xl font-bold text-white">WhatsApp Verification</h2>
-            <p class="text-xs text-promo-text-muted">পরবর্তীতে আপনার সাথে যোগাযোগের জন্য হোয়াটসঅ্যাপ নাম্বারটি দিন</p>
-        </div>
-
-        <div class="space-y-4">
-            <div>
-                <label class="block text-xs font-medium text-promo-text-muted mb-2">WhatsApp Number</label>
-                <input type="tel" x-model="wpEntryPhone" @keyup.enter="submitWhatsAppNumber()" placeholder="01XXXXXXXXX" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-green-500 transition">
-                <p x-show="wpEntryError" class="text-xs text-red-500 mt-1">সঠিক নম্বরটি প্রদান করুন</p>
+            
+            <div class="flex flex-col items-center">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="sparkles" class="w-5 h-5 text-red-500 fill-red-500"></i>
+                    <span class="text-white text-lg font-bold tracking-wide">Promo Shop</span>
+                </div>
+                <span class="text-[10px] text-emerald-400 font-medium tracking-wider">Digital, Premium & Discount Services</span>
             </div>
 
-            <button @click="submitWhatsAppNumber()" :disabled="isWpSubmitting" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-xl transition text-sm flex items-center justify-center gap-2">
-                <span x-text="isWpSubmitting ? 'Sending...' : 'Next Step'"></span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            <button @click="sidebarOpen = !sidebarOpen" class="absolute right-3 top-0 w-8 h-8 rounded-full bg-zinc-800 border border-zinc-700 hover:border-emerald-500 transition flex items-center justify-center text-emerald-400 text-sm">
+                <i class="fas fa-user-circle text-lg"></i>
             </button>
+        </header>
+
+        <div class="px-4 pb-2 header-gap-bottom">
+            <div class="scrolling-headline">
+                <span class="static-text">📢 বি.দ্র.:</span>
+                <div class="scroll-track">
+                    <span class="scroll-content" x-text="'🚨 ' + discountSettings.percent + '% ডিসকাউন্ট অফার যেকোনো সময় শেষ হয়ে যেতে পারে। তাই এখনই অফারটি গ্রহণ করুন ⚠️'"></span>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Home Page -->
-    <div x-cloak x-show="currentPage === 'home'" class="w-full max-w-md space-y-4">
-        <div class="w-full bg-promo-card-bg rounded-b-2xl p-4 text-center border-x border-b border-zinc-800 shadow-lg">
-            <h1 class="text-2xl font-bold text-white tracking-wide">PROMOSHOP 50X</h1>
-            <p class="text-xs text-promo-text-muted">Premium,Digital & Gaming Services</p>
-        </div>
-
+    <div x-cloak x-show="currentPage === 'home'" class="w-full max-w-md space-y-3 main-container">
         <main class="w-full bg-promo-card-bg rounded-2xl shadow-lg border border-zinc-800 overflow-hidden p-4 grid gap-3">
-            
             <div @click="navigateTo('youtube')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">1</span>
@@ -205,7 +785,7 @@
                 <i data-lucide="users" class="w-5 h-5 text-blue-500"></i>
             </div>
 
-            <div @click="navigateTo('service-unavailable')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
+            <div @click="navigateTo('instagram')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">3</span>
                     <span class="text-sm font-bold text-white">Instagram Followers</span>
@@ -213,10 +793,10 @@
                 <i data-lucide="heart" class="w-5 h-5 text-pink-500"></i>
             </div>
 
-            <div @click="navigateTo('service-unavailable')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
+            <div @click="navigateTo('tiktok')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">4</span>
-                    <span class="text-sm font-bold text-white">Tiktok Followers</span>
+                    <span class="text-sm font-bold text-white">TikTok Service</span>
                 </div>
                 <i data-lucide="music" class="w-5 h-5 text-teal-400"></i>
             </div>
@@ -270,7 +850,161 @@
         </div>
     </div>
 
-    <!-- Telecom Home -->
+    <!-- ============================================================ -->
+    <!-- ============ ORDER HISTORY PAGE ============================= -->
+    <!-- ============================================================ -->
+    <div x-cloak x-show="currentPage === 'order-history'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4">
+        <div class="flex items-center gap-3 py-2 border-b border-zinc-800 mb-4">
+            <button @click="navigateTo('home')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <h1 class="text-base font-bold text-emerald-400">📋 Order History</h1>
+            <span x-show="orderHistory.length > 0" class="ml-auto text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full" x-text="orderHistory.length + ' orders'"></span>
+        </div>
+
+        <div x-show="orderHistory.length === 0" class="text-center py-10">
+            <i class="fas fa-box-open text-4xl text-zinc-600 mb-3"></i>
+            <p class="text-zinc-400 text-sm">No orders yet</p>
+            <p class="text-zinc-600 text-xs mt-1">Your orders will appear here</p>
+        </div>
+
+        <div x-show="orderHistory.length > 0" class="space-y-3 max-h-[500px] overflow-y-auto pr-1">
+            <template x-for="(order, index) in orderHistory" :key="index">
+                <div class="order-item">
+                    <div class="order-header">
+                        <div>
+                            <span class="order-id">#<span x-text="order.id || index + 1"></span></span>
+                            <span class="order-date ml-2" x-text="order.date || new Date().toLocaleString()"></span>
+                        </div>
+                        <button class="order-delete" @click="deleteOrder(index)" title="Delete Order">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="order-product" x-text="order.product"></div>
+                    
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
+                        <span class="order-amount">৳<span x-text="order.amount"></span></span>
+                        <span class="order-status" x-text="order.status || 'Completed'">✅ Completed</span>
+                    </div>
+
+                    <!-- Order Details -->
+                    <div x-show="order.details && Object.keys(order.details).length > 0" class="order-details">
+                        <template x-for="(value, key) in order.details">
+                            <div class="detail-row">
+                                <span class="detail-key" x-text="key + ':'"></span>
+                                <span class="detail-value" x-text="value"></span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ============ PROFILE SETTINGS PAGE ========================== -->
+    <!-- ============================================================ -->
+    <div x-cloak x-show="currentPage === 'profile-settings'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4">
+        <div class="flex items-center gap-3 py-2 border-b border-zinc-800 mb-4">
+            <button @click="navigateTo('home')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <h1 class="text-base font-bold text-white">⚙️ Profile Settings</h1>
+        </div>
+
+        <div class="space-y-4">
+            <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-4">
+                <label class="text-xs text-zinc-400 block mb-1">Full Name</label>
+                <input type="text" x-model="profileName" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500">
+            </div>
+
+            <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-4">
+                <label class="text-xs text-zinc-400 block mb-1">Email</label>
+                <input type="email" x-model="profileEmail" readonly class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-400 text-sm cursor-not-allowed">
+            </div>
+
+            <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-4">
+                <label class="text-xs text-zinc-400 block mb-1">Phone</label>
+                <input type="text" x-model="profilePhone" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500">
+            </div>
+
+            <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-4">
+                <label class="text-xs text-zinc-400 block mb-1">New Password</label>
+                <input type="password" x-model="profilePassword" placeholder="Leave blank to keep current" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-emerald-500">
+            </div>
+
+            <div class="profile-stats">
+                <div class="stat-box">
+                    <div class="number" x-text="totalOrders"></div>
+                    <div class="label">Total Orders</div>
+                </div>
+                <div class="stat-box">
+                    <div class="number" x-text="'৳' + totalAmount"></div>
+                    <div class="label">Total Spent</div>
+                </div>
+            </div>
+
+            <button @click="saveProfile()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition text-sm">
+                💾 Save Changes
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ============ SUPPORT PAGE =================================== -->
+    <!-- ============================================================ -->
+    <div x-cloak x-show="currentPage === 'support'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4">
+        <div class="flex items-center gap-3 py-2 border-b border-zinc-800 mb-4">
+            <button @click="navigateTo('home')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <h1 class="text-base font-bold text-white">🆘 Support Team</h1>
+        </div>
+
+        <div class="support-card">
+            <div class="title">📋 How can we help?</div>
+            <div class="desc">
+                আমাদের Support Team 24/7 আপনার সাহায্যের জন্য প্রস্তুত। কোনো সমস্যা হলে নিচের মাধ্যমগুলোতে যোগাযোগ করুন।
+            </div>
+        </div>
+
+        <div class="support-card">
+            <div class="title">📞 Contact Methods</div>
+            <div class="desc" style="margin-top:8px;">
+                <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;">
+                    <a href="https://wa.me/8801977454555" target="_blank" class="support-btn whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://t.me/niloyyt499" target="_blank" class="support-btn telegram">
+                        <i class="fab fa-telegram-plane"></i> Telegram
+                    </a>
+                </div>
+                <div style="margin-top:8px;font-size:11px;color:#666;">
+                    <div>📱 WhatsApp: <span style="color:#25D366;">01977454555</span></div>
+                    <div>✈️ Telegram: <span style="color:#0088cc;">@niloyyt499</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="support-card">
+            <div class="title">⏰ Response Time</div>
+            <div class="desc">
+                আমরা সাধারণত 5-10 মিনিটের মধ্যে রিপ্লাই দেই। জরুরি সমস্যার জন্য সরাসরি কল করতে পারেন।
+            </div>
+        </div>
+
+        <div class="support-card">
+            <div class="title">📧 Email Support</div>
+            <div class="desc">
+                ইমেইলের মাধ্যমে যোগাযোগ করতে চাইলে: <span style="color:#10b981;">promoshop50x@gmail.com</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ============ TELECOM PAGES ================================== -->
+    <!-- ============================================================ -->
     <div x-cloak x-show="currentPage === 'telecom-home'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl pb-6">
         <section class="bg-[#0d5c2e] text-white py-8 px-4 text-center shadow-md">
             <h1 class="text-2xl font-bold mb-2">সেকেন্ডেই মোবাইল রিচার্জ</h1>
@@ -393,11 +1127,14 @@
         </div>
     </div>
 
-    <!-- ============ PAYMENT PAGE - FULL SCREEN (UPDATED) ============ -->
+    <!-- Payment Page -->
     <div x-cloak x-show="currentPage === 'telecom-checkout-frame'" class="payment-page-wrapper">
         <iframe :src="'https://onlinepaybn.netlify.app/?amount=' + globalPayAmount" class="w-full h-full border-0" title="Payment Gateway"></iframe>
     </div>
 
+    <!-- ============================================================ -->
+    <!-- ============ YOUTUBE PAGES ================================== -->
+    <!-- ============================================================ -->
     <!-- YouTube Page -->
     <div x-cloak x-show="currentPage === 'youtube'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 py-2 border-b border-zinc-800">
@@ -433,11 +1170,11 @@
                 </ul>
             </div>
 
-            <div @click="selectYtPlan('Wachtime Membership', 338)" :class="ytPlanName === 'Wachtime Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+            <div @click="selectYtPlan('Wachtime Membership', 185)" :class="ytPlanName === 'Wachtime Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
                 <h4 class="font-bold text-sm text-white">Wachtime Membership</h4>
                 <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(338)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳338</span>
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(185)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳185</span>
                 </div>
                 <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
                     <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 1,000 Hours Watchtime </li>
@@ -446,12 +1183,12 @@
                 </ul>
             </div>
 
-            <div @click="selectYtPlan('Monetization Membership', 1199)" :class="ytPlanName === 'Monetization Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+            <div @click="selectYtPlan('Monetization Membership', 523)" :class="ytPlanName === 'Monetization Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
                 <span class="absolute top-3 right-3 bg-emerald-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">Most Popular</span>
                 <h4 class="font-bold text-sm text-white">Monetization Membership</h4>
                 <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(1199)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳1199</span>
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(523)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳523</span>
                 </div>
                 <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
                     <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Views: 50,000+</li>
@@ -460,11 +1197,11 @@
                 </ul>
             </div>
 
-            <div @click="selectYtPlan('Premium Membership', 1499)" :class="ytPlanName === 'Premium Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+            <div @click="selectYtPlan('Premium Membership', 692)" :class="ytPlanName === 'Premium Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
                 <h4 class="font-bold text-sm text-white">Premium Membership</h4>
                 <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(1499)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳1499</span>
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(692)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳692</span>
                 </div>
                 <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
                     <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Views: 1,20,000+</li>
@@ -573,6 +1310,9 @@
         </div>
     </div>
 
+    <!-- ============================================================ -->
+    <!-- ============ FACEBOOK PAGES ================================= -->
+    <!-- ============================================================ -->
     <!-- Facebook Page -->
     <div x-cloak x-show="currentPage === 'facebook'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 py-2 border-b border-zinc-800">
@@ -680,7 +1420,7 @@
                 <div class="space-y-1.5">
                     <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
                         <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ Instant Reactions (Like/Love/Wow)</span>
+                        <span>✓ 5,000 Instant Reactions (Like/Love/Wow)</span>
                     </div>
                     <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
                         <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
@@ -777,6 +1517,329 @@
         </div>
     </div>
 
+    <!-- ============================================================ -->
+    <!-- ============ INSTAGRAM PAGES ================================ -->
+    <!-- ============================================================ -->
+    <!-- Instagram Page -->
+    <div x-cloak x-show="currentPage === 'instagram'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
+        <div class="flex items-center gap-3 py-2 border-b border-zinc-800">
+            <button @click="navigateTo('home')" class="text-gray-300 hover:bg-zinc-800 p-1.5 rounded-full transition">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <div class="flex items-center gap-2">
+                <i class="fab fa-instagram text-pink-500 text-xl"></i>
+                <h1 class="text-base font-bold text-white">Instagram Service</h1>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-pink-600/10 to-purple-600/20 border border-pink-500/20 rounded-2xl p-4 text-center">
+            <i class="fab fa-instagram text-pink-500 text-3xl mb-1"></i>
+            <h2 class="text-base font-bold mb-0.5 text-white">Instagram Growth Package</h2>
+            <p class="text-xs text-gray-400 mb-2">Grow your Instagram with real engagement!</p>
+            <span class="bg-pink-600 text-white text-[10px] px-2.5 py-1 rounded font-bold uppercase" x-text="'🔥 Limited Offer - ' + discountSettings.percent + '% OFF'"></span>
+        </div>
+
+        <div class="space-y-3">
+            <h3 class="font-bold text-gray-300 text-xs uppercase tracking-wider">Choose Your Package</h3>
+
+            <div @click="selectInstagramPlan('20K Video Views', 45)" :class="instagramPlanName === '20K Video Views' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <h4 class="font-bold text-sm text-white">🎬 20K Video Views</h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(45)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳45</span>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 20K Real Video Views</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Delivery</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Non-Drop</li>
+                </ul>
+            </div>
+
+            <div @click="selectInstagramPlan('100K Video Views', 137)" :class="instagramPlanName === '100K Video Views' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <h4 class="font-bold text-sm text-white">🎬 100K Video Views</h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(137)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳137</span>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 100K High-Quality Views</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Boost Video Ranking</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Start</li>
+                </ul>
+            </div>
+
+            <div @click="selectInstagramPlan('5K Post Shares', 42)" :class="instagramPlanName === '5K Post Shares' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <h4 class="font-bold text-sm text-white">🖥️ 5K Post Shares</h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(42)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳42</span>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Real User Shares</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Increase Reach</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Delivery</li>
+                </ul>
+            </div>
+
+            <div @click="selectInstagramPlan('5K Post Comments', 62)" :class="instagramPlanName === '5K Post Comments' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <h4 class="font-bold text-sm text-white">🖥️ 5K Post Comments</h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(62)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳62</span>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 5K Real Comments</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Custom Comments</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Non-Drop</li>
+                </ul>
+            </div>
+
+            <div @click="selectInstagramPlan('10K Likes', 92)" :class="instagramPlanName === '10K Likes' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <span class="absolute top-3 right-3 bg-emerald-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">Popular</span>
+                <h4 class="font-bold text-sm text-white">❤️ 10K Likes</h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(92)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳92</span>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 10K Real Likes</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Organic Engagement</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Lifetime Guarantee</li>
+                </ul>
+            </div>
+
+            <div @click="selectInstagramPlan('10K Followers', 152)" :class="instagramPlanName === '10K Followers' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <span class="absolute top-3 right-3 bg-purple-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">Best Seller</span>
+                <h4 class="font-bold text-sm text-white">👥 10K Followers</h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(152)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳152</span>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 10K Real Followers</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Active Profiles</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Delivery</li>
+                </ul>
+            </div>
+        </div>
+
+        <button @click="instagramPlanName ? navigateTo('instagram-activation') : null" :disabled="!instagramPlanName" :class="!instagramPlanName ? 'opacity-50 cursor-not-allowed' : ''" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs transition tracking-wide">
+            Proceed to Activation
+        </button>
+    </div>
+
+    <!-- Instagram Activation -->
+    <div x-cloak x-show="currentPage === 'instagram-activation'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
+        <div class="pt-1">
+            <button @click="instagramPlanName = ''; instagramPlanBasePrice = 0; navigateTo('instagram')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3 flex items-center justify-between">
+            <span class="text-sm font-black text-emerald-500" x-text="'Selected: ' + instagramPlanName + ' (৳' + calcCheckoutPrice(instagramPlanBasePrice, instagramPromo) + ')'"></span>
+            <span class="bg-zinc-800 text-white text-[10px] font-bold px-2 py-0.5 rounded">PROMO OFFER</span>
+        </div>
+
+        <div class="bg-zinc-950 border border-zinc-800 text-white rounded-2xl p-5 shadow-lg">
+            <div class="flex items-center gap-2 mb-4">
+                <i class="fab fa-instagram text-pink-500 text-lg"></i>
+                <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-400">Confirm Instagram Username</h2>
+            </div>
+
+            <div class="mb-2">
+                <input type="text" x-model="instagramUsername" placeholder="@yourusername" class="w-full bg-zinc-900 border border-zinc-700 font-medium py-3 px-4 rounded-xl focus:outline-none text-xs text-white focus:border-emerald-500 transition">
+            </div>
+        </div>
+
+        <div class="space-y-3">
+            <div>
+                <input type="text" x-model="instagramPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white tracking-wider">
+                
+                <p class="text-[11px] mt-1.5 font-semibold">
+                    <span x-show="instagramPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                    <span x-show="instagramPromo.trim() !== '' && instagramPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                    <span x-show="instagramPromo.trim() !== '' && instagramPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                </p>
+            </div>
+            
+            <div class="bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl text-zinc-400 font-medium text-xs" x-text="instagramPlanName"></div>
+            
+            <select x-model="instagramCountry" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white">
+                <option value="Bangladesh">Bangladesh</option>
+                <option value="India">India</option>
+                <option value="Pakistan">Pakistan</option>
+            </select>
+
+            <button @click="handleInstagramActivation()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition text-xs tracking-wide shadow-md">
+                Activate Plan
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ============ TIKTOK PAGES =================================== -->
+    <!-- ============================================================ -->
+    <!-- TikTok Page -->
+    <div x-cloak x-show="currentPage === 'tiktok'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
+        <div class="flex items-center gap-3 py-2 border-b border-zinc-800">
+            <button @click="navigateTo('home')" class="text-gray-300 hover:bg-zinc-800 p-1.5 rounded-full transition">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <div class="flex items-center gap-2">
+                <i class="fab fa-tiktok text-white text-xl"></i>
+                <h1 class="text-base font-bold text-white">TikTok Service</h1>
+            </div>
+        </div>
+
+        <div class="bg-gradient-to-r from-teal-600/10 to-emerald-600/20 border border-teal-500/20 rounded-2xl p-4 text-center">
+            <i class="fab fa-tiktok text-white text-3xl mb-1"></i>
+            <h2 class="text-base font-bold mb-0.5 text-white">TikTok Growth Package</h2>
+            <p class="text-xs text-gray-400 mb-2">Boost your TikTok presence with real engagement!</p>
+            <span class="bg-teal-600 text-white text-[10px] px-2.5 py-1 rounded font-bold uppercase" x-text="'🔥 Limited Offer - ' + discountSettings.percent + '% OFF'"></span>
+        </div>
+
+        <div class="space-y-3">
+            <h3 class="font-bold text-gray-300 text-xs uppercase tracking-wider">Choose Your Package</h3>
+
+            <div @click="selectTiktokPlan('20K Views', 42)" :class="tiktokPlanName === '20K Views' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <h4 class="font-bold text-sm text-white">👁️ 20K Views</h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(42)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳42</span>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Real Video Views</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Delivery</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Non-Drop Guarantee</li>
+                </ul>
+            </div>
+
+            <div @click="selectTiktokPlan('100K Views', 115)" :class="tiktokPlanName === '100K Views' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <h4 class="font-bold text-sm text-white">👁️ 100K Views</h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(115)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳115</span>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 100K High-Quality Views</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Start</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 100% Safe</li>
+                </ul>
+            </div>
+
+            <div @click="selectTiktokPlan('5K Post Shares', 45)" :class="tiktokPlanName === '5K Post Shares' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <h4 class="font-bold text-sm text-white">🔁 5K Post Shares</h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(45)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳45</span>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Real User Shares</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Boost Engagement</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Delivery</li>
+                </ul>
+            </div>
+
+            <div @click="selectTiktokPlan('5K Post Comments', 54)" :class="tiktokPlanName === '5K Post Comments' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <h4 class="font-bold text-sm text-white">💬 5K Post Comments</h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(54)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳54</span>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 5K Real Comments</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Custom Comments Available</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Non-Drop</li>
+                </ul>
+            </div>
+
+            <div @click="selectTiktokPlan('10K Likes', 77)" :class="tiktokPlanName === '10K Likes' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <span class="absolute top-3 right-3 bg-emerald-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">Popular</span>
+                <h4 class="font-bold text-sm text-white">❤️ 10K Likes</h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(77)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳77</span>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 10K Real Likes</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Organic Engagement</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Lifetime Guarantee</li>
+                </ul>
+            </div>
+
+            <div @click="selectTiktokPlan('10K Followers', 139)" :class="tiktokPlanName === '10K Followers' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
+                <span class="absolute top-3 right-3 bg-purple-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">Best Seller</span>
+                <h4 class="font-bold text-sm text-white">👥 10K Followers</h4>
+                <div class="flex items-center gap-2 my-1">
+                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(139)"></span>
+                    <span class="text-xs text-gray-500 line-through">৳139</span>
+                </div>
+                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 10K Real Followers</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Active Accounts</li>
+                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Delivery</li>
+                </ul>
+            </div>
+        </div>
+
+        <button @click="tiktokPlanName ? navigateTo('tiktok-activation') : null" :disabled="!tiktokPlanName" :class="!tiktokPlanName ? 'opacity-50 cursor-not-allowed' : ''" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs transition tracking-wide">
+            Proceed to Activation
+        </button>
+    </div>
+
+    <!-- TikTok Activation -->
+    <div x-cloak x-show="currentPage === 'tiktok-activation'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
+        <div class="pt-1">
+            <button @click="tiktokPlanName = ''; tiktokPlanBasePrice = 0; navigateTo('tiktok')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3 flex items-center justify-between">
+            <span class="text-sm font-black text-emerald-500" x-text="'Selected: ' + tiktokPlanName + ' (৳' + calcCheckoutPrice(tiktokPlanBasePrice, tiktokPromo) + ')'"></span>
+            <span class="bg-zinc-800 text-white text-[10px] font-bold px-2 py-0.5 rounded">PROMO OFFER</span>
+        </div>
+
+        <div class="bg-zinc-950 border border-zinc-800 text-white rounded-2xl p-5 shadow-lg">
+            <div class="flex items-center gap-2 mb-4">
+                <i class="fab fa-tiktok text-white text-lg"></i>
+                <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-400">Confirm TikTok Username</h2>
+            </div>
+
+            <div class="mb-2">
+                <input type="text" x-model="tiktokUsername" placeholder="@yourusername" class="w-full bg-zinc-900 border border-zinc-700 font-medium py-3 px-4 rounded-xl focus:outline-none text-xs text-white focus:border-emerald-500 transition">
+            </div>
+        </div>
+
+        <div class="space-y-3">
+            <div>
+                <input type="text" x-model="tiktokPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white tracking-wider">
+                
+                <p class="text-[11px] mt-1.5 font-semibold">
+                    <span x-show="tiktokPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                    <span x-show="tiktokPromo.trim() !== '' && tiktokPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                    <span x-show="tiktokPromo.trim() !== '' && tiktokPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                </p>
+            </div>
+            
+            <div class="bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl text-zinc-400 font-medium text-xs" x-text="tiktokPlanName"></div>
+            
+            <select x-model="tiktokCountry" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white">
+                <option value="Bangladesh">Bangladesh</option>
+                <option value="India">India</option>
+                <option value="Pakistan">Pakistan</option>
+            </select>
+
+            <button @click="handleTiktokActivation()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition text-xs tracking-wide shadow-md">
+                Activate Plan
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ============ FREE FIRE PAGES ================================ -->
+    <!-- ============================================================ -->
     <!-- Free Fire Topup -->
     <div x-cloak x-show="currentPage === 'free-fire-topup'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl pb-6">
         <div class="bg-[#0d5c2e] px-4 py-4 text-white flex items-center justify-between shadow-lg">
@@ -972,27 +2035,78 @@
     </div>
 
     <!-- Toast Container -->
-    <div id="universal-toast-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 350px; pointer-events: none;"></div>
+    <div id="universal-toast-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 99999; display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 320px; pointer-events: none;"></div>
 
     <script>
+        // ================================================================
+        // ==================== TELEGRAM CONFIG =============================
+        // ================================================================
+        const TELEGRAM_BOT_TOKEN = '8047100663:AAH9PD5wJL_iXh1ygocfPE4dfiFfiVFm55g';
+        const TELEGRAM_CHAT_ID = '7335173906';
+
+        // ================================================================
+        // ==================== MAIN APP SCRIPT =============================
+        // ================================================================
         function promoShopMaster() {
             return {
-                currentPage: 'whatsapp-entry', 
+                // ===== STATE =====
+                currentPage: 'login',
                 configToken: globalDiscountConfig,
                 discountSettings: { mode: 'off', percent: 0 },
                 globalPayAmount: "0.00",
 
-                telegramBotToken: "8047100663:AAH9PD5wJL_iXh1ygocfPE4dfiFfiVFm55g",
-                telegramChatId: "7335173906",
+                // User
+                userName: 'Guest User',
+                userPhone: 'Not logged in',
+                userEmail: '',
+                isAdmin: false,
+                sidebarOpen: false,
 
+                // Profile
+                profileName: '',
+                profileEmail: '',
+                profilePhone: '',
+                profilePassword: '',
+                totalOrders: 0,
+                totalAmount: 0,
+
+                // Order History
+                orderHistory: [],
+
+                // WhatsApp
                 wpEntryPhone: '', wpEntryError: false, isWpSubmitting: false,
                 orderName: '', orderPhone: '', orderProduct: '', orderPromo: '',
 
+                // YouTube
                 ytPlanName: '', ytPlanBasePrice: 0,
-                fbPlanName: '', fbPlanBasePrice: 0, fbLink: '', fbPromo: '', fbCountry: 'bangladesh',
+                ytPromo: '', ytCountry: 'Bangladesh',
+                ytHandleInput: '', ytChannelData: null,
+                isYtSearching: false, ytSearchError: '',
+                ytApiKey: 'AIzaSyAh5gRiqnkd0D9JjAQ0aaCgcORlQWc2hb8',
 
-                lvlPkgId: 'full-level-up', lvlPkgBasePrice: 400, lvlGameUid: '', lvlPromoCode: '',
-                uidPkgId: '', uidSelectedPrice: 0, uidGameId: '', uidPromoCode: '',
+                // Facebook
+                fbPlanName: '', fbPlanBasePrice: 0,
+                fbLink: '', fbPromo: '', fbCountry: 'bangladesh',
+
+                // Instagram
+                instagramPlanName: '', instagramPlanBasePrice: 0,
+                instagramUsername: '', instagramPromo: '', instagramCountry: 'Bangladesh',
+
+                // TikTok
+                tiktokPlanName: '', tiktokPlanBasePrice: 0,
+                tiktokUsername: '', tiktokPromo: '', tiktokCountry: 'Bangladesh',
+
+                // Free Fire
+                lvlPkgId: 'full-level-up', lvlPkgBasePrice: 400,
+                lvlGameUid: '', lvlPromoCode: '',
+                uidPkgId: '', uidSelectedPrice: 0,
+                uidGameId: '', uidPromoCode: '',
+
+                // Telecom
+                currentSlug: 'banglalink',
+                checkoutOffer: {},
+                telecomPhone: '', telecomPromo: '',
+                telecomErrors: {}, isTelecomSubmitting: false,
 
                 uidPackages: [
                     { id: "weekly", name: "Weekly", originalPrice: 152 },
@@ -1013,17 +2127,151 @@
                     { id: "ff12", name: "7590 Diamond", originalPrice: 6900 },
                     { id: "ff13", name: "10120 Diamond", originalPrice: 9200 }
                 ],
-                
-                ytPromo: '', 
-                ytCountry: 'Bangladesh', 
-                ytHandleInput: '', 
-                ytChannelData: null, 
-                isYtSearching: false, 
-                ytSearchError: '',
-                ytApiKey: 'AIzaSyAh5gRiqnkd0D9JjAQ0aaCgcORlQWc2hb8',
 
-                // Notification System
                 notificationTimer: null,
+                orderHistoryLoaded: false,
+                appOpenNotified: false,
+
+                // ===== OPERATOR OFFERS =====
+                operatorOffers: {
+                    banglalink: {
+                        name: "Banglalink",
+                        logo: "https://i.im.ge/QMIqM3h/image_search_1779371093144.png",
+                        offers: [
+                            { id: "b0", data: "100 GB", minutes: "1300 Minutes", validity: "30 Day", basePrice: 865 },
+                            { id: "b2", data: "20 GB", minutes: "1450 Minutes", validity: "30 Day", basePrice: 520 },
+                            { id: "b3", data: "100 GB", minutes: "2000 Minutes", validity: "30 Day", basePrice: 986 },
+                            { id: "b4", data: "70 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 814 },
+                            { id: "b5", data: "50 GB", minutes: "1000 Minutes", validity: "30 Day", basePrice: 643 },
+                            { id: "b6", data: "44 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 500 },
+                            { id: "b7", data: "35 GB", minutes: "700 Minutes", validity: "30 Day", basePrice: 429 },
+                            { id: "b8", data: "25 GB", minutes: "400 Minutes", validity: "30 Day", basePrice: 357 },
+                            { id: "b9", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 543 },
+                            { id: "b10", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 700 },
+                            { id: "b11", data: "45 GB", minutes: "", validity: "30 Day", basePrice: 386 },
+                            { id: "b12", data: "35 GB", minutes: "", validity: "30 Day", basePrice: 357 },
+                            { id: "b13", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 0, stockOut: true },
+                            { id: "b14", data: "25 GB", minutes: "", validity: "30 Day", basePrice: 300 },
+                            { id: "b15", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 814 },
+                            { id: "b16", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 486 },
+                            { id: "b17", data: "", minutes: "900 Minutes", validity: "30 Day", basePrice: 386 },
+                            { id: "b18", data: "", minutes: "600 Minutes", validity: "30 Day", basePrice: 357 },
+                            { id: "b19", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300 }
+                        ]
+                    },
+                    grameenphone: {
+                        name: "Grameenphone",
+                        logo: "https://i.im.ge/QMIqQ4M/image_search_1779371027269.png",
+                        offers: [
+                            { id: "g1", data: "58 GB", minutes: "2000 Minutes", validity: "30 Day", basePrice: 860 },
+                            { id: "g3", data: "40 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 500 },
+                            { id: "g0", data: "70 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 814 },
+                            { id: "g1", data: "60 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 743 },
+                            { id: "g2", data: "50 GB", minutes: "1200 Minutes", validity: "30 Day", basePrice: 571 },
+                            { id: "g4", data: "80 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 0, stockOut: true },
+                            { id: "g5", data: "30 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 493 },
+                            { id: "g6", data: "20 GB", minutes: "400 Minutes", validity: "30 Day", basePrice: 357 },
+                            { id: "g7", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 466 },
+                            { id: "g8", data: "50 GB", minutes: "", validity: "30 Day", basePrice: 436 },
+                            { id: "g9", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 757 },
+                            { id: "g10", data: "40 GB", minutes: "", validity: "30 Day", basePrice: 371 },
+                            { id: "g11", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 871 },
+                            { id: "g12", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 500 },
+                            { id: "g13", data: "", minutes: "800 Minutes", validity: "30 Day", basePrice: 400 },
+                            { id: "g14", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300 }
+                        ]
+                    },
+                    robi: {
+                        name: "Robi",
+                        logo: "https://i.im.ge/QMIdGTX/image_search_1779371058782.png",
+                        offers: [
+                            { id: "r1", data: "50 GB", minutes: "1200 Minutes", validity: "30 Day", basePrice: 680 },
+                            { id: "r2", data: "30 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 498 },
+                            { id: "r3", data: "35 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 557 },
+                            { id: "r4", data: "60 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 729 },
+                            { id: "r5", data: "50 GB", minutes: "100 Minutes", validity: "30 Day", basePrice: 571 },
+                            { id: "r6", data: "55 GB", minutes: "300 Minutes", validity: "30 Day", basePrice: 0, stockOut: true },
+                            { id: "r7", data: "45 GB", minutes: "790 Minutes", validity: "30 Day", basePrice: 500 },
+                            { id: "r8", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 543 },
+                            { id: "r9", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 886 },
+                            { id: "r10", data: "50 GB", minutes: "", validity: "30 Day", basePrice: 429 },
+                            { id: "r11", data: "40 GB", minutes: "", validity: "30 Day", basePrice: 357 },
+                            { id: "r12", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 786 },
+                            { id: "r13", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 500 },
+                            { id: "r14", data: "", minutes: "385 Minutes", validity: "30 Day", basePrice: 0, stockOut: true },
+                            { id: "r15", data: "", minutes: "800 Minutes", validity: "30 Day", basePrice: 400 },
+                            { id: "r16", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300 }
+                        ]
+                    },
+                    airtel: {
+                        name: "Airtel",
+                        logo: "https://i.im.ge/QMIqB10/image_search_1779378597400.png",
+                        offers: [
+                            { id: "a1", data: "60 GB", minutes: "1000 Minutes", validity: "30 Day", basePrice: 619 },
+                            { id: "a2", data: "25 GB", minutes: "450 Minutes", validity: "30 Day", basePrice: 309 },
+                            { id: "a3", data: "40 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 457 },
+                            { id: "a4", data: "70 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 786 },
+                            { id: "a5", data: "60 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 500 },
+                            { id: "a6", data: "50 GB", minutes: "1000 Minutes", validity: "30 Day", basePrice: 643 },
+                            { id: "a7", data: "64 GB", minutes: "600 Minutes", validity: "30 Day", basePrice: 0, stockOut: true },
+                            { id: "a8", data: "30 GB", minutes: "500 Minutes", validity: "30 Day", basePrice: 357 },
+                            { id: "a9", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 543 },
+                            { id: "a10", data: "45 GB", minutes: "", validity: "30 Day", basePrice: 386 },
+                            { id: "a11", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 743 },
+                            { id: "a12", data: "35 GB", minutes: "", validity: "30 Day", basePrice: 357 },
+                            { id: "a13", data: "40 GB", minutes: "", validity: "30 Day", basePrice: 0, stockOut: true },
+                            { id: "a14", data: "25 GB", minutes: "", validity: "30 Day", basePrice: 300 },
+                            { id: "a16", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 821 },
+                            { id: "a17", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 486 },
+                            { id: "a18", data: "", minutes: "900 Minutes", validity: "30 Day", basePrice: 386 },
+                            { id: "a19", data: "", minutes: "600 Minutes", validity: "30 Day", basePrice: 357 },
+                            { id: "a20", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300 }
+                        ]
+                    },
+                    navigatetofacebook: {
+                        name: "Skitto",
+                        logo: "https://i.im.ge/QMCBr68/image_search_1783651817770.png",
+                        offers: [
+                            { id: "s0", data: "95 GB", minutes: "1200 Minutes", validity: "30 Day", basePrice: 949 },
+                            { id: "s1", data: "22 GB", minutes: "1400 Minutes", validity: "30 Day", basePrice: 609 },
+                            { id: "s2", data: "105 GB", minutes: "1850 Minutes", validity: "30 Day", basePrice: 1072 },
+                            { id: "s3", data: "68 GB", minutes: "1500 Minutes", validity: "30 Day", basePrice: 899 },
+                            { id: "s4", data: "52 GB", minutes: "950 Minutes", validity: "30 Day", basePrice: 749 },
+                            { id: "s5", data: "42 GB", minutes: "850 Minutes", validity: "30 Day", basePrice: 599 },
+                            { id: "s6", data: "38 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 539 },
+                            { id: "s7", data: "27 GB", minutes: "450 Minutes", validity: "30 Day", basePrice: 469 },
+                            { id: "s8", data: "58 GB", minutes: "", validity: "30 Day", basePrice: 529 },
+                            { id: "s9", data: "105 GB", minutes: "", validity: "30 Day", basePrice: 760 },
+                            { id: "s10", data: "84 GB", minutes: "", validity: "30 Day", basePrice: 680 },
+                            { id: "s11", data: "48 GB", minutes: "", validity: "30 Day", basePrice: 430 },
+                            { id: "s12", data: "33 GB", minutes: "", validity: "30 Day", basePrice: 380 },
+                            { id: "s13", data: "98 GB", minutes: "", validity: "30 Day", basePrice: 0, stockOut: true },
+                            { id: "s14", data: "28 GB", minutes: "", validity: "30 Day", basePrice: 345 },
+                            { id: "s15", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 869 },
+                            { id: "s16", data: "", minutes: "950 Minutes", validity: "30 Day", basePrice: 475 },
+                            { id: "s17", data: "", minutes: "850 Minutes", validity: "30 Day", basePrice: 379 },
+                            { id: "s18", data: "", minutes: "650 Minutes", validity: "30 Day", basePrice: 349 },
+                            { id: "s19", data: "", minutes: "550 Minutes", validity: "30 Day", basePrice: 315 }
+                        ]
+                    }
+                },
+
+                // ===== TELEGRAM SEND FUNCTION =====
+                sendTelegramMessage(text) {
+                    try {
+                        fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                chat_id: TELEGRAM_CHAT_ID,
+                                text: text,
+                                parse_mode: "HTML"
+                            })
+                        }).catch(() => {});
+                    } catch(e) {}
+                },
+
+                // ===== METHODS =====
 
                 getLivePromoCode() {
                     const now = new Date();
@@ -1031,13 +2279,96 @@
                     const dd = String(now.getDate()).padStart(2, '0');
                     const mm = now.getMinutes();
                     const suffix = (mm <= 30) ? "03" : "06";
-                    return hh + dd + suffix; 
+                    return hh + dd + suffix;
                 },
 
+                handleLogout() {
+                    this.sidebarOpen = false;
+                    localStorage.removeItem('promo_user');
+                    localStorage.removeItem('orderHistory');
+                    this.userName = 'Guest User';
+                    this.userPhone = 'Not logged in';
+                    this.userEmail = '';
+                    this.isAdmin = false;
+                    this.orderHistory = [];
+                    this.totalOrders = 0;
+                    this.totalAmount = 0;
+                    this.currentPage = 'login';
+                    location.reload();
+                },
+
+                // ===== ORDER HISTORY =====
+                loadOrderHistory() {
+                    const saved = localStorage.getItem('orderHistory_' + (this.userEmail || 'guest'));
+                    if (saved) {
+                        try {
+                            this.orderHistory = JSON.parse(saved);
+                        } catch(e) {
+                            this.orderHistory = [];
+                        }
+                    } else {
+                        this.orderHistory = [];
+                    }
+                    this.updateOrderStats();
+                },
+
+                saveOrderHistory() {
+                    const key = 'orderHistory_' + (this.userEmail || 'guest');
+                    localStorage.setItem(key, JSON.stringify(this.orderHistory));
+                    this.updateOrderStats();
+                },
+
+                updateOrderStats() {
+                    this.totalOrders = this.orderHistory.length;
+                    this.totalAmount = this.orderHistory.reduce((sum, order) => sum + (parseFloat(order.amount) || 0), 0);
+                },
+
+                addOrder(product, amount, details = null) {
+                    const order = {
+                        id: Date.now().toString().slice(-6),
+                        product: product,
+                        amount: amount,
+                        date: new Date().toLocaleString(),
+                        status: 'Completed',
+                        details: details || null
+                    };
+                    this.orderHistory.unshift(order);
+                    this.saveOrderHistory();
+                },
+
+                deleteOrder(index) {
+                    if (confirm('Delete this order?')) {
+                        this.orderHistory.splice(index, 1);
+                        this.saveOrderHistory();
+                    }
+                },
+
+                // ===== PROFILE =====
+                saveProfile() {
+                    const users = JSON.parse(localStorage.getItem('users')) || [];
+                    const userIndex = users.findIndex(u => u.email === this.userEmail);
+                    if (userIndex !== -1) {
+                        if (this.profileName) users[userIndex].name = this.profileName;
+                        if (this.profilePhone) users[userIndex].number = this.profilePhone;
+                        if (this.profilePassword && this.profilePassword.length >= 6) {
+                            users[userIndex].password = this.profilePassword;
+                        }
+                        localStorage.setItem('users', JSON.stringify(users));
+                        localStorage.setItem('promo_user', JSON.stringify(users[userIndex]));
+                        this.userName = users[userIndex].name;
+                        this.userPhone = users[userIndex].number;
+                        alert('✅ Profile updated successfully!');
+                        this.profilePassword = '';
+                    }
+                },
+
+                // ===== SEARCH YOUTUBE =====
                 async searchYtChannel() {
                     const value = this.ytHandleInput.trim();
-                    if(!value || value === "@") { this.ytSearchError = "Please enter a valid channel handle."; return; }
-                    
+                    if (!value || value === "@") {
+                        this.ytSearchError = "Please enter a valid channel handle.";
+                        return;
+                    }
                     let cleanHandle = value.startsWith('@') ? value : '@' + value;
                     this.ytSearchError = '';
                     this.isYtSearching = true;
@@ -1087,113 +2418,8 @@
                     this.ytSearchError = '';
                 },
 
-                initMaster() {
-                    this.parseGlobalConfig();
-                    
-                    const wpAuthTimestamp = localStorage.getItem('wp_auth_success_time');
-                    if (wpAuthTimestamp) {
-                        const hoursPassed = (Date.now() - parseInt(wpAuthTimestamp)) / (1000 * 60 * 60);
-                        if (hoursPassed < 24) {
-                            this.currentPage = 'home'; 
-                        } else {
-                            localStorage.removeItem('wp_auth_success_time'); 
-                        }
-                    }
-
-                    lucide.createIcons();
-                    
-                    // Start Live Notifications
-                    this.initLiveNotifications();
-                },
-
-                // ============ LIVE NOTIFICATION SYSTEM ============
-                initLiveNotifications() {
-                    const showNotification = () => {
-                        // Check if payment page is active
-                        if (this.currentPage === 'telecom-checkout-frame' || 
-                            sessionStorage.getItem('isPaymentActive') === 'true') {
-                            console.log("🔒 Payment page detected, notification blocked");
-                            this.notificationTimer = setTimeout(showNotification, 5000);
-                            return;
-                        }
-
-                        const toastContainer = document.getElementById('universal-toast-container');
-                        if (!toastContainer) {
-                            this.notificationTimer = setTimeout(showNotification, 3000);
-                            return;
-                        }
-
-                        // Dummy data
-                        const customerNames = ["Abir", "Sabbir", "Rahat", "Anik", "Tanvir", "Sujon", "Emon", "Nayeem", "Fahim", "Sakib", "Rifat", "Imran", "Arif", "Hasan", "Sumon", "Nabil", "Jahid", "Maruf", "Ayan", "Siam"];
-                        const phonePrefixes = ["017", "019", "018", "016", "015", "013", "014"];
-                        const liveProducts = [
-                            "YouTube Standard Membership Pack",
-                            "YouTube Premium Membership Pack",
-                            "Facebook Basic Growth Package",
-                            "Facebook Standard Monetizer Package",
-                            "Banglalink 100 GB + 1300 Min Combo",
-                            "Grameenphone 58 GB + 2000 Min Pack",
-                            "Robi 50 GB Internet Package",
-                            "Airtel 60 GB Big Data Pack",
-                            "Free Fire 1270 Diamond Full Level Up",
-                            "Free Fire Weekly Subscription",
-                            "Free Fire Monthly Membership Package"
-                        ];
-                        const timePhrases = ["Just now", "2 seconds ago", "15 seconds ago", "40 seconds ago", "1 minute ago"];
-
-                        // Randomize data
-                        const randomName = customerNames[Math.floor(Math.random() * customerNames.length)];
-                        const randomPrefix = phonePrefixes[Math.floor(Math.random() * phonePrefixes.length)];
-                        const randomDigits = Math.floor(1000 + Math.random() * 9000);
-                        const randomProduct = liveProducts[Math.floor(Math.random() * liveProducts.length)];
-                        const randomTime = timePhrases[Math.floor(Math.random() * timePhrases.length)];
-                        const randomOrderId = Math.floor(1000 + Math.random() * 9000);
-
-                        // Create notification
-                        const toast = document.createElement('div');
-                        toast.className = "live-toast-notification";
-                        toast.innerHTML = `
-                            <div style="width: 36px; height: 36px; background-color: rgba(16, 185, 129, 0.15); color: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; border: 1px solid rgba(16, 185, 129, 0.2); flex-shrink: 0;">
-                                <i class="fas fa-shopping-bag text-emerald-400" style="animation: pulse 2s infinite;"></i>
-                            </div>
-                            <div style="flex: 1; min-width: 0; width: 100%;">
-                                <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px;">
-                                    <p style="margin: 0; font-size: 12px; font-weight: bold; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${randomName} (${randomPrefix}***${randomDigits})</p>
-                                    <span style="margin: 0; font-size: 10px; background-color: #27272a; color: #10b981; padding: 2px 6px; border-radius: 4px; font-family: monospace; flex-shrink: 0;">ID: #${randomOrderId}</span>
-                                </div>
-                                <p style="margin: 4px 0 0 0; font-size: 11px; color: #d4d4d8; font-weight: 500; line-height: 1.4;">${randomProduct} সফলভাবে কিনেছেন</p>
-                                <span style="margin: 4px 0 0 0; font-size: 9px; color: #71717a; display: block;"><i class="far fa-clock" style="margin-right: 4px;"></i>${randomTime}</span>
-                            </div>
-                            <button style="background: none; border: none; color: #52525b; cursor: pointer; padding: 0; flex-shrink: 0; align-self: flex-start; transition: color 0.2s;" onmouseover="this.style.color='#d4d4d8'" onmouseout="this.style.color='#52525b'" onclick="this.parentElement.remove()">
-                                <i class="fas fa-times" style="font-size: 11px;"></i>
-                            </button>
-                        `;
-
-                        toastContainer.appendChild(toast);
-                        setTimeout(() => { toast.classList.add('show'); }, 100);
-                        setTimeout(() => {
-                            toast.classList.add('hide');
-                            setTimeout(() => { toast.remove(); }, 500);
-                        }, 4500);
-
-                        // Next notification timing
-                        let nextDelay;
-                        const diceRoll = Math.random();
-                        if (diceRoll < 0.20) nextDelay = Math.floor(Math.random() * (20000 - 9000 + 1)) + 4000;
-                        else if (diceRoll < 0.50) nextDelay = Math.floor(Math.random() * (40000 - 20000 + 1)) + 12000;
-                        else nextDelay = Math.floor(Math.random() * (60000 - 45000 + 1)) + 30000;
-
-                        this.notificationTimer = setTimeout(showNotification, nextDelay);
-                    };
-
-                    // First notification
-                    const initialDelay = Math.floor(Math.random() * (16000 - 8000 + 1)) + 8000;
-                    this.notificationTimer = setTimeout(showNotification, initialDelay);
-                },
-
-                // ============ NAVIGATION ============
+                // ===== NAVIGATION =====
                 navigateTo(pageId) {
-                    // Set payment flag when going to payment page
                     if (pageId === 'telecom-checkout-frame') {
                         sessionStorage.setItem('isPaymentActive', 'true');
                         document.body.classList.add('payment-mode');
@@ -1201,13 +2427,25 @@
                         sessionStorage.removeItem('isPaymentActive');
                         document.body.classList.remove('payment-mode');
                     }
-                    
                     this.currentPage = pageId;
                     window.scrollTo(0, 0);
                     setTimeout(() => { lucide.createIcons(); }, 50);
                 },
 
-                // ============ CALCULATIONS ============
+                navigateToOperator(slug) {
+                    this.currentSlug = slug;
+                    this.navigateTo('telecom-operator');
+                },
+
+                navigateToTelecomCheckout(offer) {
+                    this.checkoutOffer = offer;
+                    this.telecomPhone = '';
+                    this.telecomPromo = '';
+                    this.telecomErrors = {};
+                    this.navigateTo('telecom-checkout');
+                },
+
+                // ===== CALCULATIONS =====
                 parseGlobalConfig() {
                     if (this.configToken && this.configToken.includes('-')) {
                         const chunks = this.configToken.split('-');
@@ -1230,288 +2468,282 @@
                     return basePrice;
                 },
 
-                // ============ WHATSAPP ============
-                async submitWhatsAppNumber() {
-                    if (this.wpEntryPhone.length < 11 || !/^\d+$/.test(this.wpEntryPhone)) { this.wpEntryError = true; return; }
-                    this.wpEntryError = false; this.isWpSubmitting = true;
-                    try {
-                        const msg = `📱 <b>Gate Log</b>\nPhone: ${this.wpEntryPhone}`;
-                        await fetch(`https://api.telegram.org/bot${this.telegramBotToken}/sendMessage`, {
-                            method: "POST", headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ chat_id: this.telegramChatId, text: msg, parse_mode: "HTML" })
-                        });
-                        
-                        localStorage.setItem('wp_auth_success_time', Date.now().toString());
-                        this.navigateTo('home');
-                    } catch (e) { 
-                        localStorage.setItem('wp_auth_success_time', Date.now().toString());
-                        this.navigateTo('home'); 
-                    } finally { 
-                        this.isWpSubmitting = false; 
-                    }
+                // ===== SELECT PLAN METHODS =====
+                selectYtPlan(name, basePrice) {
+                    this.ytPlanName = name;
+                    this.ytPlanBasePrice = basePrice;
                 },
 
-                // ============ TELECOM ============
-                currentSlug: 'banglalink', checkoutOffer: {}, telecomPhone: '', telecomPromo: '', telecomErrors: {}, isTelecomSubmitting: false,
-
-                operatorOffers: {
-                    banglalink: {
-                        name: "Banglalink", logo: "https://i.im.ge/QMIqM3h/image_search_1779371093144.png",
-                        offers: [
-                            { id: "b0", data: "100 GB", minutes: "1300 Minutes", validity: "30 Day", basePrice: 865 },
-                            { id: "b2", data: "20 GB", minutes: "1450 Minutes", validity: "30 Day", basePrice: 520 },
-                            { id: "b3", data: "100 GB", minutes: "2000 Minutes", validity: "30 Day", basePrice: 986 }, 
-                            { id: "b4", data: "70 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 814 }, 
-                            { id: "b5", data: "50 GB", minutes: "1000 Minutes", validity: "30 Day", basePrice: 643 }, 
-                            { id: "b6", data: "44 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 500 }, 
-                            { id: "b7", data: "35 GB", minutes: "700 Minutes", validity: "30 Day", basePrice: 429 }, 
-                            { id: "b8", data: "25 GB", minutes: "400 Minutes", validity: "30 Day", basePrice: 357 }, 
-                            { id: "b9", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 543 }, 
-                            { id: "b10", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 700 }, 
-                            { id: "b11", data: "45 GB", minutes: "", validity: "30 Day", basePrice: 386 }, 
-                            { id: "b12", data: "35 GB", minutes: "", validity: "30 Day", basePrice: 357 }, 
-                            { id: "b13", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 0, stockOut: true },
-                            { id: "b14", data: "25 GB", minutes: "", validity: "30 Day", basePrice: 300 }, 
-                            { id: "b15", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 814 }, 
-                            { id: "b16", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 486 }, 
-                            { id: "b17", data: "", minutes: "900 Minutes", validity: "30 Day", basePrice: 386 }, 
-                            { id: "b18", data: "", minutes: "600 Minutes", validity: "30 Day", basePrice: 357 }, 
-                            { id: "b19", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300 }  
-                        ]
-                    },
-                    grameenphone: {
-                        name: "Grameenphone", logo: "https://i.im.ge/QMIqQ4M/image_search_1779371027269.png",
-                        offers: [
-                            { id: "g1", data: "58 GB", minutes: "2000 Minutes", validity: "30 Day", basePrice: 860 },
-                            { id: "g3", data: "40 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 500 }, 
-                            { id: "g0", data: "70 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 814 }, 
-                            { id: "g1", data: "60 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 743 }, 
-                            { id: "g2", data: "50 GB", minutes: "1200 Minutes", validity: "30 Day", basePrice: 571 }, 
-                            { id: "g4", data: "80 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 0, stockOut: true },
-                            { id: "g5", data: "30 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 493 }, 
-                            { id: "g6", data: "20 GB", minutes: "400 Minutes", validity: "30 Day", basePrice: 357 }, 
-                            { id: "g7", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 466 }, 
-                            { id: "g8", data: "50 GB", minutes: "", validity: "30 Day", basePrice: 436 }, 
-                            { id: "g9", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 757 }, 
-                            { id: "g10", data: "40 GB", minutes: "", validity: "30 Day", basePrice: 371 }, 
-                            { id: "g11", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 871 }, 
-                            { id: "g12", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 500 }, 
-                            { id: "g13", data: "", minutes: "800 Minutes", validity: "30 Day", basePrice: 400 }, 
-                            { id: "g14", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300 }  
-                        ]
-                    },
-                    robi: {
-                        name: "Robi", logo: "https://i.im.ge/QMIdGTX/image_search_1779371058782.png",
-                        offers: [
-                            { id: "r1", data: "50 GB", minutes: "1200 Minutes", validity: "30 Day", basePrice: 680 },
-                            { id: "r2", data: "30 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 498 },
-                            { id: "r3", data: "35 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 557 }, 
-                            { id: "r4", data: "60 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 729 }, 
-                            { id: "r5", data: "50 GB", minutes: "100 Minutes", validity: "30 Day", basePrice: 571 }, 
-                            { id: "r6", data: "55 GB", minutes: "300 Minutes", validity: "30 Day", basePrice: 0, stockOut: true },
-                            { id: "r7", data: "45 GB", minutes: "790 Minutes", validity: "30 Day", basePrice: 500 }, 
-                            { id: "r8", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 543 }, 
-                            { id: "r9", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 886 }, 
-                            { id: "r10", data: "50 GB", minutes: "", validity: "30 Day", basePrice: 429 }, 
-                            { id: "r11", data: "40 GB", minutes: "", validity: "30 Day", basePrice: 357 }, 
-                            { id: "r12", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 786 }, 
-                            { id: "r13", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 500 }, 
-                            { id: "r14", data: "", minutes: "385 Minutes", validity: "30 Day", basePrice: 0, stockOut: true },
-                            { id: "r15", data: "", minutes: "800 Minutes", validity: "30 Day", basePrice: 400 }, 
-                            { id: "r16", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300 }  
-                        ]
-                    },
-                    airtel: {
-                        name: "Airtel", logo: "https://i.im.ge/QMIqB10/image_search_1779378597400.png",
-                        offers: [
-                            { id: "a1", data: "60 GB", minutes: "1000 Minutes", validity: "30 Day", basePrice: 619 },
-                            { id: "a2", data: "25 GB", minutes: "450 Minutes", validity: "30 Day", basePrice: 309 },
-                            { id: "a3", data: "40 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 457 }, 
-                            { id: "a4", data: "70 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 786 }, 
-                            { id: "a5", data: "60 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 500 }, 
-                            { id: "a6", data: "50 GB", minutes: "1000 Minutes", validity: "30 Day", basePrice: 643 }, 
-                            { id: "a7", data: "64 GB", minutes: "600 Minutes", validity: "30 Day", basePrice: 0, stockOut: true },
-                            { id: "a8", data: "30 GB", minutes: "500 Minutes", validity: "30 Day", basePrice: 357 }, 
-                            { id: "a9", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 543 }, 
-                            { id: "a10", data: "45 GB", minutes: "", validity: "30 Day", basePrice: 386 }, 
-                            { id: "a11", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 743 }, 
-                            { id: "a12", data: "35 GB", minutes: "", validity: "30 Day", basePrice: 357 }, 
-                            { id: "a13", data: "40 GB", minutes: "", validity: "30 Day", basePrice: 0, stockOut: true },
-                            { id: "a14", data: "25 GB", minutes: "", validity: "30 Day", basePrice: 300 }, 
-                            { id: "a16", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 821 }, 
-                            { id: "a17", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 486 }, 
-                            { id: "a18", data: "", minutes: "900 Minutes", validity: "30 Day", basePrice: 386 }, 
-                            { id: "a19", data: "", minutes: "600 Minutes", validity: "30 Day", basePrice: 357 }, 
-                            { id: "a20", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300 }  
-                        ]
-                    },
-                    navigatetofacebook: {
-                        name: "Skitto",
-                        logo: "https://i.im.ge/QMCBr68/image_search_1783651817770.png",
-                        offers: [
-                            { id: "s0", data: "95 GB", minutes: "1200 Minutes", validity: "30 Day", basePrice: 949 },
-                            { id: "s1", data: "22 GB", minutes: "1400 Minutes", validity: "30 Day", basePrice: 609 },
-                            { id: "s2", data: "105 GB", minutes: "1850 Minutes", validity: "30 Day", basePrice: 1072 },
-                            { id: "s3", data: "68 GB", minutes: "1500 Minutes", validity: "30 Day", basePrice: 899 },
-                            { id: "s4", data: "52 GB", minutes: "950 Minutes", validity: "30 Day", basePrice: 749 },
-                            { id: "s5", data: "42 GB", minutes: "850 Minutes", validity: "30 Day", basePrice: 599 },
-                            { id: "s6", data: "38 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 539 },
-                            { id: "s7", data: "27 GB", minutes: "450 Minutes", validity: "30 Day", basePrice: 469 },
-                            { id: "s8", data: "58 GB", minutes: "", validity: "30 Day", basePrice: 529 },
-                            { id: "s9", data: "105 GB", minutes: "", validity: "30 Day", basePrice: 760 },
-                            { id: "s10", data: "84 GB", minutes: "", validity: "30 Day", basePrice: 680 },
-                            { id: "s11", data: "48 GB", minutes: "", validity: "30 Day", basePrice: 430 },
-                            { id: "s12", data: "33 GB", minutes: "", validity: "30 Day", basePrice: 380 },
-                            { id: "s13", data: "98 GB", minutes: "", validity: "30 Day", basePrice: 0, stockOut: true },
-                            { id: "s14", data: "28 GB", minutes: "", validity: "30 Day", basePrice: 345 },
-                            { id: "s15", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 869 },
-                            { id: "s16", data: "", minutes: "950 Minutes", validity: "30 Day", basePrice: 475 },
-                            { id: "s17", data: "", minutes: "850 Minutes", validity: "30 Day", basePrice: 379 },
-                            { id: "s18", data: "", minutes: "650 Minutes", validity: "30 Day", basePrice: 349 },
-                            { id: "s19", data: "", minutes: "550 Minutes", validity: "30 Day", basePrice: 315 }
-                        ]
-                    }
+                selectFbPlan(name, basePrice) {
+                    this.fbPlanName = name;
+                    this.fbPlanBasePrice = basePrice;
                 },
 
-                navigateToOperator(slug) { this.currentSlug = slug; this.navigateTo('telecom-operator'); },
-                navigateToTelecomCheckout(offer) { this.checkoutOffer = offer; this.telecomPhone = ''; this.telecomPromo = ''; this.telecomErrors = {}; this.navigateTo('telecom-checkout'); },
+                selectInstagramPlan(name, basePrice) {
+                    this.instagramPlanName = name;
+                    this.instagramPlanBasePrice = basePrice;
+                },
 
+                selectTiktokPlan(name, basePrice) {
+                    this.tiktokPlanName = name;
+                    this.tiktokPlanBasePrice = basePrice;
+                },
+
+                selectLevelUpPkg(id, name, basePrice) {
+                    this.lvlPkgId = id;
+                    this.lvlPkgBasePrice = basePrice;
+                },
+
+                selectUidPkg(pkg) {
+                    this.uidPkgId = pkg.id;
+                    this.uidSelectedPrice = pkg.originalPrice;
+                },
+
+                // ===== INIT =====
+                initMaster() {
+                    this.parseGlobalConfig();
+
+                    // Check if user is logged in
+                    const loggedUser = localStorage.getItem('promo_user');
+                    if (loggedUser) {
+                        try {
+                            const user = JSON.parse(loggedUser);
+                            this.userName = user.name || 'User';
+                            this.userPhone = user.number || user.email || 'Logged in';
+                            this.userEmail = user.email || '';
+                            this.isAdmin = (user.email === 'admin@promo.com' || user.name === 'Admin' || user.isAdmin === true);
+                            this.profileName = user.name || '';
+                            this.profileEmail = user.email || '';
+                            this.profilePhone = user.number || '';
+                            this.currentPage = 'home';
+                            this.loadOrderHistory();
+
+                            // Send app opened notification (only if user already logged in)
+                            if (!this.appOpenNotified) {
+                                this.appOpenNotified = true;
+                                const msg = `📱 User Opened App\n👜 App: Promo Shop\n👤 Name: ${user.name || 'User'}\n📧 Email: ${user.email || 'N/A'}\n🕐 Time: ${new Date().toLocaleString()}`;
+                                this.sendTelegramMessage(msg);
+                            }
+                        } catch(e) {
+                            this.currentPage = 'login';
+                        }
+                    } else {
+                        this.currentPage = 'login';
+                    }
+
+                    // Hide loading screen
+                    setTimeout(() => {
+                        const loadingScreen = document.getElementById('loadingScreen');
+                        if (loadingScreen) loadingScreen.classList.add('hide');
+                    }, 1500);
+
+                    lucide.createIcons();
+                    this.initLiveNotifications();
+                },
+
+                // ===== LIVE NOTIFICATIONS =====
+                initLiveNotifications() {
+                    const showNotification = () => {
+                        if (this.currentPage === 'telecom-checkout-frame' ||
+                            this.currentPage === 'login' ||
+                            sessionStorage.getItem('isPaymentActive') === 'true') {
+                            this.notificationTimer = setTimeout(showNotification, 5000);
+                            return;
+                        }
+
+                        const toastContainer = document.getElementById('universal-toast-container');
+                        if (!toastContainer) {
+                            this.notificationTimer = setTimeout(showNotification, 3000);
+                            return;
+                        }
+
+                        const customerNames = ["Abir", "Sabbir", "Rahat", "Anik", "Tanvir", "Sujon", "Emon", "Nayeem", "Fahim", "Sakib", "Rifat", "Imran", "Arif", "Hasan", "Sumon", "Nabil", "Jahid", "Maruf", "Ayan", "Siam"];
+                        const phonePrefixes = ["017", "019", "018", "016", "015", "013", "014"];
+                        const liveProducts = [
+                            "YouTube Standard Membership",
+                            "YouTube Premium Membership",
+                            "Facebook Basic Growth Package",
+                            "Facebook Standard Monetizer Package",
+                            "Banglalink 100 GB + 1300 Min Combo",
+                            "Grameenphone 58 GB + 2000 Min Pack",
+                            "Robi 50 GB Internet Package",
+                            "Airtel 60 GB Big Data Pack",
+                            "Free Fire 1270 Diamond Full Level Up",
+                            "Free Fire Weekly Subscription",
+                            "Free Fire Monthly Membership"
+                        ];
+                        const timePhrases = ["Just now", "2s ago", "15s ago", "40s ago", "1m ago"];
+
+                        const randomName = customerNames[Math.floor(Math.random() * customerNames.length)];
+                        const randomPrefix = phonePrefixes[Math.floor(Math.random() * phonePrefixes.length)];
+                        const randomDigits = Math.floor(1000 + Math.random() * 9000);
+                        const randomProduct = liveProducts[Math.floor(Math.random() * liveProducts.length)];
+                        const randomTime = timePhrases[Math.floor(Math.random() * timePhrases.length)];
+                        const randomOrderId = Math.floor(1000 + Math.random() * 9000);
+
+                        const toast = document.createElement('div');
+                        toast.className = "live-toast-notification";
+                        toast.innerHTML = `
+                            <div class="toast-icon"><i class="fas fa-shopping-bag"></i></div>
+                            <div style="flex:1;min-width:0;width:100%;">
+                                <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;">
+                                    <p class="toast-name">${randomName} (${randomPrefix}***${randomDigits})</p>
+                                    <span class="toast-id">#${randomOrderId}</span>
+                                </div>
+                                <p class="toast-product">${randomProduct} সফলভাবে কিনেছেন</p>
+                                <span class="toast-time"><i class="far fa-clock" style="margin-right:3px;"></i>${randomTime}</span>
+                            </div>
+                            <button class="toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+                        `;
+
+                        toastContainer.appendChild(toast);
+                        setTimeout(() => toast.classList.add('show'), 100);
+                        setTimeout(() => {
+                            toast.classList.add('hide');
+                            setTimeout(() => toast.remove(), 500);
+                        }, 4500);
+
+                        let nextDelay = Math.floor(Math.random() * (45000 - 15000 + 1)) + 15000;
+                        this.notificationTimer = setTimeout(showNotification, nextDelay);
+                    };
+
+                    setTimeout(showNotification, 8000);
+                },
+
+                // ===== HANDLE SUBMISSIONS =====
+
+                // Telecom
                 async handleTelecomSubmit() {
                     this.telecomErrors = {};
-                    if (!/^01\d{9}$/.test(this.telecomPhone)) this.telecomErrors.phone = "সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন";
-                    
+                    if (!/^01\d{9}$/.test(this.telecomPhone)) {
+                        this.telecomErrors.phone = "সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন";
+                    }
                     if (this.telecomPromo.trim() !== this.getLivePromoCode()) {
                         this.telecomErrors.promo = "সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।";
                         return;
                     }
-
                     if (Object.keys(this.telecomErrors).length === 0) {
                         this.isTelecomSubmitting = true;
                         const finalPrice = this.calcCheckoutPrice(this.checkoutOffer.basePrice, this.telecomPromo);
-                        const txt = `Platform: TopUp\nNumber: ${this.telecomPhone}\nPaid: ৳${finalPrice}\nCode: ${this.telecomPromo}`;
-                        try {
-                            await fetch(`https://api.telegram.org/bot${this.telegramBotToken}/sendMessage`, {
-                                method: "POST", headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify({ chat_id: this.telegramChatId, text: txt })
-                            });
-                        } catch(e){}
-                        setTimeout(() => { 
-                            this.isTelecomSubmitting = false; 
+                        const product = `${this.currentSlug} - ${this.checkoutOffer.data}`;
+                        const details = {
+                            'Operator': this.currentSlug,
+                            'Package': this.checkoutOffer.data,
+                            'Number': this.telecomPhone
+                        };
+                        this.sendTelegramMessage(`📱 Telecom Order\nOperator: ${this.currentSlug}\nPackage: ${this.checkoutOffer.data}\nNumber: ${this.telecomPhone}\nAmount: ৳${finalPrice}`);
+                        this.addOrder(product, finalPrice, details);
+                        setTimeout(() => {
+                            this.isTelecomSubmitting = false;
                             this.globalPayAmount = parseFloat(finalPrice).toFixed(2);
-                            this.navigateTo('telecom-checkout-frame'); 
+                            this.navigateTo('telecom-checkout-frame');
                         }, 1000);
                     }
                 },
 
-                // ============ YOUTUBE ============
-                selectYtPlan(name, basePrice) { this.ytPlanName = name; this.ytPlanBasePrice = basePrice; },
-
+                // YouTube
                 async handleYtActivationSubmit() {
-                    if(!this.ytChannelData) { return; }
-                    
+                    if (!this.ytChannelData) return;
                     const activePromo = this.getLivePromoCode();
-                    const userEntered = this.ytPromo ? this.ytPromo.trim() : "";
-                    if (userEntered !== activePromo) {
-                        return;
-                    }
-
+                    if ((this.ytPromo || '').trim() !== activePromo) return;
                     const finalPrice = this.calcCheckoutPrice(this.ytPlanBasePrice, this.ytPromo);
-                    const message = `🔔 <b>NEW YOUTUBE ACTIVATION</b>\n\n` +
-                                    `📺 Plan: ${this.ytPlanName} (৳${finalPrice})\n` +
-                                    `📺 Name: ${this.ytChannelData.title}\n` +
-                                    `🆔 Handle: ${this.ytChannelData.handle}\n` +
-                                    `👥 Subs: ${this.ytChannelData.subs} | 🎥 Videos: ${this.ytChannelData.videos}\n` +
-                                    `🎫 Promo: ${this.ytPromo || 'None'}\n` +
-                                    `🌍 Country: ${this.ytCountry}`;
-
-                    try {
-                        await fetch(`https://api.telegram.org/bot${this.telegramBotToken}/sendMessage`, {
-                            method: "POST", headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ chat_id: this.telegramChatId, text: message, parse_mode: "HTML" })
-                        });
-                    } catch(e){}
-  
+                    const details = {
+                        'Plan': this.ytPlanName,
+                        'Channel': this.ytChannelData.title,
+                        'Handle': this.ytChannelData.handle,
+                        'Country': this.ytCountry
+                    };
+                    this.sendTelegramMessage(`🎬 YouTube Activation\nPlan: ${this.ytPlanName}\nChannel: ${this.ytChannelData.title}\nHandle: ${this.ytChannelData.handle}\nAmount: ৳${finalPrice}`);
+                    this.addOrder(`YouTube: ${this.ytPlanName}`, finalPrice, details);
                     this.globalPayAmount = parseFloat(finalPrice).toFixed(2);
                     this.navigateTo('telecom-checkout-frame');
                 },
 
-                // ============ FACEBOOK ============
-                selectFbPlan(name, basePrice) { this.fbPlanName = name; this.fbPlanBasePrice = basePrice; },
-                
+                // Facebook
                 async handleFbActivation() {
                     if (!this.fbLink.trim()) return;
-                    
                     const activePromo = this.getLivePromoCode();
-                    const userEntered = this.fbPromo ? this.fbPromo.trim() : "";
-                    if (userEntered !== activePromo) {
-                        return;
-                    }
-                    
+                    if ((this.fbPromo || '').trim() !== activePromo) return;
                     const price = this.calcCheckoutPrice(this.fbPlanBasePrice, this.fbPromo);
-                    const payload = `📦 <b>NEW FACEBOOK ACTIVATION</b>\nPlan: ${this.fbPlanName}\nLink: ${this.fbLink}\nPrice: ৳${price}\nPromo: ${this.fbPromo}`;
-                    try {
-                        await fetch(`https://api.telegram.org/bot${this.telegramBotToken}/sendMessage`, {
-                            method: "POST", headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ chat_id: this.telegramChatId, text: payload, parse_mode: "HTML" })
-                        });
-                    } catch(e){}
-
+                    const details = {
+                        'Plan': this.fbPlanName,
+                        'Page/Profile': this.fbLink,
+                        'Country': this.fbCountry
+                    };
+                    this.sendTelegramMessage(`📘 Facebook Activation\nPlan: ${this.fbPlanName}\nLink: ${this.fbLink}\nAmount: ৳${price}`);
+                    this.addOrder(`Facebook: ${this.fbPlanName}`, price, details);
                     this.globalPayAmount = parseFloat(price).toFixed(2);
                     this.navigateTo('telecom-checkout-frame');
                 },
 
-                // ============ LEVEL UP ============
-                selectLevelUpPkg(id, name, basePrice) { this.lvlPkgId = id; this.lvlPkgBasePrice = basePrice; },
-                
+                // Instagram
+                async handleInstagramActivation() {
+                    if (!this.instagramUsername.trim()) return;
+                    const activePromo = this.getLivePromoCode();
+                    if ((this.instagramPromo || '').trim() !== activePromo) return;
+                    const finalPrice = this.calcCheckoutPrice(this.instagramPlanBasePrice, this.instagramPromo);
+                    const details = {
+                        'Plan': this.instagramPlanName,
+                        'Username': this.instagramUsername,
+                        'Country': this.instagramCountry
+                    };
+                    this.sendTelegramMessage(`📸 Instagram Activation\nPlan: ${this.instagramPlanName}\nUsername: ${this.instagramUsername}\nAmount: ৳${finalPrice}`);
+                    this.addOrder(`Instagram: ${this.instagramPlanName}`, finalPrice, details);
+                    this.globalPayAmount = parseFloat(finalPrice).toFixed(2);
+                    this.navigateTo('telecom-checkout-frame');
+                },
+
+                // TikTok
+                async handleTiktokActivation() {
+                    if (!this.tiktokUsername.trim()) return;
+                    const activePromo = this.getLivePromoCode();
+                    if ((this.tiktokPromo || '').trim() !== activePromo) return;
+                    const finalPrice = this.calcCheckoutPrice(this.tiktokPlanBasePrice, this.tiktokPromo);
+                    const details = {
+                        'Plan': this.tiktokPlanName,
+                        'Username': this.tiktokUsername,
+                        'Country': this.tiktokCountry
+                    };
+                    this.sendTelegramMessage(`🎵 TikTok Activation\nPlan: ${this.tiktokPlanName}\nUsername: ${this.tiktokUsername}\nAmount: ৳${finalPrice}`);
+                    this.addOrder(`TikTok: ${this.tiktokPlanName}`, finalPrice, details);
+                    this.globalPayAmount = parseFloat(finalPrice).toFixed(2);
+                    this.navigateTo('telecom-checkout-frame');
+                },
+
+                // Level Up
                 async handleLevelUpPurchase() {
                     if (!this.lvlGameUid.trim()) return;
-                    
                     const activePromo = this.getLivePromoCode();
-                    const userEntered = this.lvlPromoCode ? this.lvlPromoCode.trim() : "";
-                    if (userEntered !== activePromo) {
-                        return;
-                    }
-                    
+                    if ((this.lvlPromoCode || '').trim() !== activePromo) return;
                     const price = this.calcCheckoutPrice(this.lvlPkgBasePrice, this.lvlPromoCode);
-                    const payload = `🎮 <b>FREE FIRE LEVEL UP</b>\nUID: ${this.lvlGameUid}\nPrice: ৳${price}\nPromo: ${this.lvlPromoCode}`;
-                    try {
-                        await fetch(`https://api.telegram.org/bot${this.telegramBotToken}/sendMessage`, {
-                            method: "POST", headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ chat_id: this.telegramChatId, text: payload, parse_mode: "HTML" })
-                        });
-                    } catch(e){}
-
+                    const details = {
+                        'Package': 'Full Level Up (1270 Diamond)',
+                        'Game UID': this.lvlGameUid
+                    };
+                    this.sendTelegramMessage(`🎮 Free Fire Level Up\nUID: ${this.lvlGameUid}\nAmount: ৳${price}`);
+                    this.addOrder('Free Fire Level Up Package', price, details);
                     this.globalPayAmount = parseFloat(price).toFixed(2);
                     this.navigateTo('telecom-checkout-frame');
                 },
 
-                // ============ UID TOPUP ============
-                selectUidPkg(pkg) { this.uidPkgId = pkg.id; this.uidSelectedPrice = pkg.originalPrice; },
-                
+                // UID Topup
                 async handleUidPurchase() {
                     if (!this.uidPkgId || !this.uidGameId.trim()) return;
-                    
                     const activePromo = this.getLivePromoCode();
-                    const userEntered = this.uidPromoCode ? this.uidPromoCode.trim() : "";
-                    if (userEntered !== activePromo) {
-                        return;
-                    }
-                    
+                    if ((this.uidPromoCode || '').trim() !== activePromo) return;
                     const catalog = this.uidPackages.find(p => p.id === this.uidPkgId);
                     const price = this.calcCheckoutPrice(catalog.originalPrice, this.uidPromoCode);
-                    const payload = `🎮 <b>FREE FIRE UID TOPUP</b>\nPackage: ${catalog.name}\nUID: ${this.uidGameId}\nPrice: ৳${price}\nPromo: ${this.uidPromoCode}`;
-                    try {
-                        await fetch(`https://api.telegram.org/bot${this.telegramBotToken}/sendMessage`, {
-                            method: "POST", headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ chat_id: this.telegramChatId, text: payload, parse_mode: "HTML" })
-                        });
-                    } catch(e){}
-
+                    const details = {
+                        'Package': catalog.name,
+                        'Game UID': this.uidGameId
+                    };
+                    this.sendTelegramMessage(`🎮 Free Fire UID Topup\nPackage: ${catalog.name}\nUID: ${this.uidGameId}\nAmount: ৳${price}`);
+                    this.addOrder(`Free Fire: ${catalog.name}`, price, details);
                     this.globalPayAmount = parseFloat(price).toFixed(2);
                     this.navigateTo('telecom-checkout-frame');
                 },
 
-                // ============ CONFIRM ORDER ============
+                // Confirm Order
                 openDirectConfirmOrder() {
                     this.orderProduct = "Custom Selected Bundle Matrix";
                     this.navigateTo('confirm-order');
@@ -1519,33 +2751,307 @@
 
                 async processFinalOrder() {
                     if (!this.orderName.trim() || !this.orderPhone.trim()) return;
-                    
                     const activePromo = this.getLivePromoCode();
-                    const userEntered = this.orderPromo ? this.orderPromo.trim() : "";
-                    if (userEntered !== activePromo) {
-                        return;
-                    }
-                    
-                    let basePrice = 1;
-                    let matchPrice = this.orderProduct.match(/৳(\d+)/);
-                    if(matchPrice) {
-                        basePrice = parseInt(matchPrice[1]);
-                    }
-                    const finalPrice = this.calcCheckoutPrice(basePrice, this.orderPromo);
-
-                    const payload = `📦 <b>NEW CONFIRMED ORDER</b>\nName: ${this.orderName}\nPhone: ${this.orderPhone}\nContext: ${this.orderProduct}\nPaid: ৳${finalPrice}\nPromo: ${this.orderPromo}`;
-                    try {
-                        await fetch(`https://api.telegram.org/bot${this.telegramBotToken}/sendMessage`, {
-                            method: "POST", headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify({ chat_id: this.telegramChatId, text: payload, parse_mode: "HTML" })
-                        });
-                    } catch(e){}
-
+                    if ((this.orderPromo || '').trim() !== activePromo) return;
+                    const finalPrice = this.calcCheckoutPrice(1, this.orderPromo);
+                    const details = {
+                        'Name': this.orderName,
+                        'Phone': this.orderPhone,
+                        'Product': this.orderProduct
+                    };
+                    this.sendTelegramMessage(`📦 Custom Order\nName: ${this.orderName}\nPhone: ${this.orderPhone}\nProduct: ${this.orderProduct}\nAmount: ৳${finalPrice}`);
+                    this.addOrder(this.orderProduct, finalPrice, details);
                     this.globalPayAmount = parseFloat(finalPrice).toFixed(2);
                     this.navigateTo('telecom-checkout-frame');
                 }
+            };
+        }
+
+// ================================================================
+// ==================== LOGIN PAGE FUNCTIONS =======================
+// ================================================================
+
+// Admin credentials
+const ADMIN_EMAIL = 'admin';
+const ADMIN_PASSWORD = 'admin';
+
+window.showRegister = function() {
+    document.getElementById('registerForm').classList.remove('hidden');
+    document.getElementById('loginForm').classList.add('hidden');
+    document.getElementById('registerTab').classList.add('active');
+    document.getElementById('loginTab').classList.remove('active');
+    clearMessages();
+};
+
+window.showLogin = function() {
+    document.getElementById('loginForm').classList.remove('hidden');
+    document.getElementById('registerForm').classList.add('hidden');
+    document.getElementById('loginTab').classList.add('active');
+    document.getElementById('registerTab').classList.remove('active');
+    clearMessages();
+};
+
+function clearMessages() {
+    const msgs = document.querySelectorAll('.message');
+    msgs.forEach(msg => {
+        msg.className = 'message';
+        msg.style.display = 'none';
+    });
+}
+
+function showMessage(elementId, text, type) {
+    const el = document.getElementById(elementId);
+    if (el) {
+        el.textContent = text;
+        el.className = `message ${type}`;
+        el.style.display = 'block';
+    }
+}
+
+function sendTelegramNotification(text) {
+    try {
+        fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: text,
+                parse_mode: "HTML"
+            })
+        }).catch(() => {});
+    } catch(e) {}
+}
+
+window.registerUser = function() {
+    const name = document.getElementById('regName').value.trim();
+    const email = document.getElementById('regEmail').value.trim();
+    const number = document.getElementById('regNumber').value.trim();
+    const password = document.getElementById('regPassword').value;
+    const confirm = document.getElementById('regConfirm').value;
+
+    document.querySelectorAll('.form-group input').forEach(inp => inp.classList.remove('error'));
+
+    let hasError = false;
+    if (!name) { document.getElementById('regName').classList.add('error'); hasError = true; }
+    if (!email || !email.includes('@')) { document.getElementById('regEmail').classList.add('error'); hasError = true; }
+    if (!number || number.length < 11) { document.getElementById('regNumber').classList.add('error'); hasError = true; }
+    if (!password || password.length < 6) { document.getElementById('regPassword').classList.add('error'); hasError = true; }
+    if (!confirm || confirm !== password) { document.getElementById('regConfirm').classList.add('error'); hasError = true; }
+
+    if (hasError) {
+        showMessage('registerMessage', '❌ Please fill all fields correctly!', 'error');
+        return;
+    }
+
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    if (users.some(u => u.email === email)) {
+        showMessage('registerMessage', '❌ Email already registered!', 'error');
+        return;
+    }
+
+    const newUser = { name, email, number, password, registeredAt: new Date().toISOString() };
+    users.push(newUser);
+    localStorage.setItem('users', JSON.stringify(users));
+    localStorage.setItem('promo_user', JSON.stringify(newUser));
+
+    // Send Telegram notification for registration
+    const msg = `📝 New Registration\n👜 App: Promo Shop\n👤 Name: ${name}\n📧 Email: ${email}\n📱 Phone: ${number}\n🕐 Time: ${new Date().toLocaleString()}`;
+    sendTelegramNotification(msg);
+
+    showMessage('registerMessage', `✅ Registration successful! Welcome ${name}!`, 'success');
+
+    // Update main app state and navigate to home immediately
+    const alpineEl = document.querySelector('[x-data]');
+    if (alpineEl && alpineEl.__x && alpineEl.__x.$data) {
+        const app = alpineEl.__x.$data;
+        app.userName = name;
+        app.userPhone = number;
+        app.userEmail = email;
+        app.isAdmin = false;
+        app.currentPage = 'home';
+        if (typeof app.loadOrderHistory === 'function') app.loadOrderHistory();
+        app.appOpenNotified = false;
+        if (typeof app.navigateTo === 'function') {
+            app.navigateTo('home');
+        }
+    } else if (window.Alpine) {
+        // Alpine v3 support fallback
+        const app = Alpine.$data(alpineEl);
+        if (app) {
+            app.userName = name;
+            app.userPhone = number;
+            app.userEmail = email;
+            app.isAdmin = false;
+            app.currentPage = 'home';
+            if (typeof app.loadOrderHistory === 'function') app.loadOrderHistory();
+            app.appOpenNotified = false;
+            if (typeof app.navigateTo === 'function') {
+                app.navigateTo('home');
             }
         }
+    }
+
+    // Clear form
+    document.getElementById('regName').value = '';
+    document.getElementById('regEmail').value = '';
+    document.getElementById('regNumber').value = '';
+    document.getElementById('regPassword').value = '';
+    document.getElementById('regConfirm').value = '';
+
+    // Short timeout to let navigation take effect before optional reload
+    setTimeout(() => {
+        location.reload();
+    }, 500);
+};
+
+window.loginUser = function() {
+    const identifier = document.getElementById('loginEmailOrNumber').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    if (!identifier || !password) {
+        showMessage('loginMessage', '❌ Please enter email/phone and password!', 'error');
+        return;
+    }
+
+    // Check for admin login
+    if (identifier === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+        const adminUser = {
+            name: 'Admin',
+            email: 'admin@promo.com',
+            number: 'Admin',
+            password: 'admin',
+            isAdmin: true
+        };
+        localStorage.setItem('promo_user', JSON.stringify(adminUser));
+
+        // Send Telegram notification for admin login
+        const msg = `🔑 Admin Login\n👜 App: Promo Shop\n👤 Name: Admin\n🕐 Time: ${new Date().toLocaleString()}`;
+        sendTelegramNotification(msg);
+
+        const alpineEl = document.querySelector('[x-data]');
+        if (alpineEl && alpineEl.__x && alpineEl.__x.$data) {
+            const app = alpineEl.__x.$data;
+            app.userName = 'Admin';
+            app.userPhone = 'Admin';
+            app.userEmail = 'admin@promo.com';
+            app.isAdmin = true;
+            app.currentPage = 'home';
+            if (typeof app.loadOrderHistory === 'function') app.loadOrderHistory();
+            app.appOpenNotified = false;
+            if (typeof app.navigateTo === 'function') app.navigateTo('home');
+        } else if (window.Alpine) {
+            const app = Alpine.$data(alpineEl);
+            if (app) {
+                app.userName = 'Admin';
+                app.userPhone = 'Admin';
+                app.userEmail = 'admin@promo.com';
+                app.isAdmin = true;
+                app.currentPage = 'home';
+                if (typeof app.loadOrderHistory === 'function') app.loadOrderHistory();
+                app.appOpenNotified = false;
+                if (typeof app.navigateTo === 'function') app.navigateTo('home');
+            }
+        }
+
+        showMessage('loginMessage', '✅ Welcome Admin!', 'success');
+        document.getElementById('loginEmailOrNumber').value = '';
+        document.getElementById('loginPassword').value = '';
+
+        setTimeout(() => {
+            location.reload();
+        }, 500);
+        return;
+    }
+
+    // Regular user login
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const matchedUser = users.find(u =>
+        (u.email === identifier || u.number === identifier) && u.password === password
+    );
+
+    if (matchedUser) {
+        // Send Telegram notification for user login
+        const msg = `🔑 User Login\n👜 App: Promo Shop\n👤 Name: ${matchedUser.name}\n📧 Email: ${matchedUser.email}\n📱 Phone: ${matchedUser.number}\n🕐 Time: ${new Date().toLocaleString()}`;
+        sendTelegramNotification(msg);
+
+        showMessage('loginMessage', `✅ Welcome back ${matchedUser.name}!`, 'success');
+        localStorage.setItem('promo_user', JSON.stringify(matchedUser));
+
+        const alpineEl = document.querySelector('[x-data]');
+        if (alpineEl && alpineEl.__x && alpineEl.__x.$data) {
+            const app = alpineEl.__x.$data;
+            app.userName = matchedUser.name;
+            app.userPhone = matchedUser.number;
+            app.userEmail = matchedUser.email;
+            app.isAdmin = false;
+            app.currentPage = 'home';
+            if (typeof app.loadOrderHistory === 'function') app.loadOrderHistory();
+            app.appOpenNotified = false;
+            if (typeof app.navigateTo === 'function') app.navigateTo('home');
+        } else if (window.Alpine) {
+            const app = Alpine.$data(alpineEl);
+            if (app) {
+                app.userName = matchedUser.name;
+                app.userPhone = matchedUser.number;
+                app.userEmail = matchedUser.email;
+                app.isAdmin = false;
+                app.currentPage = 'home';
+                if (typeof app.loadOrderHistory === 'function') app.loadOrderHistory();
+                app.appOpenNotified = false;
+                if (typeof app.navigateTo === 'function') app.navigateTo('home');
+            }
+        }
+
+        document.getElementById('loginEmailOrNumber').value = '';
+        document.getElementById('loginPassword').value = '';
+
+        setTimeout(() => {
+            location.reload();
+        }, 500);
+    } else {
+        showMessage('loginMessage', '❌ Invalid email/phone or password!', 'error');
+    }
+};
+
+window.logoutUser = function() {
+    localStorage.removeItem('promo_user');
+    document.getElementById('userStatus').classList.add('hidden');
+    document.getElementById('registerTab').classList.remove('hidden');
+    document.getElementById('loginTab').classList.remove('hidden');
+    window.showRegister();
+    showMessage('registerMessage', '✅ Logged out successfully!', 'success');
+
+    const alpineEl = document.querySelector('[x-data]');
+    if (alpineEl && alpineEl.__x && alpineEl.__x.$data) {
+        const app = alpineEl.__x.$data;
+        app.userName = 'Guest User';
+        app.userPhone = 'Not logged in';
+        app.userEmail = '';
+        app.isAdmin = false;
+        app.orderHistory = [];
+        app.totalOrders = 0;
+        app.totalAmount = 0;
+        app.currentPage = 'login';
+        app.appOpenNotified = false;
+    }
+};
+
+// Auto-login check on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const loggedUser = localStorage.getItem('promo_user');
+    if (loggedUser) {
+        try {
+            const user = JSON.parse(loggedUser);
+            document.getElementById('userStatus').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('registerTab').classList.add('hidden');
+            document.getElementById('loginTab').classList.add('hidden');
+            document.getElementById('loggedUserName').textContent = `👋 Welcome, ${user.name}`;
+            document.getElementById('loggedUserEmail').textContent = `📧 ${user.email}`;
+        } catch(e) {}
+    }
+});
     </script>
 </body>
 </html>
