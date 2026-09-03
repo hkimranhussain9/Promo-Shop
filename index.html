@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="bn" class="dark">
 <head>
@@ -6,9 +7,7 @@
     <title>PromoShop - Premium Services</title>
 
     <script>
-        // ==================== GLOBAL CONFIGURATION ====================
         const globalDiscountConfig = "on-35"; 
-        // ==============================================================
     </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -21,7 +20,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* ===== ALL STYLES ===== */
         :root {
             --background: 0 0% 100%;
             --foreground: 0 0% 3.9%;
@@ -70,7 +68,7 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Toast Notification Styles */
+        /* Toast Notification */
         .live-toast-notification {
             pointer-events: auto;
             width: 100%;
@@ -617,6 +615,181 @@
         .support-btn.telegram { background: #0088cc; }
         .support-btn.telegram:hover { background: #006699; transform: translateY(-2px); }
         .support-btn i { font-size: 18px; }
+
+        /* Stock Out Badge */
+        .stock-out-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #ef4444;
+            color: white;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stock-out-overlay {
+            opacity: 0.5;
+            border-color: #ef4444 !important;
+            background: rgba(239, 68, 68, 0.05) !important;
+        }
+        .stock-out-btn {
+            background: #374151 !important;
+            color: #9ca3af !important;
+            cursor: not-allowed !important;
+            pointer-events: none !important;
+        }
+        .stock-out-btn:hover {
+            background: #374151 !important;
+            transform: none !important;
+        }
+        .stock-out-price {
+            color: #ef4444 !important;
+            font-size: 11px !important;
+        }
+
+        /* Selected Plan Style */
+        .plan-selected {
+            border-color: #10b981 !important;
+            background: rgba(16, 185, 129, 0.1) !important;
+            box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2), 0 4px 12px rgba(16, 185, 129, 0.1);
+        }
+        .plan-selected .plan-name {
+            color: #10b981 !important;
+        }
+        .plan-selected .plan-price {
+            color: #10b981 !important;
+        }
+
+        /* Popup Overlay */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .popup-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .popup-overlay .popup-content {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px 35px;
+            max-width: 380px;
+            width: 90%;
+            text-align: center;
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+        }
+        .popup-overlay.active .popup-content {
+            transform: scale(1) translateY(0);
+        }
+        .popup-overlay .popup-content .popup-icon {
+            width: 65px;
+            height: 65px;
+            background: rgba(239, 68, 68, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 30px;
+            color: #ef4444;
+            border: 2px solid rgba(239, 68, 68, 0.2);
+        }
+        .popup-overlay .popup-content h2 {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .popup-overlay .popup-content p {
+            color: #ef4444;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .popup-overlay .popup-content .sub-text {
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+        .popup-overlay .popup-content .popup-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        .popup-overlay .popup-content .popup-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+        .popup-overlay .popup-content .popup-btn-secondary {
+            background: #2d2d2d;
+            color: #ccc;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .popup-overlay .popup-content .popup-btn-secondary:hover {
+            background: #3d3d3d;
+            color: #fff;
+        }
+
+        /* Promo Required Toggle */
+        .promo-toggle-btn {
+            padding: 4px 14px;
+            border-radius: 20px;
+            border: none;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .promo-toggle-btn.required {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+        .promo-toggle-btn.required:hover {
+            background: rgba(239, 68, 68, 0.3);
+        }
+        .promo-toggle-btn.not-required {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+        .promo-toggle-btn.not-required:hover {
+            background: rgba(16, 185, 129, 0.3);
+        }
     </style>
 </head>
 <body x-data="promoShopMaster()" x-init="initMaster()" class="min-h-screen flex flex-col items-center justify-center bg-promo-dark-bg">
@@ -626,6 +799,24 @@
         <div class="loader"></div>
         <div class="logo-text">PROMO <span>SHOP</span></div>
         <div class="sub-text">Loading your experience...</div>
+    </div>
+
+    <!-- Popup Overlay (Stock Out) -->
+    <div class="popup-overlay" :class="showStockPopup ? 'active' : ''" @click.self="showStockPopup = false">
+        <div class="popup-content">
+            <div class="popup-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h2>Service Out of Stock</h2>
+            <p>⛔ Currently Unavailable!</p>
+            <p class="sub-text">এই সেকশনটি বর্তমানে স্টক আউট। দয়া করে অন্য সেকশন ব্যবহার করুন।</p>
+            <button class="popup-btn" @click="showStockPopup = false; navigateTo('home')">
+                Return to Dashboard
+            </button>
+            <button class="popup-btn-secondary" @click="showStockPopup = false">
+                Close
+            </button>
+        </div>
     </div>
 
     <!-- Sidebar Overlay -->
@@ -647,7 +838,7 @@
         <div class="menu-item" @click="sidebarOpen = false; navigateTo('home')">
             <i class="fas fa-home"></i> Home
         </div>
-        <div class="menu-item" @click="sidebarOpen = false; navigateTo('order-history')">
+        <div class="menu-item" @click="sidebarOpen = false; navigateTo('order-history')" x-show="isAdmin">
             <i class="fas fa-history"></i> Order History
             <span class="badge" x-show="orderHistory.length > 0" x-text="orderHistory.length"></span>
         </div>
@@ -656,6 +847,10 @@
         </div>
         <div class="menu-item" @click="sidebarOpen = false; navigateTo('support')">
             <i class="fas fa-headset"></i> Support
+        </div>
+        <div class="menu-item" @click="sidebarOpen = false; navigateTo('stock-control')" x-show="isAdmin">
+            <i class="fas fa-boxes"></i> Stock Control
+            <span class="badge" style="background:#ef4444;">Admin</span>
         </div>
         <div class="menu-item danger" @click="handleLogout()">
             <i class="fas fa-sign-out-alt"></i> Logout
@@ -769,7 +964,8 @@
     <!-- Home Page -->
     <div x-cloak x-show="currentPage === 'home'" class="w-full max-w-md space-y-3 main-container">
         <main class="w-full bg-promo-card-bg rounded-2xl shadow-lg border border-zinc-800 overflow-hidden p-4 grid gap-3">
-            <div @click="navigateTo('youtube')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
+            <!-- Section 1: YouTube -->
+            <div @click="navigateToSection('youtube')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">1</span>
                     <span class="text-sm font-bold text-white">Youtube Membership</span>
@@ -777,7 +973,8 @@
                 <i data-lucide="play" class="w-5 h-5 text-red-500"></i>
             </div>
 
-            <div @click="navigateTo('facebook')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
+            <!-- Section 2: Facebook -->
+            <div @click="navigateToSection('facebook')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">2</span>
                     <span class="text-sm font-bold text-white">Facebook Membership</span>
@@ -785,7 +982,8 @@
                 <i data-lucide="users" class="w-5 h-5 text-blue-500"></i>
             </div>
 
-            <div @click="navigateTo('instagram')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
+            <!-- Section 3: Instagram -->
+            <div @click="navigateToSection('instagram')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">3</span>
                     <span class="text-sm font-bold text-white">Instagram Followers</span>
@@ -793,7 +991,8 @@
                 <i data-lucide="heart" class="w-5 h-5 text-pink-500"></i>
             </div>
 
-            <div @click="navigateTo('tiktok')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
+            <!-- Section 4: TikTok -->
+            <div @click="navigateToSection('tiktok')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">4</span>
                     <span class="text-sm font-bold text-white">TikTok Service</span>
@@ -801,7 +1000,8 @@
                 <i data-lucide="music" class="w-5 h-5 text-teal-400"></i>
             </div>
 
-            <div @click="navigateTo('telecom-home')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
+            <!-- Section 5: Telecom -->
+            <div @click="navigateToSection('telecom-home')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">5</span>
                     <span class="text-sm font-bold text-white">All Sim Offer</span>
@@ -809,7 +1009,8 @@
                 <i data-lucide="phone-call" class="w-5 h-5 text-emerald-400"></i>
             </div>
 
-            <div @click="navigateTo('free-fire-topup')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
+            <!-- Section 6: Free Fire -->
+            <div @click="navigateToSection('free-fire-topup')" class="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-emerald-900/40 to-zinc-800/50 border border-emerald-700/40 hover:bg-zinc-800 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-emerald-700 text-xs rounded-full font-bold text-white">6</span>
                     <span class="text-sm font-bold text-white">Free Fire Diamond TopUp</span>
@@ -817,7 +1018,8 @@
                 <i data-lucide="zap" class="w-5 h-5 text-amber-400"></i>
             </div>
 
-            <div @click="openDirectConfirmOrder()" class="flex items-center justify-between p-3 rounded-xl bg-promo-red-20 border border-promo-red hover-bg-promo-red-30 transition cursor-pointer">
+            <!-- Confirm Order Section -->
+            <div @click="navigateToSection('confirm-order')" class="flex items-center justify-between p-3 rounded-xl bg-promo-red-20 border border-promo-red hover-bg-promo-red-30 transition cursor-pointer">
                 <div class="flex items-center gap-3">
                     <span class="w-6 h-6 flex items-center justify-center bg-red-600 text-xs rounded-full font-bold text-white">#</span>
                     <span class="text-sm font-bold text-white">Confirm Order</span>
@@ -851,9 +1053,9 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- ============ ORDER HISTORY PAGE ============================= -->
+    <!-- ============ ORDER HISTORY PAGE (শুধু অ্যাডমিন) ============= -->
     <!-- ============================================================ -->
-    <div x-cloak x-show="currentPage === 'order-history'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4">
+    <div x-cloak x-show="currentPage === 'order-history' && isAdmin" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4">
         <div class="flex items-center gap-3 py-2 border-b border-zinc-800 mb-4">
             <button @click="navigateTo('home')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
@@ -865,7 +1067,7 @@
         <div x-show="orderHistory.length === 0" class="text-center py-10">
             <i class="fas fa-box-open text-4xl text-zinc-600 mb-3"></i>
             <p class="text-zinc-400 text-sm">No orders yet</p>
-            <p class="text-zinc-600 text-xs mt-1">Your orders will appear here</p>
+            <p class="text-zinc-600 text-xs mt-1">All orders will appear here for Admin</p>
         </div>
 
         <div x-show="orderHistory.length > 0" class="space-y-3 max-h-[500px] overflow-y-auto pr-1">
@@ -888,7 +1090,6 @@
                         <span class="order-status" x-text="order.status || 'Completed'">✅ Completed</span>
                     </div>
 
-                    <!-- Order Details -->
                     <div x-show="order.details && Object.keys(order.details).length > 0" class="order-details">
                         <template x-for="(value, key) in order.details">
                             <div class="detail-row">
@@ -900,6 +1101,16 @@
                 </div>
             </template>
         </div>
+    </div>
+
+    <!-- নন-অ্যাডমিনের জন্য অর্ডার হিস্টরি লুকানো -->
+    <div x-cloak x-show="currentPage === 'order-history' && !isAdmin" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 text-center py-10">
+        <i class="fas fa-lock text-4xl text-zinc-600 mb-3"></i>
+        <p class="text-zinc-400 text-sm">🔒 Order History is only visible to Admin</p>
+        <p class="text-zinc-600 text-xs mt-1">Please login with Admin credentials</p>
+        <button @click="navigateTo('home')" class="mt-4 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg text-sm transition">
+            Go Back
+        </button>
     </div>
 
     <!-- ============================================================ -->
@@ -1003,6 +1214,264 @@
     </div>
 
     <!-- ============================================================ -->
+    <!-- ============ STOCK CONTROL PAGE (ADMIN ONLY) =============== -->
+    <!-- ============================================================ -->
+    <div x-cloak x-show="currentPage === 'stock-control'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4">
+        <div class="flex items-center gap-3 py-2 border-b border-zinc-800 mb-4">
+            <button @click="navigateTo('home')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <h1 class="text-base font-bold text-white">📦 Stock Control</h1>
+            <span class="ml-auto text-xs bg-red-500/20 text-red-400 px-2 py-0.5 rounded-full">Admin Only</span>
+        </div>
+
+        <!-- Main Sections Stock Control -->
+        <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3 mb-4">
+            <h2 class="text-xs font-bold text-yellow-400 mb-2">📌 Main Sections</h2>
+            <div class="space-y-2">
+                <div class="flex items-center justify-between bg-zinc-900 p-2 rounded-lg">
+                    <span class="text-xs text-white">1. Youtube Membership</span>
+                    <button @click="toggleSectionStock('youtube')" 
+                            :class="sectionStock.youtube ? 'bg-red-600' : 'bg-emerald-600'"
+                            class="px-3 py-1 rounded text-xs text-white transition">
+                        <span x-text="sectionStock.youtube ? '⛔ Stock Out' : '✅ In Stock'"></span>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between bg-zinc-900 p-2 rounded-lg">
+                    <span class="text-xs text-white">2. Facebook Membership</span>
+                    <button @click="toggleSectionStock('facebook')" 
+                            :class="sectionStock.facebook ? 'bg-red-600' : 'bg-emerald-600'"
+                            class="px-3 py-1 rounded text-xs text-white transition">
+                        <span x-text="sectionStock.facebook ? '⛔ Stock Out' : '✅ In Stock'"></span>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between bg-zinc-900 p-2 rounded-lg">
+                    <span class="text-xs text-white">3. Instagram Followers</span>
+                    <button @click="toggleSectionStock('instagram')" 
+                            :class="sectionStock.instagram ? 'bg-red-600' : 'bg-emerald-600'"
+                            class="px-3 py-1 rounded text-xs text-white transition">
+                        <span x-text="sectionStock.instagram ? '⛔ Stock Out' : '✅ In Stock'"></span>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between bg-zinc-900 p-2 rounded-lg">
+                    <span class="text-xs text-white">4. TikTok Service</span>
+                    <button @click="toggleSectionStock('tiktok')" 
+                            :class="sectionStock.tiktok ? 'bg-red-600' : 'bg-emerald-600'"
+                            class="px-3 py-1 rounded text-xs text-white transition">
+                        <span x-text="sectionStock.tiktok ? '⛔ Stock Out' : '✅ In Stock'"></span>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between bg-zinc-900 p-2 rounded-lg">
+                    <span class="text-xs text-white">5. All Sim Offer</span>
+                    <button @click="toggleSectionStock('telecom')" 
+                            :class="sectionStock.telecom ? 'bg-red-600' : 'bg-emerald-600'"
+                            class="px-3 py-1 rounded text-xs text-white transition">
+                        <span x-text="sectionStock.telecom ? '⛔ Stock Out' : '✅ In Stock'"></span>
+                    </button>
+                </div>
+                <div class="flex items-center justify-between bg-zinc-900 p-2 rounded-lg">
+                    <span class="text-xs text-white">6. Free Fire Diamond TopUp</span>
+                    <button @click="toggleSectionStock('freefire')" 
+                            :class="sectionStock.freefire ? 'bg-red-600' : 'bg-emerald-600'"
+                            class="px-3 py-1 rounded text-xs text-white transition">
+                        <span x-text="sectionStock.freefire ? '⛔ Stock Out' : '✅ In Stock'"></span>
+                    </button>
+                </div>
+                <!-- Confirm Order Section Stock Control -->
+                <div class="flex items-center justify-between bg-zinc-900 p-2 rounded-lg border-t border-zinc-800 pt-2 mt-1">
+                    <span class="text-xs text-red-400 font-semibold">#. Confirm Order</span>
+                    <button @click="toggleSectionStock('confirmorder')" 
+                            :class="sectionStock.confirmorder ? 'bg-red-600' : 'bg-emerald-600'"
+                            class="px-3 py-1 rounded text-xs text-white transition">
+                        <span x-text="sectionStock.confirmorder ? '⛔ Stock Out' : '✅ In Stock'"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promo Code Required Toggle -->
+        <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3 mb-4">
+            <h2 class="text-xs font-bold text-purple-400 mb-2">🔑 Promo Code Settings</h2>
+            <div class="flex items-center justify-between bg-zinc-900 p-3 rounded-lg">
+                <div>
+                    <span class="text-xs text-white font-medium">Promo Code Required</span>
+                    <p class="text-[10px] text-zinc-400 mt-0.5" x-text="promoRequired ? '✅ Required - User must enter promo code' : '⭕ Not Required - User can skip promo code'"></p>
+                </div>
+                <button @click="togglePromoRequired()" 
+                        :class="promoRequired ? 'bg-red-600' : 'bg-emerald-600'"
+                        class="px-4 py-1.5 rounded-lg text-xs text-white transition font-medium">
+                    <span x-text="promoRequired ? 'Required' : 'Optional'"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- YouTube Plans -->
+        <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3 mb-4">
+            <h2 class="text-xs font-bold text-emerald-400 mb-2">🎬 YouTube Plans</h2>
+            <div class="space-y-2">
+                <template x-for="(plan, index) in youtubePlans" :key="'yt-'+index">
+                    <div class="flex items-center justify-between bg-zinc-900 p-2 rounded-lg">
+                        <span class="text-xs text-white" x-text="plan.name"></span>
+                        <button @click="toggleStock('youtube', index)" 
+                                :class="plan.stockOut ? 'bg-red-600' : 'bg-emerald-600'"
+                                class="px-3 py-1 rounded text-xs text-white transition">
+                            <span x-text="plan.stockOut ? '⛔ Stock Out' : '✅ In Stock'"></span>
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Facebook Plans -->
+        <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3 mb-4">
+            <h2 class="text-xs font-bold text-blue-400 mb-2">📘 Facebook Plans</h2>
+            <div class="space-y-2">
+                <template x-for="(plan, index) in facebookPlans" :key="'fb-'+index">
+                    <div class="flex items-center justify-between bg-zinc-900 p-2 rounded-lg">
+                        <span class="text-xs text-white" x-text="plan.name"></span>
+                        <button @click="toggleStock('facebook', index)" 
+                                :class="plan.stockOut ? 'bg-red-600' : 'bg-emerald-600'"
+                                class="px-3 py-1 rounded text-xs text-white transition">
+                            <span x-text="plan.stockOut ? '⛔ Stock Out' : '✅ In Stock'"></span>
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Instagram Plans -->
+        <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3 mb-4">
+            <h2 class="text-xs font-bold text-pink-400 mb-2">📸 Instagram Plans</h2>
+            <div class="space-y-2">
+                <template x-for="(plan, index) in instagramPlans" :key="'ig-'+index">
+                    <div class="flex items-center justify-between bg-zinc-900 p-2 rounded-lg">
+                        <span class="text-xs text-white" x-text="plan.name"></span>
+                        <button @click="toggleStock('instagram', index)" 
+                                :class="plan.stockOut ? 'bg-red-600' : 'bg-emerald-600'"
+                                class="px-3 py-1 rounded text-xs text-white transition">
+                            <span x-text="plan.stockOut ? '⛔ Stock Out' : '✅ In Stock'"></span>
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- TikTok Plans -->
+        <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3 mb-4">
+            <h2 class="text-xs font-bold text-teal-400 mb-2">🎵 TikTok Plans</h2>
+            <div class="space-y-2">
+                <template x-for="(plan, index) in tiktokPlans" :key="'tt-'+index">
+                    <div class="flex items-center justify-between bg-zinc-900 p-2 rounded-lg">
+                        <span class="text-xs text-white" x-text="plan.name"></span>
+                        <button @click="toggleStock('tiktok', index)" 
+                                :class="plan.stockOut ? 'bg-red-600' : 'bg-emerald-600'"
+                                class="px-3 py-1 rounded text-xs text-white transition">
+                            <span x-text="plan.stockOut ? '⛔ Stock Out' : '✅ In Stock'"></span>
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Free Fire Packages -->
+        <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3 mb-4">
+            <h2 class="text-xs font-bold text-amber-400 mb-2">🎮 Free Fire Packages</h2>
+            <div class="space-y-2">
+                <template x-for="(pkg, index) in freeFirePackages" :key="'ff-'+index">
+                    <div class="flex items-center justify-between bg-zinc-900 p-2 rounded-lg">
+                        <span class="text-xs text-white" x-text="pkg.name"></span>
+                        <button @click="toggleStock('freefire', index)" 
+                                :class="pkg.stockOut ? 'bg-red-600' : 'bg-emerald-600'"
+                                class="px-3 py-1 rounded text-xs text-white transition">
+                            <span x-text="pkg.stockOut ? '⛔ Stock Out' : '✅ In Stock'"></span>
+                        </button>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Telecom Operators & Offers -->
+        <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3">
+            <h2 class="text-xs font-bold text-emerald-400 mb-2">📱 Telecom Offers</h2>
+            <div class="space-y-3">
+                <template x-for="(operator, opSlug) in operatorOffers" :key="opSlug">
+                    <div class="border-t border-zinc-800 pt-2 first:border-0 first:pt-0">
+                        <h3 class="text-xs font-semibold text-zinc-400 mb-1" x-text="operator.name"></h3>
+                        <div class="space-y-1 max-h-32 overflow-y-auto">
+                            <template x-for="(offer, idx) in operator.offers" :key="offer.id">
+                                <div class="flex items-center justify-between bg-zinc-900/50 p-1.5 rounded">
+                                    <span class="text-[10px] text-zinc-300" x-text="offer.data || offer.minutes || 'Minute Pack'"></span>
+                                    <button @click="toggleTelecomStock(opSlug, idx)" 
+                                            :class="offer.stockOut ? 'bg-red-600' : 'bg-emerald-600'"
+                                            class="px-2 py-0.5 rounded text-[9px] text-white transition">
+                                        <span x-text="offer.stockOut ? 'Out' : 'In'"></span>
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ============ CONFIRM ORDER PAGE ============================= -->
+    <!-- ============================================================ -->
+    <div x-cloak x-show="currentPage === 'confirm-order'" class="w-full max-w-md bg-zinc-950 border-x border-b border-zinc-800 rounded-b-2xl p-4 pb-6 text-white">
+        <div class="flex items-center gap-3 mb-4">
+            <button @click="navigateTo('home')" class="p-1.5 hover:bg-zinc-900 rounded-full transition text-zinc-400">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            </button>
+            <h1 class="text-base font-bold">Confirm Order Setup</h1>
+        </div>
+        
+        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 space-y-3.5">
+            <h3 class="text-xs font-bold text-zinc-300">ভেরিফিকেশন ও ডেলিভারি ফর্ম</h3>
+            
+            <div class="space-y-2.5">
+                <div>
+                    <label class="block text-[11px] text-zinc-400 mb-1">Your Full Name *</label>
+                    <input type="text" x-model="orderName" placeholder="Enter your full name" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-red-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] text-zinc-400 mb-1">Active Contact Number *</label>
+                    <input type="tel" x-model="orderPhone" placeholder="Enter your phone number" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-red-500">
+                </div>
+                <div>
+                    <label class="block text-[11px] text-zinc-400 mb-1">Selected Product Context</label>
+                    <input type="text" x-model="orderProduct" readonly class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-zinc-400 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-[11px] text-zinc-400 mb-1">
+                        Live Promo Code 
+                        <span x-show="!promoRequired" class="text-zinc-500 text-[9px]">(Optional)</span>
+                        <span x-show="promoRequired" class="text-red-400 text-[9px]">* Required</span>
+                    </label>
+                    <input type="text" x-model="orderPromo" :placeholder="promoRequired ? 'Enter live promo code *' : 'Enter promo code (optional)'" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-red-500 tracking-wider">
+                    
+                    <p class="text-[11px] mt-1.5 font-semibold">
+                        <template x-if="promoRequired">
+                            <span x-show="orderPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                            <span x-show="orderPromo.trim() !== '' && orderPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                            <span x-show="orderPromo.trim() !== '' && orderPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                        </template>
+                        <template x-if="!promoRequired">
+                            <span class="text-zinc-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                            <span x-show="orderPromo.trim() !== '' && orderPromo.trim() === getLivePromoCode()" class="text-green-400 ml-2"><i class="fas fa-check-circle mr-1"></i> ✅ Discount Applied!</span>
+                            <span x-show="orderPromo.trim() !== '' && orderPromo.trim() !== getLivePromoCode()" class="text-amber-400 ml-2">⚠️ Invalid promo code</span>
+                        </template>
+                    </p>
+                </div>
+            </div>
+
+            <button @click="processFinalOrder()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition text-sm tracking-wide mt-2">
+                Confirm Order Securely
+            </button>
+        </div>
+    </div>
+
+    <!-- ============================================================ -->
     <!-- ============ TELECOM PAGES ================================== -->
     <!-- ============================================================ -->
     <div x-cloak x-show="currentPage === 'telecom-home'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl pb-6">
@@ -1049,10 +1518,10 @@
 
         <div class="p-4 max-h-[500px] overflow-y-auto space-y-3">
             <template x-for="offer in operatorOffers[currentSlug]?.offers || []" :key="offer.id">
-                <div :class="offer.stockOut ? 'border-red-900/50 bg-red-950/20 opacity-60' : 'border-zinc-800 bg-zinc-800/60'" class="relative rounded-xl p-3.5 border flex flex-col justify-between gap-2">
-                    <template x-if="offer.stockOut">
-                        <span class="absolute top-2 right-2 bg-red-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">Stock Out</span>
-                    </template>
+                <div :class="offer.stockOut ? 'stock-out-overlay border-red-900/50 bg-red-950/20' : 'border-zinc-800 bg-zinc-800/60'" 
+                     class="relative rounded-xl p-3.5 border flex flex-col justify-between gap-2 transition">
+                    
+                    <span x-show="offer.stockOut" class="stock-out-badge">⛔ Stock Out</span>
                     
                     <div class="space-y-1">
                         <div class="flex items-center gap-2 text-white font-bold text-sm">
@@ -1070,15 +1539,21 @@
                             <span x-text="offer.validity"></span>
                         </div>
                     </div>
+                    
                     <div class="flex items-center justify-between border-t border-zinc-800 pt-2 mt-1">
                         <div class="flex flex-col">
-                            <span class="text-emerald-400 font-bold text-base" x-text="'৳' + calcPriceOnSite(offer.basePrice)"></span>
+                            <span x-show="!offer.stockOut" class="text-emerald-400 font-bold text-base" x-text="'৳' + calcPriceOnSite(offer.basePrice)"></span>
+                            <span x-show="offer.stockOut" class="stock-out-price font-bold text-xs">⛔ Unavailable</span>
                             <template x-if="discountSettings.mode === 'on' || discountSettings.mode === 'off'">
-                                <span class="text-zinc-500 line-through text-[10px]" x-text="'৳' + offer.basePrice"></span>
+                                <span x-show="!offer.stockOut" class="text-zinc-500 line-through text-[10px]" x-text="'৳' + offer.basePrice"></span>
                             </template>
                         </div>
+                        
                         <template x-if="!offer.stockOut">
                             <button @click="navigateToTelecomCheckout(offer)" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-1.5 rounded-lg transition">Buy Now</button>
+                        </template>
+                        <template x-if="offer.stockOut">
+                            <button disabled class="stock-out-btn bg-zinc-700 text-zinc-500 text-xs font-semibold px-4 py-1.5 rounded-lg">Out of Stock</button>
                         </template>
                     </div>
                 </div>
@@ -1110,13 +1585,24 @@
                 <p x-show="telecomErrors.phone" class="text-xs text-red-500 mt-1" x-text="telecomErrors.phone"></p>
             </div>
             <div>
-                <label class="block text-xs font-medium text-zinc-400 mb-1">Live Promo Code *</label>
-                <input type="text" x-model="telecomPromo" placeholder="Enter Promo Code" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500 tracking-wider">
+                <label class="block text-xs font-medium text-zinc-400 mb-1">
+                    Live Promo Code
+                    <span x-show="!promoRequired" class="text-zinc-500 text-[9px]">(Optional)</span>
+                    <span x-show="promoRequired" class="text-red-400 text-[9px]">* Required</span>
+                </label>
+                <input type="text" x-model="telecomPromo" :placeholder="promoRequired ? 'Enter Promo Code *' : 'Enter Promo Code (optional)'" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500 tracking-wider">
                 
                 <p class="text-[11px] mt-1.5 font-semibold">
-                    <span x-show="telecomPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
-                    <span x-show="telecomPromo.trim() !== '' && telecomPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
-                    <span x-show="telecomPromo.trim() !== '' && telecomPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    <template x-if="promoRequired">
+                        <span x-show="telecomPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                        <span x-show="telecomPromo.trim() !== '' && telecomPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                        <span x-show="telecomPromo.trim() !== '' && telecomPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    </template>
+                    <template x-if="!promoRequired">
+                        <span class="text-zinc-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                        <span x-show="telecomPromo.trim() !== '' && telecomPromo.trim() === getLivePromoCode()" class="text-green-400 ml-2"><i class="fas fa-check-circle mr-1"></i> ✅ Discount Applied!</span>
+                        <span x-show="telecomPromo.trim() !== '' && telecomPromo.trim() !== getLivePromoCode()" class="text-amber-400 ml-2">⚠️ Invalid promo code</span>
+                    </template>
                 </p>
             </div>
 
@@ -1135,7 +1621,6 @@
     <!-- ============================================================ -->
     <!-- ============ YOUTUBE PAGES ================================== -->
     <!-- ============================================================ -->
-    <!-- YouTube Page -->
     <div x-cloak x-show="currentPage === 'youtube'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 py-2 border-b border-zinc-800">
             <button @click="navigateTo('home')" class="text-gray-300 hover:bg-zinc-800 p-1.5 rounded-full transition">
@@ -1157,74 +1642,29 @@
         <div class="space-y-3">
             <h3 class="font-bold text-gray-300 text-xs uppercase tracking-wider">Choose Your Plan</h3>
 
-            <div @click="selectYtPlan('Subscribe Membership', 78)" :class="ytPlanName === 'Subscribe Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <h4 class="font-bold text-sm text-white">Subscribe Membership</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(78)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳78</span>
+            <template x-for="plan in youtubePlans" :key="plan.id">
+                <div @click="!plan.stockOut && selectYtPlan(plan.name, plan.price)" 
+                     class="relative border rounded-2xl p-4 cursor-pointer transition"
+                     :class="ytPlanName === plan.name && !plan.stockOut ? 'plan-selected' : (plan.stockOut ? 'stock-out-overlay' : 'border-zinc-800 bg-zinc-950')">
+                    
+                    <span x-show="plan.stockOut" class="stock-out-badge">⛔ Stock Out</span>
+                    <span x-show="plan.badge && !plan.stockOut" class="absolute top-3 right-3 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase"
+                          :class="plan.badgeColor || 'bg-emerald-600'" 
+                          x-text="plan.badge"></span>
+                    
+                    <h4 class="font-bold text-sm text-white plan-name" x-text="plan.name"></h4>
+                    <div class="flex items-center gap-2 my-1">
+                        <span x-show="!plan.stockOut" class="text-xl font-bold text-white plan-price" x-text="'৳' + calcPriceOnSite(plan.price)"></span>
+                        <span x-show="plan.stockOut" class="stock-out-price font-bold text-sm">⛔ Unavailable</span>
+                        <span x-show="!plan.stockOut" class="text-xs text-gray-500 line-through" x-text="'৳' + plan.price"></span>
+                    </div>
+                    <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                        <template x-for="feature in plan.features" :key="feature">
+                            <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> <span x-text="feature"></span></li>
+                        </template>
+                    </ul>
                 </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Country: Asia</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Delivery time: Instant</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Subscribers: 1,000</li>
-                </ul>
-            </div>
-
-            <div @click="selectYtPlan('Wachtime Membership', 185)" :class="ytPlanName === 'Wachtime Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <h4 class="font-bold text-sm text-white">Wachtime Membership</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(185)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳185</span>
-                </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 1,000 Hours Watchtime </li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Non Drop & Organic</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Delivery</li>
-                </ul>
-            </div>
-
-            <div @click="selectYtPlan('Monetization Membership', 523)" :class="ytPlanName === 'Monetization Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <span class="absolute top-3 right-3 bg-emerald-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">Most Popular</span>
-                <h4 class="font-bold text-sm text-white">Monetization Membership</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(523)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳523</span>
-                </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Views: 50,000+</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Watch Time: 4,000 Hour</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Subscribers: 1,000</li>
-                </ul>
-            </div>
-
-            <div @click="selectYtPlan('Premium Membership', 692)" :class="ytPlanName === 'Premium Membership' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <h4 class="font-bold text-sm text-white">Premium Membership</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(692)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳692</span>
-                </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Views: 1,20,000+</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Watch Time: 4,500+ Hour</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Subscribers: 10,000</li>
-                </ul>
-            </div>
-
-            <div @click="selectYtPlan('Artist Verification', 171)" :class="ytPlanName === 'Artist Verification' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <span class="absolute top-3 right-3 bg-purple-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">OAC Badge</span>
-                <h4 class="font-bold text-sm text-white flex items-center gap-1.5">
-                    Artist Verification <i class="fas fa-music text-purple-400 text-xs"></i>
-                </h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(171)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳171</span>
-                </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Official Artist Channel Badge (🎵)</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Music Distribution: Included</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Delivery: 5-7 Working Days</li>
-                </ul>
-            </div>
+            </template>
         </div>
 
         <button @click="ytPlanName ? navigateTo('youtube-activation') : null" :disabled="!ytPlanName" :class="!ytPlanName ? 'opacity-50 cursor-not-allowed' : ''" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs transition tracking-wide">
@@ -1287,12 +1727,24 @@
 
         <div class="space-y-3">
             <div>
-                <input type="text" x-model="ytPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white tracking-wider">
+                <label class="block text-xs font-medium text-zinc-400 mb-1">
+                    Promo Code
+                    <span x-show="!promoRequired" class="text-zinc-500 text-[9px]">(Optional)</span>
+                    <span x-show="promoRequired" class="text-red-400 text-[9px]">* Required</span>
+                </label>
+                <input type="text" x-model="ytPromo" :placeholder="promoRequired ? 'Enter Promo Code *' : 'Enter Promo Code (optional)'" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white tracking-wider">
                 
                 <p class="text-[11px] mt-1.5 font-semibold">
-                    <span x-show="ytPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
-                    <span x-show="ytPromo.trim() !== '' && ytPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
-                    <span x-show="ytPromo.trim() !== '' && ytPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    <template x-if="promoRequired">
+                        <span x-show="ytPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                        <span x-show="ytPromo.trim() !== '' && ytPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                        <span x-show="ytPromo.trim() !== '' && ytPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    </template>
+                    <template x-if="!promoRequired">
+                        <span class="text-zinc-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                        <span x-show="ytPromo.trim() !== '' && ytPromo.trim() === getLivePromoCode()" class="text-green-400 ml-2"><i class="fas fa-check-circle mr-1"></i> ✅ Discount Applied!</span>
+                        <span x-show="ytPromo.trim() !== '' && ytPromo.trim() !== getLivePromoCode()" class="text-amber-400 ml-2">⚠️ Invalid promo code</span>
+                    </template>
                 </p>
             </div>
             
@@ -1313,7 +1765,6 @@
     <!-- ============================================================ -->
     <!-- ============ FACEBOOK PAGES ================================= -->
     <!-- ============================================================ -->
-    <!-- Facebook Page -->
     <div x-cloak x-show="currentPage === 'facebook'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 py-2 border-b border-zinc-800">
             <button @click="navigateTo('home')" class="p-1.5 hover:bg-zinc-800 rounded-full transition text-zinc-400">
@@ -1333,158 +1784,34 @@
         <div class="space-y-3">
             <h3 class="font-bold text-gray-300 text-xs uppercase tracking-wider">Choose Your Package</h3>
 
-            <div @click="selectFbPlan('Facebook Followers', 69)" :class="fbPlanName === 'Facebook Followers' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="p-4 border rounded-xl cursor-pointer transition group hover:border-zinc-700">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-white text-xs">Facebook Followers</h4>
-                    <span class="text-[10px] bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded font-bold uppercase tracking-wide">Profile</span>
-                </div>
-                <div class="flex items-baseline gap-2 mt-1.5 mb-3 border-b border-zinc-900 pb-3">
-                    <span class="text-base font-black text-white" x-text="'৳' + calcPriceOnSite(69)"></span>
-                    <span class="text-xs text-zinc-500 line-through">৳69</span>
-                </div>
-                <div class="space-y-1.5">
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ 5,000 Profile Followers</span>
+            <template x-for="plan in facebookPlans" :key="plan.id">
+                <div @click="!plan.stockOut && selectFbPlan(plan.name, plan.price)" 
+                     class="p-4 border rounded-xl cursor-pointer transition group hover:border-zinc-700"
+                     :class="fbPlanName === plan.name && !plan.stockOut ? 'plan-selected' : (plan.stockOut ? 'stock-out-overlay' : 'border-zinc-800 bg-zinc-950')">
+                    
+                    <span x-show="plan.stockOut" class="stock-out-badge">⛔ Stock Out</span>
+                    
+                    <div class="flex justify-between items-center">
+                        <h4 class="font-bold text-white text-xs plan-name" x-text="plan.name"></h4>
+                        <span x-show="plan.badge && !plan.stockOut" class="text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wide" 
+                              :class="plan.badgeColor || 'bg-zinc-800 text-zinc-400'" 
+                              x-text="plan.badge"></span>
                     </div>
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ Premium & Non-Drop Pack</span>
+                    <div class="flex items-baseline gap-2 mt-1.5 mb-3 border-b border-zinc-900 pb-3">
+                        <span x-show="!plan.stockOut" class="text-base font-black text-white plan-price" x-text="'৳' + calcPriceOnSite(plan.price)"></span>
+                        <span x-show="plan.stockOut" class="stock-out-price font-bold text-xs">⛔ Unavailable</span>
+                        <span x-show="!plan.stockOut" class="text-xs text-zinc-500 line-through" x-text="'৳' + plan.price"></span>
                     </div>
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ Global Active Accounts</span>
-                    </div>
-                </div>
-            </div>
-
-            <div @click="selectFbPlan('Facebook Page Followers', 84)" :class="fbPlanName === 'Facebook Page Followers' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="p-4 border rounded-xl cursor-pointer transition group hover:border-zinc-700">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-white text-xs">Facebook Page Followers</h4>
-                    <span class="text-[10px] bg-blue-600 text-white px-2 py-0.5 rounded font-bold uppercase tracking-wide">Best Seller</span>
-                </div>
-                <div class="flex items-baseline gap-2 mt-1.5 mb-3 border-b border-zinc-900 pb-3">
-                    <span class="text-base font-black text-white" x-text="'৳' + calcPriceOnSite(84)"></span>
-                    <span class="text-xs text-zinc-500 line-through">৳84</span>
-                </div>
-                <div class="space-y-1.5">
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ 5,000 Page Followers & Likes</span>
-                    </div>
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ 100% Safe & Lifetime Guarantee</span>
-                    </div>
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ Bangladeshi Real Users</span>
+                    <div class="space-y-1.5">
+                        <template x-for="feature in plan.features" :key="feature">
+                            <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
+                                <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
+                                <span x-text="feature"></span>
+                            </div>
+                        </template>
                     </div>
                 </div>
-            </div>
-
-            <div @click="selectFbPlan('Standard Monetizer Package', 460)" :class="fbPlanName === 'Standard Monetizer Package' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="p-4 border rounded-xl cursor-pointer transition group hover:border-zinc-700">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-white text-xs">Standard Monetizer Package</h4>
-                    <span class="text-[10px] bg-blue-600 text-white px-2 py-0.5 rounded font-bold uppercase tracking-wide">Popular</span>
-                </div>
-                <div class="flex items-baseline gap-2 mt-1.5 mb-3 border-b border-zinc-900 pb-3">
-                    <span class="text-base font-black text-white" x-text="'৳' + calcPriceOnSite(460)"></span>
-                    <span class="text-xs text-zinc-500 line-through">৳460</span>
-                </div>
-                <div class="space-y-1.5">
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ 10,000 followers & 500K+ Organic Reach</span>
-                    </div>
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ 60,000 Minutes watchtime</span>
-                    </div>
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ Premium & Real Engagement</span>
-                    </div>
-                </div>
-            </div>
-
-            
-
-            <div @click="selectFbPlan('Facebook Post Reaction', 45)" :class="fbPlanName === 'Facebook Post Reaction' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="p-4 border rounded-xl cursor-pointer transition group hover:border-zinc-700">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-white text-xs">Facebook Post Reaction</h4>
-                    <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-bold" x-text="discountSettings.percent + '% OFF'"></span>
-                </div>
-                <div class="flex items-baseline gap-2 mt-1.5 mb-3 border-b border-zinc-900 pb-3">
-                    <span class="text-base font-black text-white" x-text="'৳' + calcPriceOnSite(45)"></span>
-                    <span class="text-xs text-zinc-500 line-through">৳45</span>
-                </div>
-                <div class="space-y-1.5">
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ 5,000 Instant Reactions (Like/Love/Wow)</span>
-                    </div>
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ Safe & Non-Drop Pack</span>
-                    </div>
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ Bangladeshi Active Profiles</span>
-                    </div>
-                </div>
-            </div>
-
-            <div @click="selectFbPlan('Facebook Views', 42)" :class="fbPlanName === 'Facebook Views' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="p-4 border rounded-xl cursor-pointer transition group hover:border-zinc-700">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-white text-xs">Facebook Views</h4>
-                    <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-bold" x-text="discountSettings.percent + '% OFF'"></span>
-                </div>
-                <div class="flex items-baseline gap-2 mt-1.5 mb-3 border-b border-zinc-900 pb-3">
-                    <span class="text-base font-black text-white" x-text="'৳' + calcPriceOnSite(42)"></span>
-                    <span class="text-xs text-zinc-500 line-through">৳42</span>
-                </div>
-                <div class="space-y-1.5">
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ 20,000 Video Views</span>
-                    </div>
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ Fast & High Retention</span>
-                    </div>
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ 100% Safe & Secure</span>
-                    </div>
-                </div>
-            </div>
-
-
-            <div @click="selectFbPlan('Facebook Profile/Page Verify', 60)" :class="fbPlanName === 'Facebook Profile/Page Verify' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="p-4 border rounded-xl cursor-pointer transition group hover:border-zinc-700">
-                <div class="flex justify-between items-center">
-                    <h4 class="font-bold text-white text-xs">Blue Badge Verify</h4>
-                    <span class="text-[10px] bg-purple-600 text-white px-2 py-0.5 rounded font-bold uppercase tracking-wide">Blue Badge</span>
-                </div>
-                <div class="flex items-baseline gap-2 mt-1.5 mb-3 border-b border-zinc-900 pb-3">
-                    <span class="text-base font-black text-white" x-text="'৳' + calcPriceOnSite(60)"></span>
-                    <span class="text-xs text-zinc-500 line-through">৳60</span>
-                </div>
-                <div class="space-y-1.5">
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ Instant Delivery </span>
-                    </div>
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ Lifetime Verified </span>
-                    </div>
-                    <div class="flex items-start gap-2 text-[11px] font-medium text-zinc-400">
-                        <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5"></i>
-                        <span>✓ Profile/Page Verification Submission (Our Document) </span>
-                    </div>
-                </div>
-            </div>
+            </template>
         </div>
 
         <div class="p-1">
@@ -1522,12 +1849,24 @@
 
         <div class="space-y-3">
             <div>
-                <input type="text" x-model="fbPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white tracking-wider">
+                <label class="block text-xs font-medium text-zinc-400 mb-1">
+                    Promo Code
+                    <span x-show="!promoRequired" class="text-zinc-500 text-[9px]">(Optional)</span>
+                    <span x-show="promoRequired" class="text-red-400 text-[9px]">* Required</span>
+                </label>
+                <input type="text" x-model="fbPromo" :placeholder="promoRequired ? 'Enter Promo Code *' : 'Enter Promo Code (optional)'" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white tracking-wider">
                 
                 <p class="text-[11px] mt-1.5 font-semibold">
-                    <span x-show="fbPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
-                    <span x-show="fbPromo.trim() !== '' && fbPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
-                    <span x-show="fbPromo.trim() !== '' && fbPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    <template x-if="promoRequired">
+                        <span x-show="fbPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                        <span x-show="fbPromo.trim() !== '' && fbPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                        <span x-show="fbPromo.trim() !== '' && fbPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    </template>
+                    <template x-if="!promoRequired">
+                        <span class="text-zinc-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                        <span x-show="fbPromo.trim() !== '' && fbPromo.trim() === getLivePromoCode()" class="text-green-400 ml-2"><i class="fas fa-check-circle mr-1"></i> ✅ Discount Applied!</span>
+                        <span x-show="fbPromo.trim() !== '' && fbPromo.trim() !== getLivePromoCode()" class="text-amber-400 ml-2">⚠️ Invalid promo code</span>
+                    </template>
                 </p>
             </div>
             
@@ -1548,7 +1887,6 @@
     <!-- ============================================================ -->
     <!-- ============ INSTAGRAM PAGES ================================ -->
     <!-- ============================================================ -->
-    <!-- Instagram Page -->
     <div x-cloak x-show="currentPage === 'instagram'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 py-2 border-b border-zinc-800">
             <button @click="navigateTo('home')" class="text-gray-300 hover:bg-zinc-800 p-1.5 rounded-full transition">
@@ -1570,85 +1908,29 @@
         <div class="space-y-3">
             <h3 class="font-bold text-gray-300 text-xs uppercase tracking-wider">Choose Your Package</h3>
 
-            <div @click="selectInstagramPlan('20K Video Views', 45)" :class="instagramPlanName === '20K Video Views' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <h4 class="font-bold text-sm text-white">🎬 20K Video Views</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(45)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳45</span>
+            <template x-for="plan in instagramPlans" :key="plan.id">
+                <div @click="!plan.stockOut && selectInstagramPlan(plan.name, plan.price)" 
+                     class="relative border rounded-2xl p-4 cursor-pointer transition"
+                     :class="instagramPlanName === plan.name && !plan.stockOut ? 'plan-selected' : (plan.stockOut ? 'stock-out-overlay' : 'border-zinc-800 bg-zinc-950')">
+                    
+                    <span x-show="plan.stockOut" class="stock-out-badge">⛔ Stock Out</span>
+                    <span x-show="plan.badge && !plan.stockOut" class="absolute top-3 right-3 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase"
+                          :class="plan.badgeColor || 'bg-emerald-600'" 
+                          x-text="plan.badge"></span>
+                    
+                    <h4 class="font-bold text-sm text-white plan-name" x-text="plan.name"></h4>
+                    <div class="flex items-center gap-2 my-1">
+                        <span x-show="!plan.stockOut" class="text-xl font-bold text-white plan-price" x-text="'৳' + calcPriceOnSite(plan.price)"></span>
+                        <span x-show="plan.stockOut" class="stock-out-price font-bold text-sm">⛔ Unavailable</span>
+                        <span x-show="!plan.stockOut" class="text-xs text-gray-500 line-through" x-text="'৳' + plan.price"></span>
+                    </div>
+                    <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                        <template x-for="feature in plan.features" :key="feature">
+                            <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> <span x-text="feature"></span></li>
+                        </template>
+                    </ul>
                 </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 20K Real Video Views</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Delivery</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Non-Drop</li>
-                </ul>
-            </div>
-
-            <div @click="selectInstagramPlan('100K Video Views', 137)" :class="instagramPlanName === '100K Video Views' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <h4 class="font-bold text-sm text-white">🎬 100K Video Views</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(137)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳137</span>
-                </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 100K High-Quality Views</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Boost Video Ranking</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Start</li>
-                </ul>
-            </div>
-
-            <div @click="selectInstagramPlan('5K Post Shares', 42)" :class="instagramPlanName === '5K Post Shares' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <h4 class="font-bold text-sm text-white">🖥️ 5K Post Shares</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(42)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳42</span>
-                </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Real User Shares</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Increase Reach</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Delivery</li>
-                </ul>
-            </div>
-
-            <div @click="selectInstagramPlan('5K Post Comments', 62)" :class="instagramPlanName === '5K Post Comments' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <h4 class="font-bold text-sm text-white">🖥️ 5K Post Comments</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(62)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳62</span>
-                </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 5K Real Comments</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Custom Comments</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Non-Drop</li>
-                </ul>
-            </div>
-
-            <div @click="selectInstagramPlan('10K Likes', 92)" :class="instagramPlanName === '10K Likes' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <span class="absolute top-3 right-3 bg-emerald-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">Popular</span>
-                <h4 class="font-bold text-sm text-white">❤️ 10K Likes</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(92)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳92</span>
-                </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 10K Real Likes</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Organic Engagement</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Lifetime Guarantee</li>
-                </ul>
-            </div>
-
-            <div @click="selectInstagramPlan('10K Followers', 152)" :class="instagramPlanName === '10K Followers' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <span class="absolute top-3 right-3 bg-purple-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">Best Seller</span>
-                <h4 class="font-bold text-sm text-white">👥 10K Followers</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(152)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳152</span>
-                </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 10K Real Followers</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Active Profiles</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Delivery</li>
-                </ul>
-            </div>
+            </template>
         </div>
 
         <button @click="instagramPlanName ? navigateTo('instagram-activation') : null" :disabled="!instagramPlanName" :class="!instagramPlanName ? 'opacity-50 cursor-not-allowed' : ''" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs transition tracking-wide">
@@ -1682,12 +1964,24 @@
 
         <div class="space-y-3">
             <div>
-                <input type="text" x-model="instagramPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white tracking-wider">
+                <label class="block text-xs font-medium text-zinc-400 mb-1">
+                    Promo Code
+                    <span x-show="!promoRequired" class="text-zinc-500 text-[9px]">(Optional)</span>
+                    <span x-show="promoRequired" class="text-red-400 text-[9px]">* Required</span>
+                </label>
+                <input type="text" x-model="instagramPromo" :placeholder="promoRequired ? 'Enter Promo Code *' : 'Enter Promo Code (optional)'" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white tracking-wider">
                 
                 <p class="text-[11px] mt-1.5 font-semibold">
-                    <span x-show="instagramPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
-                    <span x-show="instagramPromo.trim() !== '' && instagramPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
-                    <span x-show="instagramPromo.trim() !== '' && instagramPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    <template x-if="promoRequired">
+                        <span x-show="instagramPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                        <span x-show="instagramPromo.trim() !== '' && instagramPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                        <span x-show="instagramPromo.trim() !== '' && instagramPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    </template>
+                    <template x-if="!promoRequired">
+                        <span class="text-zinc-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                        <span x-show="instagramPromo.trim() !== '' && instagramPromo.trim() === getLivePromoCode()" class="text-green-400 ml-2"><i class="fas fa-check-circle mr-1"></i> ✅ Discount Applied!</span>
+                        <span x-show="instagramPromo.trim() !== '' && instagramPromo.trim() !== getLivePromoCode()" class="text-amber-400 ml-2">⚠️ Invalid promo code</span>
+                    </template>
                 </p>
             </div>
             
@@ -1708,7 +2002,6 @@
     <!-- ============================================================ -->
     <!-- ============ TIKTOK PAGES =================================== -->
     <!-- ============================================================ -->
-    <!-- TikTok Page -->
     <div x-cloak x-show="currentPage === 'tiktok'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl p-4 space-y-4">
         <div class="flex items-center gap-3 py-2 border-b border-zinc-800">
             <button @click="navigateTo('home')" class="text-gray-300 hover:bg-zinc-800 p-1.5 rounded-full transition">
@@ -1730,85 +2023,29 @@
         <div class="space-y-3">
             <h3 class="font-bold text-gray-300 text-xs uppercase tracking-wider">Choose Your Package</h3>
 
-            <div @click="selectTiktokPlan('20K Views', 42)" :class="tiktokPlanName === '20K Views' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <h4 class="font-bold text-sm text-white">👁️ 20K Views</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(42)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳42</span>
+            <template x-for="plan in tiktokPlans" :key="plan.id">
+                <div @click="!plan.stockOut && selectTiktokPlan(plan.name, plan.price)" 
+                     class="relative border rounded-2xl p-4 cursor-pointer transition"
+                     :class="tiktokPlanName === plan.name && !plan.stockOut ? 'plan-selected' : (plan.stockOut ? 'stock-out-overlay' : 'border-zinc-800 bg-zinc-950')">
+                    
+                    <span x-show="plan.stockOut" class="stock-out-badge">⛔ Stock Out</span>
+                    <span x-show="plan.badge && !plan.stockOut" class="absolute top-3 right-3 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase"
+                          :class="plan.badgeColor || 'bg-emerald-600'" 
+                          x-text="plan.badge"></span>
+                    
+                    <h4 class="font-bold text-sm text-white plan-name" x-text="plan.name"></h4>
+                    <div class="flex items-center gap-2 my-1">
+                        <span x-show="!plan.stockOut" class="text-xl font-bold text-white plan-price" x-text="'৳' + calcPriceOnSite(plan.price)"></span>
+                        <span x-show="plan.stockOut" class="stock-out-price font-bold text-sm">⛔ Unavailable</span>
+                        <span x-show="!plan.stockOut" class="text-xs text-gray-500 line-through" x-text="'৳' + plan.price"></span>
+                    </div>
+                    <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
+                        <template x-for="feature in plan.features" :key="feature">
+                            <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> <span x-text="feature"></span></li>
+                        </template>
+                    </ul>
                 </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Real Video Views</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Delivery</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Non-Drop Guarantee</li>
-                </ul>
-            </div>
-
-            <div @click="selectTiktokPlan('100K Views', 115)" :class="tiktokPlanName === '100K Views' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <h4 class="font-bold text-sm text-white">👁️ 100K Views</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(115)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳115</span>
-                </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 100K High-Quality Views</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Start</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 100% Safe</li>
-                </ul>
-            </div>
-
-            <div @click="selectTiktokPlan('5K Post Shares', 45)" :class="tiktokPlanName === '5K Post Shares' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <h4 class="font-bold text-sm text-white">🔁 5K Post Shares</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(45)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳45</span>
-                </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Real User Shares</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Boost Engagement</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Delivery</li>
-                </ul>
-            </div>
-
-            <div @click="selectTiktokPlan('5K Post Comments', 54)" :class="tiktokPlanName === '5K Post Comments' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <h4 class="font-bold text-sm text-white">💬 5K Post Comments</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(54)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳54</span>
-                </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 5K Real Comments</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Custom Comments Available</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Non-Drop</li>
-                </ul>
-            </div>
-
-            <div @click="selectTiktokPlan('10K Likes', 77)" :class="tiktokPlanName === '10K Likes' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <span class="absolute top-3 right-3 bg-emerald-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">Popular</span>
-                <h4 class="font-bold text-sm text-white">❤️ 10K Likes</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(77)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳77</span>
-                </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 10K Real Likes</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Organic Engagement</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Lifetime Guarantee</li>
-                </ul>
-            </div>
-
-            <div @click="selectTiktokPlan('10K Followers', 139)" :class="tiktokPlanName === '10K Followers' ? 'border-emerald-500 bg-emerald-500/10' : 'border-zinc-800 bg-zinc-950'" class="relative border rounded-2xl p-4 cursor-pointer transition">
-                <span class="absolute top-3 right-3 bg-purple-600 text-[9px] text-white px-2 py-0.5 rounded-full font-bold uppercase">Best Seller</span>
-                <h4 class="font-bold text-sm text-white">👥 10K Followers</h4>
-                <div class="flex items-center gap-2 my-1">
-                    <span class="text-xl font-bold text-white" x-text="'৳' + calcPriceOnSite(139)"></span>
-                    <span class="text-xs text-gray-500 line-through">৳139</span>
-                </div>
-                <ul class="text-[11px] text-gray-300 space-y-1 mt-2 border-t border-zinc-800/80 pt-2">
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> 10K Real Followers</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Active Accounts</li>
-                    <li><i class="fas fa-check text-emerald-400 mr-1.5"></i> Instant Delivery</li>
-                </ul>
-            </div>
+            </template>
         </div>
 
         <button @click="tiktokPlanName ? navigateTo('tiktok-activation') : null" :disabled="!tiktokPlanName" :class="!tiktokPlanName ? 'opacity-50 cursor-not-allowed' : ''" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl text-xs transition tracking-wide">
@@ -1842,12 +2079,24 @@
 
         <div class="space-y-3">
             <div>
-                <input type="text" x-model="tiktokPromo" placeholder="Enter Promo Code *" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white tracking-wider">
+                <label class="block text-xs font-medium text-zinc-400 mb-1">
+                    Promo Code
+                    <span x-show="!promoRequired" class="text-zinc-500 text-[9px]">(Optional)</span>
+                    <span x-show="promoRequired" class="text-red-400 text-[9px]">* Required</span>
+                </label>
+                <input type="text" x-model="tiktokPromo" :placeholder="promoRequired ? 'Enter Promo Code *' : 'Enter Promo Code (optional)'" class="w-full bg-zinc-950 border border-zinc-800 px-4 py-3 rounded-xl focus:outline-none focus:border-emerald-500 text-xs text-white tracking-wider">
                 
                 <p class="text-[11px] mt-1.5 font-semibold">
-                    <span x-show="tiktokPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
-                    <span x-show="tiktokPromo.trim() !== '' && tiktokPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
-                    <span x-show="tiktokPromo.trim() !== '' && tiktokPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    <template x-if="promoRequired">
+                        <span x-show="tiktokPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                        <span x-show="tiktokPromo.trim() !== '' && tiktokPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                        <span x-show="tiktokPromo.trim() !== '' && tiktokPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                    </template>
+                    <template x-if="!promoRequired">
+                        <span class="text-zinc-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                        <span x-show="tiktokPromo.trim() !== '' && tiktokPromo.trim() === getLivePromoCode()" class="text-green-400 ml-2"><i class="fas fa-check-circle mr-1"></i> ✅ Discount Applied!</span>
+                        <span x-show="tiktokPromo.trim() !== '' && tiktokPromo.trim() !== getLivePromoCode()" class="text-amber-400 ml-2">⚠️ Invalid promo code</span>
+                    </template>
                 </p>
             </div>
             
@@ -1868,7 +2117,6 @@
     <!-- ============================================================ -->
     <!-- ============ FREE FIRE PAGES ================================ -->
     <!-- ============================================================ -->
-    <!-- Free Fire Topup -->
     <div x-cloak x-show="currentPage === 'free-fire-topup'" class="w-full max-w-md bg-zinc-900 border-x border-b border-zinc-800 rounded-b-2xl pb-6">
         <div class="bg-[#0d5c2e] px-4 py-4 text-white flex items-center justify-between shadow-lg">
             <button @click="navigateTo('home')" class="p-1.5 hover:bg-white/10 rounded-full transition text-white">
@@ -1924,15 +2172,27 @@
         <div class="space-y-4">
             <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 space-y-2">
                 <h3 class="text-xs font-bold text-zinc-400">1. সিলেক্ট রিচার্জ প্যাক</h3>
-                <div @click="selectLevelUpPkg('full-level-up', 'Full Level Up (1270 Diamond)', 400)" :class="lvlPkgId === 'full-level-up' ? 'border-emerald-500 bg-emerald-500/5' : 'border-zinc-800 bg-zinc-900'" class="cursor-pointer border rounded-xl p-3 transition flex items-center justify-between">
-                    <div>
-                        <div class="text-white font-medium text-xs">Full Level Up <span class="text-zinc-400 font-normal">(1270 Diamond Max)</span></div>
-                        <div class="text-emerald-400 font-bold text-base mt-0.5" x-text="calcCheckoutPrice(400, lvlPromoCode) + ' TK '"><span class="text-xs text-zinc-500 line-through">400 TK</span></div>
+                
+                <template x-for="pkg in freeFirePackages" :key="pkg.id">
+                    <div @click="!pkg.stockOut && selectLevelUpPkg(pkg.id, pkg.name, pkg.price)" 
+                         class="cursor-pointer border rounded-xl p-3 transition flex items-center justify-between relative"
+                         :class="lvlPkgId === pkg.id && !pkg.stockOut ? 'plan-selected' : (pkg.stockOut ? 'stock-out-overlay' : 'border-zinc-800 bg-zinc-900')">
+                        
+                        <span x-show="pkg.stockOut" class="stock-out-badge">⛔ Stock Out</span>
+                        
+                        <div>
+                            <div class="text-white font-medium text-xs plan-name" x-text="pkg.name"></div>
+                            <div class="text-emerald-400 font-bold text-base mt-0.5 plan-price" x-show="!pkg.stockOut">
+                                <span x-text="calcCheckoutPrice(pkg.price, lvlPromoCode) + ' TK '"></span>
+                                <span class="text-xs text-zinc-500 line-through" x-text="pkg.price + ' TK'"></span>
+                            </div>
+                            <div class="stock-out-price font-bold text-xs mt-0.5" x-show="pkg.stockOut">⛔ Unavailable</div>
+                        </div>
+                        <div :class="lvlPkgId === pkg.id && !pkg.stockOut ? 'bg-emerald-500' : 'bg-zinc-800'" class="w-4 h-4 rounded-full border border-zinc-700 flex items-center justify-center">
+                            <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+                        </div>
                     </div>
-                    <div :class="lvlPkgId === 'full-level-up' ? 'bg-emerald-500' : 'bg-zinc-800'" class="w-4 h-4 rounded-full border border-zinc-700 flex items-center justify-center">
-                        <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
-                    </div>
-                </div>
+                </template>
             </div>
 
             <div class="bg-zinc-950 border border-zinc-800 rounded-xl p-3.5 space-y-3">
@@ -1941,12 +2201,24 @@
                     <input type="text" x-model="lvlGameUid" placeholder="Enter Your Game UID *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none focus:border-emerald-500">
                 </div>
                 <div>
-                    <input type="text" x-model="lvlPromoCode" placeholder="Enter Promo Code *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none tracking-wider focus:border-emerald-500">
+                    <label class="block text-xs font-medium text-zinc-400 mb-1">
+                        Promo Code
+                        <span x-show="!promoRequired" class="text-zinc-500 text-[9px]">(Optional)</span>
+                        <span x-show="promoRequired" class="text-red-400 text-[9px]">* Required</span>
+                    </label>
+                    <input type="text" x-model="lvlPromoCode" :placeholder="promoRequired ? 'Enter Promo Code *' : 'Enter Promo Code (optional)'" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none tracking-wider focus:border-emerald-500">
                     
                     <p class="text-[11px] mt-1.5 font-semibold">
-                        <span x-show="lvlPromoCode.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
-                        <span x-show="lvlPromoCode.trim() !== '' && lvlPromoCode.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিন কে মেসেজ দিন।</span>
-                        <span x-show="lvlPromoCode.trim() !== '' && lvlPromoCode.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                        <template x-if="promoRequired">
+                            <span x-show="lvlPromoCode.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                            <span x-show="lvlPromoCode.trim() !== '' && lvlPromoCode.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিন কে মেসেজ দিন।</span>
+                            <span x-show="lvlPromoCode.trim() !== '' && lvlPromoCode.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                        </template>
+                        <template x-if="!promoRequired">
+                            <span class="text-zinc-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                            <span x-show="lvlPromoCode.trim() !== '' && lvlPromoCode.trim() === getLivePromoCode()" class="text-green-400 ml-2"><i class="fas fa-check-circle mr-1"></i> ✅ Discount Applied!</span>
+                            <span x-show="lvlPromoCode.trim() !== '' && lvlPromoCode.trim() !== getLivePromoCode()" class="text-amber-400 ml-2">⚠️ Invalid promo code</span>
+                        </template>
                     </p>
                 </div>
             </div>
@@ -1975,11 +2247,17 @@
                 <h3 class="text-xs font-bold text-zinc-400 mb-2">1. সিলেক্ট রিচার্জ প্যাকেজ</h3>
                 <div class="grid grid-cols-2 gap-2 max-h-[220px] overflow-y-auto pr-1">
                     <template x-for="pkg in uidPackages" :key="pkg.id">
-                        <div @click="selectUidPkg(pkg)" :class="uidPkgId === pkg.id ? 'border-emerald-500 bg-emerald-500/5' : 'border-zinc-800 bg-zinc-900'" class="cursor-pointer border rounded-lg p-2 transition flex items-center gap-2">
+                        <div @click="!pkg.stockOut && selectUidPkg(pkg)" 
+                             class="cursor-pointer border rounded-lg p-2 transition relative"
+                             :class="uidPkgId === pkg.id && !pkg.stockOut ? 'plan-selected' : (pkg.stockOut ? 'stock-out-overlay' : 'border-zinc-800 bg-zinc-900')">
+                            
+                            <span x-show="pkg.stockOut" class="stock-out-badge" style="top:4px;right:4px;font-size:7px;padding:1px 6px;">Out</span>
+                            
                             <div class="flex-1 min-w-0">
-                                <p class="text-white font-bold text-[11px] truncate" x-text="pkg.name"></p>
-                                <span class="text-emerald-400 font-black text-xs" x-text="calcCheckoutPrice(pkg.originalPrice, uidPromoCode) + ' TK'"></span>
-                                <span class="text-zinc-500 line-through text-[9px] block" x-text="pkg.originalPrice + ' TK'"></span>
+                                <p class="text-white font-bold text-[11px] truncate plan-name" x-text="pkg.name"></p>
+                                <span x-show="!pkg.stockOut" class="text-emerald-400 font-black text-xs plan-price" x-text="calcCheckoutPrice(pkg.originalPrice, uidPromoCode) + ' TK'"></span>
+                                <span x-show="pkg.stockOut" class="stock-out-price font-bold text-xs">⛔ Out</span>
+                                <span x-show="!pkg.stockOut" class="text-zinc-500 line-through text-[9px] block" x-text="pkg.originalPrice + ' TK'"></span>
                             </div>
                         </div>
                     </template>
@@ -1991,12 +2269,24 @@
                 <input type="text" x-model="uidGameId" placeholder="Enter Your Game UID *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none focus:border-emerald-500">
                 
                 <div>
-                    <input type="text" x-model="uidPromoCode" placeholder="Enter Promo Code *" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none tracking-wider focus:border-emerald-500">
+                    <label class="block text-xs font-medium text-zinc-400 mb-1">
+                        Promo Code
+                        <span x-show="!promoRequired" class="text-zinc-500 text-[9px]">(Optional)</span>
+                        <span x-show="promoRequired" class="text-red-400 text-[9px]">* Required</span>
+                    </label>
+                    <input type="text" x-model="uidPromoCode" :placeholder="promoRequired ? 'Enter Promo Code *' : 'Enter Promo Code (optional)'" class="w-full px-3 py-2.5 bg-zinc-900 border border-zinc-700 rounded-lg text-xs text-white focus:outline-none tracking-wider focus:border-emerald-500">
                     
                     <p class="text-[11px] mt-1.5 font-semibold">
-                        <span x-show="uidPromoCode.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
-                        <span x-show="uidPromoCode.trim() !== '' && uidPromoCode.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
-                        <span x-show="uidPromoCode.trim() !== '' && uidPromoCode.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                        <template x-if="promoRequired">
+                            <span x-show="uidPromoCode.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                            <span x-show="uidPromoCode.trim() !== '' && uidPromoCode.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
+                            <span x-show="uidPromoCode.trim() !== '' && uidPromoCode.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
+                        </template>
+                        <template x-if="!promoRequired">
+                            <span class="text-zinc-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
+                            <span x-show="uidPromoCode.trim() !== '' && uidPromoCode.trim() === getLivePromoCode()" class="text-green-400 ml-2"><i class="fas fa-check-circle mr-1"></i> ✅ Discount Applied!</span>
+                            <span x-show="uidPromoCode.trim() !== '' && uidPromoCode.trim() !== getLivePromoCode()" class="text-amber-400 ml-2">⚠️ Invalid promo code</span>
+                        </template>
                     </p>
                 </div>
             </div>
@@ -2005,61 +2295,6 @@
                 Purchase Securely
             </button>
         </div>
-    </div>
-
-    <!-- Confirm Order -->
-    <div x-cloak x-show="currentPage === 'confirm-order'" class="w-full max-w-md bg-zinc-950 border-x border-b border-zinc-800 rounded-b-2xl p-4 pb-6 text-white">
-        <div class="flex items-center gap-3 mb-4">
-            <button @click="navigateTo('home')" class="p-1.5 hover:bg-zinc-900 rounded-full transition text-zinc-400">
-                <i data-lucide="arrow-left" class="w-5 h-5"></i>
-            </button>
-            <h1 class="text-base font-bold">Confirm Order Setup</h1>
-        </div>
-        
-        <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 space-y-3.5">
-            <h3 class="text-xs font-bold text-zinc-300">ভেরিফিকেশন ও ডেলিভারি ফর্ম</h3>
-            
-            <div class="space-y-2.5">
-                <div>
-                    <label class="block text-[11px] text-zinc-400 mb-1">Your Full Name *</label>
-                    <input type="text" x-model="orderName" placeholder="Enter your full name" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-red-500">
-                </div>
-                <div>
-                    <label class="block text-[11px] text-zinc-400 mb-1">Active Contact Number *</label>
-                    <input type="tel" x-model="orderPhone" placeholder="Enter your phone number" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-red-500">
-                </div>
-                <div>
-                    <label class="block text-[11px] text-zinc-400 mb-1">Selected Product Context</label>
-                    <input type="text" x-model="orderProduct" readonly class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-zinc-400 focus:outline-none">
-                </div>
-                <div>
-                    <label class="block text-[11px] text-zinc-400 mb-1">Live Promo Code *</label>
-                    <input type="text" x-model="orderPromo" placeholder="Enter live promo code" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-red-500 tracking-wider">
-                    
-                    <p class="text-[11px] mt-1.5 font-semibold">
-                        <span x-show="orderPromo.trim() === ''" class="text-amber-400">Use promo code for <span x-text="discountSettings.percent"></span>% discount</span>
-                        <span x-show="orderPromo.trim() !== '' && orderPromo.trim() !== getLivePromoCode()" class="text-red-500">সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।</span>
-                        <span x-show="orderPromo.trim() !== '' && orderPromo.trim() === getLivePromoCode()" class="text-green-400"><i class="fas fa-check-circle mr-1"></i> প্রমোকোডটি সফলভাবে যুক্ত হয়েছে! আপনি ডিসকাউন্ট পেয়েছেন।</span>
-                    </p>
-                </div>
-            </div>
-
-            <button @click="processFinalOrder()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-xl transition text-sm tracking-wide mt-2">
-                Confirm Order Securely
-            </button>
-        </div>
-    </div>
-
-    <!-- Service Unavailable -->
-    <div x-cloak x-show="currentPage === 'service-unavailable'" class="w-full max-w-md bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-b-2xl p-6 text-center">
-        <div class="w-16 h-16 bg-red-500/10 border border-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i data-lucide="alert-triangle" class="h-8 w-8 text-red-500"></i>
-        </div>
-        <h2 class="text-xl font-bold text-white mb-1">Service Out of Stock</h2>
-        <p class="text-red-500 font-extrabold text-sm mb-4">Currently Unavailable!</p>
-        <button @click="navigateTo('home')" class="w-full bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-white py-2.5 rounded-xl text-xs font-semibold transition">
-            Return to Dashboard
-        </button>
     </div>
 
     <!-- Toast Container -->
@@ -2101,6 +2336,12 @@
                 // Order History
                 orderHistory: [],
 
+                // Popup
+                showStockPopup: false,
+
+                // Promo Required
+                promoRequired: true,
+
                 // WhatsApp
                 wpEntryPhone: '', wpEntryError: false, isWpSubmitting: false,
                 orderName: '', orderPhone: '', orderProduct: '', orderPromo: '',
@@ -2136,151 +2377,316 @@
                 telecomPhone: '', telecomPromo: '',
                 telecomErrors: {}, isTelecomSubmitting: false,
 
-                uidPackages: [
-                    { id: "weekly", name: "Weekly", originalPrice: 152 },
-                    { id: "2x-weekly", name: "2X Weekly", originalPrice: 304 },
-                    { id: "monthly", name: "Monthly", originalPrice: 745 },
-                    { id: "2x-weekly-lite", name: "2X Weekly Lite", originalPrice: 80 },
-                    { id: "ff1", name: "115 Diamond", originalPrice: 110 },
-                    { id: "ff2", name: "240 Diamond", originalPrice: 222 },
-                    { id: "ff3", name: "355 Diamond", originalPrice: 339 },
-                    { id: "ff4", name: "505 Diamond", originalPrice: 480 },
-                    { id: "ff5", name: "610 Diamond", originalPrice: 558 },
-                    { id: "ff6", name: "850 Diamond", originalPrice: 798 },
-                    { id: "ff7", name: "1090 Diamond", originalPrice: 1023 },
-                    { id: "ff8", name: "1240 Diamond", originalPrice: 1129 },
-                    { id: "ff9", name: "2530 Diamond", originalPrice: 2272 },
-                    { id: "ff10", name: "3010 Diamond", originalPrice: 2752 },
-                    { id: "ff11", name: "5060 Diamond", originalPrice: 4600 },
-                    { id: "ff12", name: "7590 Diamond", originalPrice: 6900 },
-                    { id: "ff13", name: "10120 Diamond", originalPrice: 9200 }
+                // ===== SECTION STOCK CONTROL =====
+                sectionStock: {
+                    youtube: false,
+                    facebook: false,
+                    instagram: false,
+                    tiktok: false,
+                    telecom: false,
+                    freefire: false,
+                    confirmorder: false
+                },
+
+                // ===== PLAN LISTS WITH STOCK CONTROL =====
+                youtubePlans: [
+                    { id: 'yt1', name: 'Subscribe Membership', price: 78, stockOut: false, features: ['Country: Asia', 'Delivery time: Instant', 'Subscribers: 1,000'] },
+                    { id: 'yt2', name: 'Wachtime Membership', price: 185, stockOut: false, features: ['1,000 Hours Watchtime', 'Non Drop & Organic', 'Instant Delivery'] },
+                    { id: 'yt3', name: 'Monetization Membership', price: 523, stockOut: false, features: ['Views: 50,000+', 'Watch Time: 4,000 Hour', 'Subscribers: 1,000'], badge: 'Most Popular', badgeColor: 'bg-emerald-600' },
+                    { id: 'yt4', name: 'Premium Membership', price: 692, stockOut: false, features: ['Views: 1,20,000+', 'Watch Time: 4,500+ Hour', 'Subscribers: 10,000'] },
+                    { id: 'yt5', name: 'Artist Verification', price: 171, stockOut: false, features: ['Official Artist Channel Badge 🎵', 'Music Distribution: Included', 'Delivery: 5-7 Working Days'], badge: 'OAC Badge', badgeColor: 'bg-purple-600' }
                 ],
 
-                notificationTimer: null,
-                orderHistoryLoaded: false,
-                appOpenNotified: false,
+                facebookPlans: [
+                    { id: 'fb1', name: 'Facebook Followers', price: 69, stockOut: false, features: ['5,000 Profile Followers', 'Premium & Non-Drop Pack', 'Global Active Accounts'] },
+                    { id: 'fb2', name: 'Facebook Page Followers', price: 84, stockOut: false, features: ['5,000 Page Followers & Likes', '100% Safe & Lifetime Guarantee', 'Bangladeshi Real Users'], badge: 'Best Seller', badgeColor: 'bg-blue-600' },
+                    { id: 'fb3', name: 'Standard Monetizer Package', price: 460, stockOut: false, features: ['10,000 followers & 500K+ Organic Reach', '60,000 Minutes watchtime', 'Premium & Real Engagement'], badge: 'Popular', badgeColor: 'bg-blue-600' },
+                    { id: 'fb4', name: 'Facebook Post Reaction', price: 45, stockOut: false, features: ['5,000 Instant Reactions (Like/Love/Wow)', 'Safe & Non-Drop Pack', 'Bangladeshi Active Profiles'] },
+                    { id: 'fb5', name: 'Facebook Views', price: 42, stockOut: false, features: ['20,000 Video Views', 'Fast & High Retention', '100% Safe & Secure'] },
+                    { id: 'fb6', name: 'Blue Badge Verify', price: 60, stockOut: false, features: ['Instant Delivery', 'Lifetime Verified', 'Profile/Page Verification Submission'], badge: 'Blue Badge', badgeColor: 'bg-purple-600' }
+                ],
 
-                // ===== OPERATOR OFFERS =====
+                instagramPlans: [
+                    { id: 'ig1', name: '20K Video Views', price: 45, stockOut: false, features: ['20K Real Video Views', 'Instant Delivery', 'Non-Drop'] },
+                    { id: 'ig2', name: '100K Video Views', price: 137, stockOut: false, features: ['100K High-Quality Views', 'Boost Video Ranking', 'Instant Start'] },
+                    { id: 'ig3', name: '5K Post Shares', price: 42, stockOut: false, features: ['Real User Shares', 'Increase Reach', 'Instant Delivery'] },
+                    { id: 'ig4', name: '5K Post Comments', price: 62, stockOut: false, features: ['5K Real Comments', 'Custom Comments', 'Non-Drop'] },
+                    { id: 'ig5', name: '10K Likes', price: 92, stockOut: false, features: ['10K Real Likes', 'Organic Engagement', 'Lifetime Guarantee'], badge: 'Popular', badgeColor: 'bg-emerald-600' },
+                    { id: 'ig6', name: '10K Followers', price: 152, stockOut: false, features: ['10K Real Followers', 'Active Profiles', 'Instant Delivery'], badge: 'Best Seller', badgeColor: 'bg-purple-600' }
+                ],
+
+                tiktokPlans: [
+                    { id: 'tt1', name: '20K Views', price: 42, stockOut: false, features: ['Real Video Views', 'Instant Delivery', 'Non-Drop Guarantee'] },
+                    { id: 'tt2', name: '100K Views', price: 115, stockOut: false, features: ['100K High-Quality Views', 'Instant Start', '100% Safe'] },
+                    { id: 'tt3', name: '5K Post Shares', price: 45, stockOut: false, features: ['Real User Shares', 'Boost Engagement', 'Instant Delivery'] },
+                    { id: 'tt4', name: '5K Post Comments', price: 54, stockOut: false, features: ['5K Real Comments', 'Custom Comments Available', 'Non-Drop'] },
+                    { id: 'tt5', name: '10K Likes', price: 77, stockOut: false, features: ['10K Real Likes', 'Organic Engagement', 'Lifetime Guarantee'], badge: 'Popular', badgeColor: 'bg-emerald-600' },
+                    { id: 'tt6', name: '10K Followers', price: 139, stockOut: false, features: ['10K Real Followers', 'Active Accounts', 'Instant Delivery'], badge: 'Best Seller', badgeColor: 'bg-purple-600' }
+                ],
+
+                freeFirePackages: [
+                    { id: 'full-level-up', name: 'Full Level Up (1270 Diamond)', price: 400, stockOut: false },
+                    { id: 'elite-pass', name: 'Elite Pass', price: 300, stockOut: false },
+                    { id: 'premium-bundle', name: 'Premium Bundle', price: 250, stockOut: false }
+                ],
+
+                uidPackages: [
+                    { id: "weekly", name: "Weekly", originalPrice: 152, stockOut: false },
+                    { id: "2x-weekly", name: "2X Weekly", originalPrice: 304, stockOut: false },
+                    { id: "monthly", name: "Monthly", originalPrice: 745, stockOut: false },
+                    { id: "2x-weekly-lite", name: "2X Weekly Lite", originalPrice: 80, stockOut: false },
+                    { id: "ff1", name: "115 Diamond", originalPrice: 110, stockOut: false },
+                    { id: "ff2", name: "240 Diamond", originalPrice: 222, stockOut: false },
+                    { id: "ff3", name: "355 Diamond", originalPrice: 339, stockOut: false },
+                    { id: "ff4", name: "505 Diamond", originalPrice: 480, stockOut: false },
+                    { id: "ff5", name: "610 Diamond", originalPrice: 558, stockOut: false },
+                    { id: "ff6", name: "850 Diamond", originalPrice: 798, stockOut: false },
+                    { id: "ff7", name: "1090 Diamond", originalPrice: 1023, stockOut: false },
+                    { id: "ff8", name: "1240 Diamond", originalPrice: 1129, stockOut: false },
+                    { id: "ff9", name: "2530 Diamond", originalPrice: 2272, stockOut: false },
+                    { id: "ff10", name: "3010 Diamond", originalPrice: 2752, stockOut: false },
+                    { id: "ff11", name: "5060 Diamond", originalPrice: 4600, stockOut: false },
+                    { id: "ff12", name: "7590 Diamond", originalPrice: 6900, stockOut: false },
+                    { id: "ff13", name: "10120 Diamond", originalPrice: 9200, stockOut: false }
+                ],
+
+                // ===== OPERATOR OFFERS WITH STOCK OUT =====
                 operatorOffers: {
                     banglalink: {
                         name: "Banglalink",
                         logo: "https://i.im.ge/QMIqM3h/image_search_1779371093144.png",
                         offers: [
-                            { id: "b0", data: "100 GB", minutes: "1300 Minutes", validity: "30 Day", basePrice: 865 },
-                            { id: "b2", data: "20 GB", minutes: "1450 Minutes", validity: "30 Day", basePrice: 520 },
-                            { id: "b3", data: "100 GB", minutes: "2000 Minutes", validity: "30 Day", basePrice: 986 },
-                            { id: "b4", data: "70 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 814 },
-                            { id: "b5", data: "50 GB", minutes: "1000 Minutes", validity: "30 Day", basePrice: 643 },
-                            { id: "b6", data: "44 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 500 },
-                            { id: "b7", data: "35 GB", minutes: "700 Minutes", validity: "30 Day", basePrice: 429 },
-                            { id: "b8", data: "25 GB", minutes: "400 Minutes", validity: "30 Day", basePrice: 357 },
-                            { id: "b9", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 543 },
-                            { id: "b10", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 700 },
-                            { id: "b11", data: "45 GB", minutes: "", validity: "30 Day", basePrice: 386 },
-                            { id: "b12", data: "35 GB", minutes: "", validity: "30 Day", basePrice: 357 },
+                            { id: "b0", data: "100 GB", minutes: "1300 Minutes", validity: "30 Day", basePrice: 865, stockOut: false },
+                            { id: "b2", data: "20 GB", minutes: "1450 Minutes", validity: "30 Day", basePrice: 520, stockOut: false },
+                            { id: "b3", data: "100 GB", minutes: "2000 Minutes", validity: "30 Day", basePrice: 986, stockOut: false },
+                            { id: "b4", data: "70 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 814, stockOut: false },
+                            { id: "b5", data: "50 GB", minutes: "1000 Minutes", validity: "30 Day", basePrice: 643, stockOut: false },
+                            { id: "b6", data: "44 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 500, stockOut: false },
+                            { id: "b7", data: "35 GB", minutes: "700 Minutes", validity: "30 Day", basePrice: 429, stockOut: false },
+                            { id: "b8", data: "25 GB", minutes: "400 Minutes", validity: "30 Day", basePrice: 357, stockOut: false },
+                            { id: "b9", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 543, stockOut: false },
+                            { id: "b10", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 700, stockOut: false },
+                            { id: "b11", data: "45 GB", minutes: "", validity: "30 Day", basePrice: 386, stockOut: false },
+                            { id: "b12", data: "35 GB", minutes: "", validity: "30 Day", basePrice: 357, stockOut: false },
                             { id: "b13", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 0, stockOut: true },
-                            { id: "b14", data: "25 GB", minutes: "", validity: "30 Day", basePrice: 300 },
-                            { id: "b15", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 814 },
-                            { id: "b16", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 486 },
-                            { id: "b17", data: "", minutes: "900 Minutes", validity: "30 Day", basePrice: 386 },
-                            { id: "b18", data: "", minutes: "600 Minutes", validity: "30 Day", basePrice: 357 },
-                            { id: "b19", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300 }
+                            { id: "b14", data: "25 GB", minutes: "", validity: "30 Day", basePrice: 300, stockOut: false },
+                            { id: "b15", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 814, stockOut: false },
+                            { id: "b16", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 486, stockOut: false },
+                            { id: "b17", data: "", minutes: "900 Minutes", validity: "30 Day", basePrice: 386, stockOut: false },
+                            { id: "b18", data: "", minutes: "600 Minutes", validity: "30 Day", basePrice: 357, stockOut: false },
+                            { id: "b19", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300, stockOut: false }
                         ]
                     },
                     grameenphone: {
                         name: "Grameenphone",
                         logo: "https://i.im.ge/QMIqQ4M/image_search_1779371027269.png",
                         offers: [
-                            { id: "g1", data: "58 GB", minutes: "2000 Minutes", validity: "30 Day", basePrice: 860 },
-                            { id: "g3", data: "40 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 500 },
-                            { id: "g0", data: "70 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 814 },
-                            { id: "g1", data: "60 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 743 },
-                            { id: "g2", data: "50 GB", minutes: "1200 Minutes", validity: "30 Day", basePrice: 571 },
+                            { id: "g1", data: "58 GB", minutes: "2000 Minutes", validity: "30 Day", basePrice: 860, stockOut: false },
+                            { id: "g3", data: "40 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 500, stockOut: false },
+                            { id: "g0", data: "70 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 814, stockOut: false },
+                            { id: "g1", data: "60 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 743, stockOut: false },
+                            { id: "g2", data: "50 GB", minutes: "1200 Minutes", validity: "30 Day", basePrice: 571, stockOut: false },
                             { id: "g4", data: "80 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 0, stockOut: true },
-                            { id: "g5", data: "30 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 493 },
-                            { id: "g6", data: "20 GB", minutes: "400 Minutes", validity: "30 Day", basePrice: 357 },
-                            { id: "g7", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 466 },
-                            { id: "g8", data: "50 GB", minutes: "", validity: "30 Day", basePrice: 436 },
-                            { id: "g9", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 757 },
-                            { id: "g10", data: "40 GB", minutes: "", validity: "30 Day", basePrice: 371 },
-                            { id: "g11", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 871 },
-                            { id: "g12", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 500 },
-                            { id: "g13", data: "", minutes: "800 Minutes", validity: "30 Day", basePrice: 400 },
-                            { id: "g14", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300 }
+                            { id: "g5", data: "30 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 493, stockOut: false },
+                            { id: "g6", data: "20 GB", minutes: "400 Minutes", validity: "30 Day", basePrice: 357, stockOut: false },
+                            { id: "g7", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 466, stockOut: false },
+                            { id: "g8", data: "50 GB", minutes: "", validity: "30 Day", basePrice: 436, stockOut: false },
+                            { id: "g9", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 757, stockOut: false },
+                            { id: "g10", data: "40 GB", minutes: "", validity: "30 Day", basePrice: 371, stockOut: false },
+                            { id: "g11", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 871, stockOut: false },
+                            { id: "g12", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 500, stockOut: false },
+                            { id: "g13", data: "", minutes: "800 Minutes", validity: "30 Day", basePrice: 400, stockOut: false },
+                            { id: "g14", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300, stockOut: false }
                         ]
                     },
                     robi: {
                         name: "Robi",
                         logo: "https://i.im.ge/QMIdGTX/image_search_1779371058782.png",
                         offers: [
-                            { id: "r1", data: "50 GB", minutes: "1200 Minutes", validity: "30 Day", basePrice: 680 },
-                            { id: "r2", data: "30 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 498 },
-                            { id: "r3", data: "35 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 557 },
-                            { id: "r4", data: "60 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 729 },
-                            { id: "r5", data: "50 GB", minutes: "100 Minutes", validity: "30 Day", basePrice: 571 },
+                            { id: "r1", data: "50 GB", minutes: "1200 Minutes", validity: "30 Day", basePrice: 680, stockOut: false },
+                            { id: "r2", data: "30 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 498, stockOut: false },
+                            { id: "r3", data: "35 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 557, stockOut: false },
+                            { id: "r4", data: "60 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 729, stockOut: false },
+                            { id: "r5", data: "50 GB", minutes: "100 Minutes", validity: "30 Day", basePrice: 571, stockOut: false },
                             { id: "r6", data: "55 GB", minutes: "300 Minutes", validity: "30 Day", basePrice: 0, stockOut: true },
-                            { id: "r7", data: "45 GB", minutes: "790 Minutes", validity: "30 Day", basePrice: 500 },
-                            { id: "r8", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 543 },
-                            { id: "r9", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 886 },
-                            { id: "r10", data: "50 GB", minutes: "", validity: "30 Day", basePrice: 429 },
-                            { id: "r11", data: "40 GB", minutes: "", validity: "30 Day", basePrice: 357 },
-                            { id: "r12", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 786 },
-                            { id: "r13", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 500 },
+                            { id: "r7", data: "45 GB", minutes: "790 Minutes", validity: "30 Day", basePrice: 500, stockOut: false },
+                            { id: "r8", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 543, stockOut: false },
+                            { id: "r9", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 886, stockOut: false },
+                            { id: "r10", data: "50 GB", minutes: "", validity: "30 Day", basePrice: 429, stockOut: false },
+                            { id: "r11", data: "40 GB", minutes: "", validity: "30 Day", basePrice: 357, stockOut: false },
+                            { id: "r12", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 786, stockOut: false },
+                            { id: "r13", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 500, stockOut: false },
                             { id: "r14", data: "", minutes: "385 Minutes", validity: "30 Day", basePrice: 0, stockOut: true },
-                            { id: "r15", data: "", minutes: "800 Minutes", validity: "30 Day", basePrice: 400 },
-                            { id: "r16", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300 }
+                            { id: "r15", data: "", minutes: "800 Minutes", validity: "30 Day", basePrice: 400, stockOut: false },
+                            { id: "r16", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300, stockOut: false }
                         ]
                     },
                     airtel: {
                         name: "Airtel",
                         logo: "https://i.im.ge/QMIqB10/image_search_1779378597400.png",
                         offers: [
-                            { id: "a1", data: "60 GB", minutes: "1000 Minutes", validity: "30 Day", basePrice: 619 },
-                            { id: "a2", data: "25 GB", minutes: "450 Minutes", validity: "30 Day", basePrice: 309 },
-                            { id: "a3", data: "40 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 457 },
-                            { id: "a4", data: "70 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 786 },
-                            { id: "a5", data: "60 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 500 },
-                            { id: "a6", data: "50 GB", minutes: "1000 Minutes", validity: "30 Day", basePrice: 643 },
+                            { id: "a1", data: "60 GB", minutes: "1000 Minutes", validity: "30 Day", basePrice: 619, stockOut: false },
+                            { id: "a2", data: "25 GB", minutes: "450 Minutes", validity: "30 Day", basePrice: 309, stockOut: false },
+                            { id: "a3", data: "40 GB", minutes: "800 Minutes", validity: "30 Day", basePrice: 457, stockOut: false },
+                            { id: "a4", data: "70 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 786, stockOut: false },
+                            { id: "a5", data: "60 GB", minutes: "1600 Minutes", validity: "30 Day", basePrice: 500, stockOut: false },
+                            { id: "a6", data: "50 GB", minutes: "1000 Minutes", validity: "30 Day", basePrice: 643, stockOut: false },
                             { id: "a7", data: "64 GB", minutes: "600 Minutes", validity: "30 Day", basePrice: 0, stockOut: true },
-                            { id: "a8", data: "30 GB", minutes: "500 Minutes", validity: "30 Day", basePrice: 357 },
-                            { id: "a9", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 543 },
-                            { id: "a10", data: "45 GB", minutes: "", validity: "30 Day", basePrice: 386 },
-                            { id: "a11", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 743 },
-                            { id: "a12", data: "35 GB", minutes: "", validity: "30 Day", basePrice: 357 },
+                            { id: "a8", data: "30 GB", minutes: "500 Minutes", validity: "30 Day", basePrice: 357, stockOut: false },
+                            { id: "a9", data: "60 GB", minutes: "", validity: "30 Day", basePrice: 543, stockOut: false },
+                            { id: "a10", data: "45 GB", minutes: "", validity: "30 Day", basePrice: 386, stockOut: false },
+                            { id: "a11", data: "100 GB", minutes: "", validity: "30 Day", basePrice: 743, stockOut: false },
+                            { id: "a12", data: "35 GB", minutes: "", validity: "30 Day", basePrice: 357, stockOut: false },
                             { id: "a13", data: "40 GB", minutes: "", validity: "30 Day", basePrice: 0, stockOut: true },
-                            { id: "a14", data: "25 GB", minutes: "", validity: "30 Day", basePrice: 300 },
-                            { id: "a16", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 821 },
-                            { id: "a17", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 486 },
-                            { id: "a18", data: "", minutes: "900 Minutes", validity: "30 Day", basePrice: 386 },
-                            { id: "a19", data: "", minutes: "600 Minutes", validity: "30 Day", basePrice: 357 },
-                            { id: "a20", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300 }
+                            { id: "a14", data: "25 GB", minutes: "", validity: "30 Day", basePrice: 300, stockOut: false },
+                            { id: "a16", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 821, stockOut: false },
+                            { id: "a17", data: "", minutes: "1000 Minutes", validity: "30 Day", basePrice: 486, stockOut: false },
+                            { id: "a18", data: "", minutes: "900 Minutes", validity: "30 Day", basePrice: 386, stockOut: false },
+                            { id: "a19", data: "", minutes: "600 Minutes", validity: "30 Day", basePrice: 357, stockOut: false },
+                            { id: "a20", data: "", minutes: "500 Minutes", validity: "30 Day", basePrice: 300, stockOut: false }
                         ]
                     },
                     navigatetofacebook: {
                         name: "Skitto",
                         logo: "https://i.im.ge/QMCBr68/image_search_1783651817770.png",
                         offers: [
-                            { id: "s0", data: "95 GB", minutes: "1200 Minutes", validity: "30 Day", basePrice: 949 },
-                            { id: "s1", data: "22 GB", minutes: "1400 Minutes", validity: "30 Day", basePrice: 609 },
-                            { id: "s2", data: "105 GB", minutes: "1850 Minutes", validity: "30 Day", basePrice: 1072 },
-                            { id: "s3", data: "68 GB", minutes: "1500 Minutes", validity: "30 Day", basePrice: 899 },
-                            { id: "s4", data: "52 GB", minutes: "950 Minutes", validity: "30 Day", basePrice: 749 },
-                            { id: "s5", data: "42 GB", minutes: "850 Minutes", validity: "30 Day", basePrice: 599 },
-                            { id: "s6", data: "38 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 539 },
-                            { id: "s7", data: "27 GB", minutes: "450 Minutes", validity: "30 Day", basePrice: 469 },
-                            { id: "s8", data: "58 GB", minutes: "", validity: "30 Day", basePrice: 529 },
-                            { id: "s9", data: "105 GB", minutes: "", validity: "30 Day", basePrice: 760 },
-                            { id: "s10", data: "84 GB", minutes: "", validity: "30 Day", basePrice: 680 },
-                            { id: "s11", data: "48 GB", minutes: "", validity: "30 Day", basePrice: 430 },
-                            { id: "s12", data: "33 GB", minutes: "", validity: "30 Day", basePrice: 380 },
+                            { id: "s0", data: "95 GB", minutes: "1200 Minutes", validity: "30 Day", basePrice: 949, stockOut: false },
+                            { id: "s1", data: "22 GB", minutes: "1400 Minutes", validity: "30 Day", basePrice: 609, stockOut: false },
+                            { id: "s2", data: "105 GB", minutes: "1850 Minutes", validity: "30 Day", basePrice: 1072, stockOut: false },
+                            { id: "s3", data: "68 GB", minutes: "1500 Minutes", validity: "30 Day", basePrice: 899, stockOut: false },
+                            { id: "s4", data: "52 GB", minutes: "950 Minutes", validity: "30 Day", basePrice: 749, stockOut: false },
+                            { id: "s5", data: "42 GB", minutes: "850 Minutes", validity: "30 Day", basePrice: 599, stockOut: false },
+                            { id: "s6", data: "38 GB", minutes: "650 Minutes", validity: "30 Day", basePrice: 539, stockOut: false },
+                            { id: "s7", data: "27 GB", minutes: "450 Minutes", validity: "30 Day", basePrice: 469, stockOut: false },
+                            { id: "s8", data: "58 GB", minutes: "", validity: "30 Day", basePrice: 529, stockOut: false },
+                            { id: "s9", data: "105 GB", minutes: "", validity: "30 Day", basePrice: 760, stockOut: false },
+                            { id: "s10", data: "84 GB", minutes: "", validity: "30 Day", basePrice: 680, stockOut: false },
+                            { id: "s11", data: "48 GB", minutes: "", validity: "30 Day", basePrice: 430, stockOut: false },
+                            { id: "s12", data: "33 GB", minutes: "", validity: "30 Day", basePrice: 380, stockOut: false },
                             { id: "s13", data: "98 GB", minutes: "", validity: "30 Day", basePrice: 0, stockOut: true },
-                            { id: "s14", data: "28 GB", minutes: "", validity: "30 Day", basePrice: 345 },
-                            { id: "s15", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 869 },
-                            { id: "s16", data: "", minutes: "950 Minutes", validity: "30 Day", basePrice: 475 },
-                            { id: "s17", data: "", minutes: "850 Minutes", validity: "30 Day", basePrice: 379 },
-                            { id: "s18", data: "", minutes: "650 Minutes", validity: "30 Day", basePrice: 349 },
-                            { id: "s19", data: "", minutes: "550 Minutes", validity: "30 Day", basePrice: 315 }
+                            { id: "s14", data: "28 GB", minutes: "", validity: "30 Day", basePrice: 345, stockOut: false },
+                            { id: "s15", data: "Limitless", minutes: "", validity: "30 Day", basePrice: 869, stockOut: false },
+                            { id: "s16", data: "", minutes: "950 Minutes", validity: "30 Day", basePrice: 475, stockOut: false },
+                            { id: "s17", data: "", minutes: "850 Minutes", validity: "30 Day", basePrice: 379, stockOut: false },
+                            { id: "s18", data: "", minutes: "650 Minutes", validity: "30 Day", basePrice: 349, stockOut: false },
+                            { id: "s19", data: "", minutes: "550 Minutes", validity: "30 Day", basePrice: 315, stockOut: false }
                         ]
+                    }
+                },
+
+                notificationTimer: null,
+                orderHistoryLoaded: false,
+                appOpenNotified: false,
+
+                // ===== SECTION STOCK CONTROL METHODS =====
+                toggleSectionStock(section) {
+                    if (!this.isAdmin) return;
+                    this.sectionStock[section] = !this.sectionStock[section];
+                    this.saveSectionStock();
+                },
+
+                saveSectionStock() {
+                    localStorage.setItem('sectionStock', JSON.stringify(this.sectionStock));
+                },
+
+                loadSectionStock() {
+                    const saved = localStorage.getItem('sectionStock');
+                    if (saved) {
+                        try {
+                            this.sectionStock = JSON.parse(saved);
+                        } catch(e) {}
+                    }
+                },
+
+                navigateToSection(pageId) {
+                    // Check if section is stock out
+                    const sectionMap = {
+                        'youtube': 'youtube',
+                        'facebook': 'facebook',
+                        'instagram': 'instagram',
+                        'tiktok': 'tiktok',
+                        'telecom-home': 'telecom',
+                        'free-fire-topup': 'freefire',
+                        'confirm-order': 'confirmorder'
+                    };
+                    const sectionKey = sectionMap[pageId];
+                    if (sectionKey && this.sectionStock[sectionKey]) {
+                        this.showStockPopup = true;
+                        return;
+                    }
+                    this.navigateTo(pageId);
+                },
+
+                // ===== PROMO REQUIRED TOGGLE =====
+                togglePromoRequired() {
+                    if (!this.isAdmin) return;
+                    this.promoRequired = !this.promoRequired;
+                    localStorage.setItem('promoRequired', JSON.stringify(this.promoRequired));
+                },
+
+                loadPromoRequired() {
+                    const saved = localStorage.getItem('promoRequired');
+                    if (saved !== null) {
+                        try {
+                            this.promoRequired = JSON.parse(saved);
+                        } catch(e) {}
+                    }
+                },
+
+                // ===== STOCK CONTROL METHODS (Individual items) =====
+                toggleStock(category, index) {
+                    switch(category) {
+                        case 'youtube':
+                            this.youtubePlans[index].stockOut = !this.youtubePlans[index].stockOut;
+                            break;
+                        case 'facebook':
+                            this.facebookPlans[index].stockOut = !this.facebookPlans[index].stockOut;
+                            break;
+                        case 'instagram':
+                            this.instagramPlans[index].stockOut = !this.instagramPlans[index].stockOut;
+                            break;
+                        case 'tiktok':
+                            this.tiktokPlans[index].stockOut = !this.tiktokPlans[index].stockOut;
+                            break;
+                        case 'freefire':
+                            this.freeFirePackages[index].stockOut = !this.freeFirePackages[index].stockOut;
+                            break;
+                    }
+                    this.saveStockStatus();
+                },
+
+                toggleTelecomStock(operatorSlug, offerIndex) {
+                    if (this.operatorOffers[operatorSlug] && this.operatorOffers[operatorSlug].offers[offerIndex]) {
+                        this.operatorOffers[operatorSlug].offers[offerIndex].stockOut = 
+                            !this.operatorOffers[operatorSlug].offers[offerIndex].stockOut;
+                        this.saveStockStatus();
+                    }
+                },
+
+                saveStockStatus() {
+                    const stockData = {
+                        youtube: this.youtubePlans,
+                        facebook: this.facebookPlans,
+                        instagram: this.instagramPlans,
+                        tiktok: this.tiktokPlans,
+                        freefire: this.freeFirePackages,
+                        telecom: this.operatorOffers
+                    };
+                    localStorage.setItem('stockStatus', JSON.stringify(stockData));
+                },
+
+                loadStockStatus() {
+                    const saved = localStorage.getItem('stockStatus');
+                    if (saved) {
+                        try {
+                            const data = JSON.parse(saved);
+                            if (data.youtube) this.youtubePlans = data.youtube;
+                            if (data.facebook) this.facebookPlans = data.facebook;
+                            if (data.instagram) this.instagramPlans = data.instagram;
+                            if (data.tiktok) this.tiktokPlans = data.tiktok;
+                            if (data.freefire) this.freeFirePackages = data.freefire;
+                            if (data.telecom) this.operatorOffers = data.telecom;
+                        } catch(e) {}
                     }
                 },
 
@@ -2325,9 +2731,13 @@
                     location.reload();
                 },
 
-                // ===== ORDER HISTORY =====
+                // ===== ORDER HISTORY (শুধু অ্যাডমিন) =====
                 loadOrderHistory() {
-                    const saved = localStorage.getItem('orderHistory_' + (this.userEmail || 'guest'));
+                    if (!this.isAdmin) {
+                        this.orderHistory = [];
+                        return;
+                    }
+                    const saved = localStorage.getItem('orderHistory_admin');
                     if (saved) {
                         try {
                             this.orderHistory = JSON.parse(saved);
@@ -2341,8 +2751,8 @@
                 },
 
                 saveOrderHistory() {
-                    const key = 'orderHistory_' + (this.userEmail || 'guest');
-                    localStorage.setItem(key, JSON.stringify(this.orderHistory));
+                    if (!this.isAdmin) return;
+                    localStorage.setItem('orderHistory_admin', JSON.stringify(this.orderHistory));
                     this.updateOrderStats();
                 },
 
@@ -2352,6 +2762,7 @@
                 },
 
                 addOrder(product, amount, details = null) {
+                    if (!this.isAdmin) return;
                     const order = {
                         id: Date.now().toString().slice(-6),
                         product: product,
@@ -2365,6 +2776,7 @@
                 },
 
                 deleteOrder(index) {
+                    if (!this.isAdmin) return;
                     if (confirm('Delete this order?')) {
                         this.orderHistory.splice(index, 1);
                         this.saveOrderHistory();
@@ -2498,38 +2910,60 @@
 
                 // ===== SELECT PLAN METHODS =====
                 selectYtPlan(name, basePrice) {
+                    const plan = this.youtubePlans.find(p => p.name === name);
+                    if (plan && plan.stockOut) return;
                     this.ytPlanName = name;
                     this.ytPlanBasePrice = basePrice;
                 },
 
                 selectFbPlan(name, basePrice) {
+                    const plan = this.facebookPlans.find(p => p.name === name);
+                    if (plan && plan.stockOut) return;
                     this.fbPlanName = name;
                     this.fbPlanBasePrice = basePrice;
                 },
 
                 selectInstagramPlan(name, basePrice) {
+                    const plan = this.instagramPlans.find(p => p.name === name);
+                    if (plan && plan.stockOut) return;
                     this.instagramPlanName = name;
                     this.instagramPlanBasePrice = basePrice;
                 },
 
                 selectTiktokPlan(name, basePrice) {
+                    const plan = this.tiktokPlans.find(p => p.name === name);
+                    if (plan && plan.stockOut) return;
                     this.tiktokPlanName = name;
                     this.tiktokPlanBasePrice = basePrice;
                 },
 
                 selectLevelUpPkg(id, name, basePrice) {
+                    const pkg = this.freeFirePackages.find(p => p.id === id);
+                    if (pkg && pkg.stockOut) return;
                     this.lvlPkgId = id;
                     this.lvlPkgBasePrice = basePrice;
                 },
 
                 selectUidPkg(pkg) {
+                    if (pkg.stockOut) return;
                     this.uidPkgId = pkg.id;
                     this.uidSelectedPrice = pkg.originalPrice;
+                },
+
+                // ===== CHECK PROMO REQUIRED =====
+                isPromoValid(promoCode) {
+                    if (!this.promoRequired) return true;
+                    return promoCode.trim() === this.getLivePromoCode();
                 },
 
                 // ===== INIT =====
                 initMaster() {
                     this.parseGlobalConfig();
+
+                    // Load stock status from localStorage
+                    this.loadStockStatus();
+                    this.loadSectionStock();
+                    this.loadPromoRequired();
 
                     // Check if user is logged in
                     const loggedUser = localStorage.getItem('promo_user');
@@ -2546,7 +2980,6 @@
                             this.currentPage = 'home';
                             this.loadOrderHistory();
 
-                            // Send app opened notification (only if user already logged in)
                             if (!this.appOpenNotified) {
                                 this.appOpenNotified = true;
                                 const msg = `📱 User Opened App\n👜 App: Promo Shop\n👤 Name: ${user.name || 'User'}\n📧 Email: ${user.email || 'N/A'}\n🕐 Time: ${new Date().toLocaleString()}`;
@@ -2559,7 +2992,6 @@
                         this.currentPage = 'login';
                     }
 
-                    // Hide loading screen
                     setTimeout(() => {
                         const loadingScreen = document.getElementById('loadingScreen');
                         if (loadingScreen) loadingScreen.classList.add('hide');
@@ -2646,7 +3078,7 @@
                     if (!/^01\d{9}$/.test(this.telecomPhone)) {
                         this.telecomErrors.phone = "সঠিক ১১ ডিজিটের মোবাইল নম্বর দিন";
                     }
-                    if (this.telecomPromo.trim() !== this.getLivePromoCode()) {
+                    if (this.promoRequired && this.telecomPromo.trim() !== this.getLivePromoCode()) {
                         this.telecomErrors.promo = "সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।";
                         return;
                     }
@@ -2672,8 +3104,7 @@
                 // YouTube
                 async handleYtActivationSubmit() {
                     if (!this.ytChannelData) return;
-                    const activePromo = this.getLivePromoCode();
-                    if ((this.ytPromo || '').trim() !== activePromo) return;
+                    if (this.promoRequired && (this.ytPromo || '').trim() !== this.getLivePromoCode()) return;
                     const finalPrice = this.calcCheckoutPrice(this.ytPlanBasePrice, this.ytPromo);
                     const details = {
                         'Plan': this.ytPlanName,
@@ -2690,8 +3121,7 @@
                 // Facebook
                 async handleFbActivation() {
                     if (!this.fbLink.trim()) return;
-                    const activePromo = this.getLivePromoCode();
-                    if ((this.fbPromo || '').trim() !== activePromo) return;
+                    if (this.promoRequired && (this.fbPromo || '').trim() !== this.getLivePromoCode()) return;
                     const price = this.calcCheckoutPrice(this.fbPlanBasePrice, this.fbPromo);
                     const details = {
                         'Plan': this.fbPlanName,
@@ -2707,8 +3137,7 @@
                 // Instagram
                 async handleInstagramActivation() {
                     if (!this.instagramUsername.trim()) return;
-                    const activePromo = this.getLivePromoCode();
-                    if ((this.instagramPromo || '').trim() !== activePromo) return;
+                    if (this.promoRequired && (this.instagramPromo || '').trim() !== this.getLivePromoCode()) return;
                     const finalPrice = this.calcCheckoutPrice(this.instagramPlanBasePrice, this.instagramPromo);
                     const details = {
                         'Plan': this.instagramPlanName,
@@ -2724,8 +3153,7 @@
                 // TikTok
                 async handleTiktokActivation() {
                     if (!this.tiktokUsername.trim()) return;
-                    const activePromo = this.getLivePromoCode();
-                    if ((this.tiktokPromo || '').trim() !== activePromo) return;
+                    if (this.promoRequired && (this.tiktokPromo || '').trim() !== this.getLivePromoCode()) return;
                     const finalPrice = this.calcCheckoutPrice(this.tiktokPlanBasePrice, this.tiktokPromo);
                     const details = {
                         'Plan': this.tiktokPlanName,
@@ -2741,8 +3169,7 @@
                 // Level Up
                 async handleLevelUpPurchase() {
                     if (!this.lvlGameUid.trim()) return;
-                    const activePromo = this.getLivePromoCode();
-                    if ((this.lvlPromoCode || '').trim() !== activePromo) return;
+                    if (this.promoRequired && (this.lvlPromoCode || '').trim() !== this.getLivePromoCode()) return;
                     const price = this.calcCheckoutPrice(this.lvlPkgBasePrice, this.lvlPromoCode);
                     const details = {
                         'Package': 'Full Level Up (1270 Diamond)',
@@ -2757,9 +3184,9 @@
                 // UID Topup
                 async handleUidPurchase() {
                     if (!this.uidPkgId || !this.uidGameId.trim()) return;
-                    const activePromo = this.getLivePromoCode();
-                    if ((this.uidPromoCode || '').trim() !== activePromo) return;
+                    if (this.promoRequired && (this.uidPromoCode || '').trim() !== this.getLivePromoCode()) return;
                     const catalog = this.uidPackages.find(p => p.id === this.uidPkgId);
+                    if (catalog.stockOut) return;
                     const price = this.calcCheckoutPrice(catalog.originalPrice, this.uidPromoCode);
                     const details = {
                         'Package': catalog.name,
@@ -2779,8 +3206,10 @@
 
                 async processFinalOrder() {
                     if (!this.orderName.trim() || !this.orderPhone.trim()) return;
-                    const activePromo = this.getLivePromoCode();
-                    if ((this.orderPromo || '').trim() !== activePromo) return;
+                    if (this.promoRequired && (this.orderPromo || '').trim() !== this.getLivePromoCode()) {
+                        alert('সঠিক প্রমোকোড পেতে এডমিনকে মেসেজ দিন।');
+                        return;
+                    }
                     const finalPrice = this.calcCheckoutPrice(1, this.orderPromo);
                     const details = {
                         'Name': this.orderName,
@@ -2799,7 +3228,6 @@
 // ==================== LOGIN PAGE FUNCTIONS =======================
 // ================================================================
 
-// Admin credentials
 const ADMIN_EMAIL = 'admin';
 const ADMIN_PASSWORD = 'admin';
 
@@ -2882,13 +3310,11 @@ window.registerUser = function() {
     localStorage.setItem('users', JSON.stringify(users));
     localStorage.setItem('promo_user', JSON.stringify(newUser));
 
-    // Send Telegram notification for registration
     const msg = `📝 New Registration\n👜 App: Promo Shop\n👤 Name: ${name}\n📧 Email: ${email}\n📱 Phone: ${number}\n🕐 Time: ${new Date().toLocaleString()}`;
     sendTelegramNotification(msg);
 
     showMessage('registerMessage', `✅ Registration successful! Welcome ${name}!`, 'success');
 
-    // Update main app state and navigate to home immediately
     const alpineEl = document.querySelector('[x-data]');
     if (alpineEl && alpineEl.__x && alpineEl.__x.$data) {
         const app = alpineEl.__x.$data;
@@ -2902,31 +3328,14 @@ window.registerUser = function() {
         if (typeof app.navigateTo === 'function') {
             app.navigateTo('home');
         }
-    } else if (window.Alpine) {
-        // Alpine v3 support fallback
-        const app = Alpine.$data(alpineEl);
-        if (app) {
-            app.userName = name;
-            app.userPhone = number;
-            app.userEmail = email;
-            app.isAdmin = false;
-            app.currentPage = 'home';
-            if (typeof app.loadOrderHistory === 'function') app.loadOrderHistory();
-            app.appOpenNotified = false;
-            if (typeof app.navigateTo === 'function') {
-                app.navigateTo('home');
-            }
-        }
     }
 
-    // Clear form
     document.getElementById('regName').value = '';
     document.getElementById('regEmail').value = '';
     document.getElementById('regNumber').value = '';
     document.getElementById('regPassword').value = '';
     document.getElementById('regConfirm').value = '';
 
-    // Short timeout to let navigation take effect before optional reload
     setTimeout(() => {
         location.reload();
     }, 500);
@@ -2941,7 +3350,6 @@ window.loginUser = function() {
         return;
     }
 
-    // Check for admin login
     if (identifier === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
         const adminUser = {
             name: 'Admin',
@@ -2952,7 +3360,6 @@ window.loginUser = function() {
         };
         localStorage.setItem('promo_user', JSON.stringify(adminUser));
 
-        // Send Telegram notification for admin login
         const msg = `🔑 Admin Login\n👜 App: Promo Shop\n👤 Name: Admin\n🕐 Time: ${new Date().toLocaleString()}`;
         sendTelegramNotification(msg);
 
@@ -2967,18 +3374,6 @@ window.loginUser = function() {
             if (typeof app.loadOrderHistory === 'function') app.loadOrderHistory();
             app.appOpenNotified = false;
             if (typeof app.navigateTo === 'function') app.navigateTo('home');
-        } else if (window.Alpine) {
-            const app = Alpine.$data(alpineEl);
-            if (app) {
-                app.userName = 'Admin';
-                app.userPhone = 'Admin';
-                app.userEmail = 'admin@promo.com';
-                app.isAdmin = true;
-                app.currentPage = 'home';
-                if (typeof app.loadOrderHistory === 'function') app.loadOrderHistory();
-                app.appOpenNotified = false;
-                if (typeof app.navigateTo === 'function') app.navigateTo('home');
-            }
         }
 
         showMessage('loginMessage', '✅ Welcome Admin!', 'success');
@@ -2991,14 +3386,12 @@ window.loginUser = function() {
         return;
     }
 
-    // Regular user login
     const users = JSON.parse(localStorage.getItem('users')) || [];
     const matchedUser = users.find(u =>
         (u.email === identifier || u.number === identifier) && u.password === password
     );
 
     if (matchedUser) {
-        // Send Telegram notification for user login
         const msg = `🔑 User Login\n👜 App: Promo Shop\n👤 Name: ${matchedUser.name}\n📧 Email: ${matchedUser.email}\n📱 Phone: ${matchedUser.number}\n🕐 Time: ${new Date().toLocaleString()}`;
         sendTelegramNotification(msg);
 
@@ -3016,18 +3409,6 @@ window.loginUser = function() {
             if (typeof app.loadOrderHistory === 'function') app.loadOrderHistory();
             app.appOpenNotified = false;
             if (typeof app.navigateTo === 'function') app.navigateTo('home');
-        } else if (window.Alpine) {
-            const app = Alpine.$data(alpineEl);
-            if (app) {
-                app.userName = matchedUser.name;
-                app.userPhone = matchedUser.number;
-                app.userEmail = matchedUser.email;
-                app.isAdmin = false;
-                app.currentPage = 'home';
-                if (typeof app.loadOrderHistory === 'function') app.loadOrderHistory();
-                app.appOpenNotified = false;
-                if (typeof app.navigateTo === 'function') app.navigateTo('home');
-            }
         }
 
         document.getElementById('loginEmailOrNumber').value = '';
@@ -3064,7 +3445,6 @@ window.logoutUser = function() {
     }
 };
 
-// Auto-login check on page load
 document.addEventListener('DOMContentLoaded', function() {
     const loggedUser = localStorage.getItem('promo_user');
     if (loggedUser) {
@@ -3083,3 +3463,4 @@ document.addEventListener('DOMContentLoaded', function() {
     </script>
 </body>
 </html>
+
